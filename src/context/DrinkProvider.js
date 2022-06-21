@@ -3,11 +3,15 @@ import PropTypes from 'prop-types';
 import DrinkContext from './DrinkContext';
 
 function DrinkProvider({ children }) {
-  const [drinks, setDrinks] = useState([]);
+  const [dataDrinks, setDataDrinks] = useState([]);
+  const [exibitionDrinks, setExibitionDrinks] = useState([]);
 
   const context = {
-    drinks,
-    setDrinks,
+    dataDrinks,
+    setDataDrinks,
+
+    exibitionDrinks,
+    setExibitionDrinks,
   };
 
   return (

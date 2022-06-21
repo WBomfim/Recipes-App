@@ -1,7 +1,12 @@
 import React from 'react';
+import SearchBar from '../components/SearchBar';
 
 function Drinks() {
-  return <div>Drinks</div>;
+  return (
+    <section>
+      <SearchBar />
+    </section>
+  );
 }
 
 export default Drinks;

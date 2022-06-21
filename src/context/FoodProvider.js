@@ -3,11 +3,15 @@ import PropTypes from 'prop-types';
 import FoodContext from './FoodContext';
 
 function FoodProvider({ children }) {
-  const [food, setFood] = useState([]);
+  const [dataFoods, setDataFoods] = useState([]);
+  const [exibitionFoods, setExibitionFoods] = useState([]);
 
   const context = {
-    food,
-    setFood,
+    dataFoods,
+    setDataFoods,
+
+    exibitionFoods,
+    setExibitionFoods,
   };
 
   return (
