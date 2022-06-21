@@ -25,12 +25,12 @@ function SearchBar() {
     if (!exibitionRevenues) {
       global.alert('Sorry, we haven\'t found any recipes for these filters.');
     } else {
-      if (exibitionRevenues === 1 && location === '/foods') {
+      if (exibitionRevenues.length === 1 && location === '/foods') {
         history.push(`/foods/${exibitionRevenues[0].idMeal}`);
       }
 
-      if (exibitionRevenues === 1 && location === '/drinks') {
-        history.push(`/drinks/${exibitionRevenues[0].idMeal}`);
+      if (exibitionRevenues.length === 1 && location === '/drinks') {
+        history.push(`/drinks/${exibitionRevenues[0].idDrink}`);
       }
     }
   }, [exibitionRevenues, history, location]);
