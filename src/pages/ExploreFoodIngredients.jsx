@@ -1,11 +1,11 @@
 import React from 'react';
 import Footer from '../components/Footer';
-import HeaderWithoutSearch from '../components/HeaderWithoutSearch';
+import Header from '../components/Header';
 
 function ExploreFoodIngredients() {
   return (
     <div>
-      <HeaderWithoutSearch title="Explore Ingredients" />
+      <Header title="Explore Ingredients" />
       <Footer />
     </div>
   );
