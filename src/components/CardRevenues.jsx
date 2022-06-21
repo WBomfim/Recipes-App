@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 
 function CardRevenues({ index, imagem, nome }) {
   return (
-    <section data-testid={ `${index}-recipe-card` }>
+    <div data-testid={ `${index}-recipe-card` }>
       <img src={ imagem } alt={ `imagem-${nome}` } data-testid={ `${index}-card-img` } />
       <h3 data-testid={ `${index}-card-name` }>{ nome }</h3>
-    </section>
+    </div>
   );
 }
 
