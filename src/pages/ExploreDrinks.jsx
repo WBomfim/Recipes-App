@@ -1,13 +1,13 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import Footer from '../components/Footer';
-import HeaderWithoutSearch from '../components/HeaderWithoutSearch';
+import Header from '../components/Header';
 
 function ExploreDrinks() {
   const history = useHistory();
   return (
     <div>
-      <HeaderWithoutSearch title="Explore Drinks" />
+      <Header title="Explore Drinks" />
       <section>
         <button
           type="button"

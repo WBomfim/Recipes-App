@@ -1,11 +1,11 @@
 import React from 'react';
 import Footer from '../components/Footer';
-import HeaderWithoutSearch from '../components/HeaderWithoutSearch';
+import Header from '../components/Header';
 
 function Profile() {
   return (
     <div>
-      <HeaderWithoutSearch title="Profile" />
+      <Header title="Profile" />
       <Footer />
     </div>
   );

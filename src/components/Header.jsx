@@ -5,7 +5,7 @@ import RevenuesContext from '../context/RevenuesContext';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 
-function Header({ title }) {
+function Header({ title, buttonSearch = false }) {
   const { searchValue, setSearchValue } = useContext(RevenuesContext);
   const history = useHistory();
   const [search, setSearch] = useState(false);
@@ -16,36 +16,38 @@ function Header({ title }) {
 
   return (
     <header>
-      <button
-        data-testid="profile-top-btn"
-        type="button"
-        onClick={ () => history.push('/profile') }
-        src={ profileIcon }
-      >
-        <img src={ profileIcon } alt="profileIcon" />
-      </button>
+      <div>
+        <button
+          data-testid="profile-top-btn"
+          type="button"
+          onClick={ () => history.push('/profile') }
+          src={ profileIcon }
+        >
+          <img src={ profileIcon } alt="profileIcon" />
+        </button>
 
-      <h1 data-testid="page-title">{title}</h1>
-      <button
-        data-testid="search-top-btn"
-        type="button"
-        onClick={ () => setSearch(!search) }
-        src={ searchIcon }
-      >
-        <img src={ searchIcon } alt="searchIcon" />
-      </button>
+        <h1 data-testid="page-title">{title}</h1>
+        {buttonSearch && (
+          <button
+            data-testid="search-top-btn"
+            type="button"
+            onClick={ () => setSearch(!search) }
+            src={ searchIcon }
+          >
+            <img src={ searchIcon } alt="searchIcon" />
+          </button>
+        )}
+      </div>
 
-      {
-        search && (
-          <input
-            type="text"
-            placeholder="Search"
-            value={ searchValue }
-            onChange={ (event) => hendleChange(event) }
-            data-testid="search-input"
-          />
-        )
-      }
+      {search && (
+        <input
+          type="text"
+          placeholder="Search"
+          value={ searchValue }
+          onChange={ (event) => hendleChange(event) }
+          data-testid="search-input"
+        />
+      )}
     </header>
   );
 }
