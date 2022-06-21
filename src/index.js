@@ -2,14 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
-import CombineProviders from './context/CombineProviders';
+import RevenuesProvider from './context/RevenuesProvider';
 import App from './App';
 
 ReactDOM.render(
   <BrowserRouter>
-    <CombineProviders>
+    <RevenuesProvider>
       <App />
-    </CombineProviders>
+    </RevenuesProvider>
   </BrowserRouter>,
   document.getElementById('root'),
 );

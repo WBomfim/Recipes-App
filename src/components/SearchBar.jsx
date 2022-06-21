@@ -1,78 +1,38 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { useLocation } from 'react-router-dom';
-import FoodContext from '../context/FoodContext';
-import DrinkContext from '../context/DrinkContext';
-import * as fetchFoods from '../services/fetchFoods';
-import * as fetchDrinks from '../services/fetchDrinks';
+import RevenuesContext from '../context/RevenuesContext';
 
 function SearchBar() {
-  const { setDataFoods, setExibitionFoods } = useContext(FoodContext);
-  const { setDataDrinks, setExibitionDrinks } = useContext(DrinkContext);
-  const [searchOptions, setSearchOptions] = useState('');
+  const {
+    searchValue,
+    searchOptions,
+    setSearchOptions,
+    getDataByIngredients,
+    getDataByName,
+    getDataByFirstLetter,
+  } = useContext(RevenuesContext);
+
   const location = useLocation().pathname;
-  const searchValue = 'lemon';
+  const locationName = location.split('/')[1];
 
   const handleChangeRadios = ({ target }) => {
     setSearchOptions(target.value);
   };
 
-  const getDataByIngredients = async () => {
-    if (location === '/foods') {
-      const data = await fetchFoods.getFoodsIngredients(searchValue);
-      setDataFoods(data);
-      setExibitionFoods(data);
-    }
-
-    if (location === '/drinks') {
-      const data = await fetchDrinks.getDrinksIngredients(searchValue);
-      console.log(data);
-      setDataDrinks(data);
-      setExibitionDrinks(data);
-    }
-  };
-
-  const getDataByName = async () => {
-    if (location === '/foods') {
-      const data = await fetchFoods.getFoodsName(searchValue);
-      setDataFoods(data);
-      setExibitionFoods(data);
-    }
-
-    if (location === '/drinks') {
-      const data = await fetchDrinks.getDrinksName(searchValue);
-      setDataDrinks(data);
-      setExibitionDrinks(data);
-    }
-  };
-
-  const getDataByFirstLetter = async () => {
-    if (location === '/foods') {
-      const data = await fetchFoods.getFoodsFirstLetter(searchValue);
-      setDataFoods(data);
-      setExibitionFoods(data);
-    }
-
-    if (location === '/drinks') {
-      const data = await fetchDrinks.getDrinksFirstLetter(searchValue);
-      setDataDrinks(data);
-      setExibitionDrinks(data);
-    }
-  };
-
   const getSelectData = async () => {
     if (searchOptions === 'ingredients') {
-      getDataByIngredients();
+      getDataByIngredients(locationName);
     }
 
     if (searchOptions === 'name') {
-      getDataByName();
+      getDataByName(locationName);
     }
 
     if (searchOptions === 'first-letter') {
       if (searchValue.length !== 1) {
         global.alert('Your search must have only 1 (one) character');
       } else {
-        getDataByFirstLetter();
+        getDataByFirstLetter(locationName);
       }
     }
   };
