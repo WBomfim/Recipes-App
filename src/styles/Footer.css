@@ -1,0 +1,17 @@
+footer {
+  align-items: center;
+  background-color: rgba(196, 196, 196, 1);
+  bottom: 0;
+  display: flex;
+  height: 58px;
+  justify-content: space-around;
+  left: 0;
+  position: fixed;
+  width: 100%;
+}
+
+.footer-buttons {
+  background-color: rgba(196, 196, 196, 1);
+  border: none;
+  cursor: pointer;
+}

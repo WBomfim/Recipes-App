@@ -22,18 +22,30 @@ function App() {
   return (
     <Switch>
       <Route exact path="/" component={ Login } />
-      <Route path="/foods" component={ Foods } />
+      <Route exact path="/foods" component={ Foods } />
       <Route path="/foods/:id" component={ FoodDetail } />
       <Route path="/foods/:id/in-progress" component={ FoodInProgress } />
-      <Route path="/drinks" component={ Drinks } />
+      <Route exact path="/drinks" component={ Drinks } />
       <Route path="/drinks/:id" component={ DrinkDetail } />
       <Route path="/drinks/:id/in-progress" component={ DrinkInProgress } />
-      <Route path="/explore" component={ Explore } />
-      <Route path="/explore/foods" component={ ExploreFoods } />
+      <Route exact path="/explore" component={ Explore } />
+      <Route exact path="/explore/foods" component={ ExploreFoods } />
       <Route path="/explore/drinks" component={ ExploreDrinks } />
-      <Route path="/explore/foods/ingredients" component={ ExploreFoodIngredients } />
-      <Route path="/explore/drinks/ingredients" component={ ExploreDrinkIngredients } />
-      <Route path="/explore/foods/nationalities" component={ ExploreFoodNationalities } />
+      <Route
+        exact
+        path="/explore/foods/ingredients"
+        component={ ExploreFoodIngredients }
+      />
+      <Route
+        exact
+        path="/explore/drinks/ingredients"
+        component={ ExploreDrinkIngredients }
+      />
+      <Route
+        exact
+        path="/explore/foods/nationalities"
+        component={ ExploreFoodNationalities }
+      />
       <Route path="/profile" component={ Profile } />
       <Route path="/done-recipes" component={ DoneRecipes } />
       <Route path="/favorite-recipes" component={ FavoriteRecipes } />
