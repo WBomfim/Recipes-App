@@ -9,6 +9,7 @@ function ShowRevenues() {
   const MAX_EXIBITION_DRINKS = 12;
 
   const changeExibition = () => {
+    console.log(exibitionRevenues);
     if (location === '/drinks') {
       return (
         exibitionRevenues.map((revenue, index) => (
