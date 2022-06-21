@@ -1,7 +1,10 @@
 import React from 'react';
+import RevenuesHeader from '../components/RevenuesHeader';
 
 function DrinkInProgress() {
-  return <div>DrinkInProgress</div>;
+  return (
+    <RevenuesHeader />
+  );
 }
 
 export default DrinkInProgress;
