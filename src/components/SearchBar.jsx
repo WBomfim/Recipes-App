@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useContext, useCallback, useEffect } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 import RevenuesContext from '../context/RevenuesContext';
 
 function SearchBar() {
@@ -7,11 +7,13 @@ function SearchBar() {
     searchValue,
     searchOptions,
     setSearchOptions,
+    exibitionRevenues,
     getDataByIngredients,
     getDataByName,
     getDataByFirstLetter,
   } = useContext(RevenuesContext);
 
+  const history = useHistory();
   const location = useLocation().pathname;
   const locationName = location.split('/')[1];
 
@@ -19,13 +21,33 @@ function SearchBar() {
     setSearchOptions(target.value);
   };
 
-  const getSelectData = async () => {
+  const changeExibition = useCallback(() => {
+    if (!exibitionRevenues) {
+      global.alert('Sorry, we haven\'t found any recipes for these filters.');
+    } else {
+      if (exibitionRevenues === 1 && location === '/foods') {
+        history.push(`/foods/${exibitionRevenues[0].idMeal}`);
+      }
+
+      if (exibitionRevenues === 1 && location === '/drinks') {
+        history.push(`/drinks/${exibitionRevenues[0].idMeal}`);
+      }
+    }
+  }, [exibitionRevenues, history, location]);
+
+  useEffect(() => {
+    changeExibition();
+  }, [exibitionRevenues, changeExibition]);
+
+  const getSelectData = () => {
     if (searchOptions === 'ingredients') {
       getDataByIngredients(locationName);
+      changeExibition();
     }
 
     if (searchOptions === 'name') {
       getDataByName(locationName);
+      changeExibition();
     }
 
     if (searchOptions === 'first-letter') {
@@ -33,6 +55,7 @@ function SearchBar() {
         global.alert('Your search must have only 1 (one) character');
       } else {
         getDataByFirstLetter(locationName);
+        changeExibition();
       }
     }
   };
