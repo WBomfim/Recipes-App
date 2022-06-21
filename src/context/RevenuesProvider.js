@@ -7,7 +7,7 @@ import * as fetchDrinks from '../services/fetchDrinks';
 function RevenuesProvider({ children }) {
   const [dataRevenues, setDataRevenues] = useState([]);
   const [exibitionRevenues, setExibitionRevenues] = useState([]);
-  const [searchValue, setSearchValue] = useState('chicken');
+  const [searchValue, setSearchValue] = useState('');
   const [searchOptions, setSearchOptions] = useState('');
 
   const getDataByIngredients = async (fetchOption) => {

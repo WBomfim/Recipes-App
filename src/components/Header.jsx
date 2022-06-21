@@ -1,12 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import RevenuesContext from '../context/RevenuesContext';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 
 function Header({ title }) {
+  const { searchValue, setSearchValue } = useContext(RevenuesContext);
   const history = useHistory();
   const [search, setSearch] = useState(false);
+
+  const hendleChange = ({ target }) => {
+    setSearchValue(target.value);
+  };
 
   return (
     <header>
@@ -33,12 +39,13 @@ function Header({ title }) {
         search && (
           <input
             type="text"
-            data-testid="search-input"
             placeholder="Search"
+            value={ searchValue }
+            onChange={ (event) => hendleChange(event) }
+            data-testid="search-input"
           />
         )
       }
-      {}
     </header>
   );
 }
