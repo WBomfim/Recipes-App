@@ -1,11 +1,17 @@
 import React from 'react';
 import Footer from '../components/Footer';
+import Header from '../components/Header';
+import SearchBar from '../components/SearchBar';
+import ShowRevenues from '../components/ShowRevenues';
 
 function Foods() {
   return (
-    <div>
+    <section>
+      <Header title="Foods" />
+      <SearchBar />
+      <ShowRevenues />
       <Footer />
-    </div>
+    </section>
   );
 }
 
