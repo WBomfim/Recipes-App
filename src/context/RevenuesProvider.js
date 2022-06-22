@@ -7,6 +7,7 @@ import * as fetchDrinks from '../services/fetchDrinks';
 function RevenuesProvider({ children }) {
   const [dataRevenues, setDataRevenues] = useState([]);
   const [exibitionRevenues, setExibitionRevenues] = useState([]);
+  const [exibitionDetails, setExibitionDetails] = useState([]);
   const [searchValue, setSearchValue] = useState('');
   const [searchOptions, setSearchOptions] = useState('');
 
@@ -52,12 +53,27 @@ function RevenuesProvider({ children }) {
     }
   };
 
+  const getDataById = async (fetchOption, id) => {
+    if (fetchOption === 'foods') {
+      const data = await fetchFoods.getFoodsId(id);
+      setExibitionDetails(data);
+    }
+
+    if (fetchOption === 'drinks') {
+      const data = await fetchDrinks.getDrinksId(id);
+      setExibitionDetails(data);
+    }
+  };
+
   const context = {
     dataRevenues,
     setDataRevenues,
 
     exibitionRevenues,
     setExibitionRevenues,
+
+    exibitionDetails,
+    setExibitionDetails,
 
     searchValue,
     setSearchValue,
@@ -68,6 +84,7 @@ function RevenuesProvider({ children }) {
     getDataByIngredients,
     getDataByName,
     getDataByFirstLetter,
+    getDataById,
   };
 
   return (

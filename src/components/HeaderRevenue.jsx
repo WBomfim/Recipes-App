@@ -4,7 +4,7 @@ import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 
-function RevenuesHeader({
+function HeaderRevenue({
   image, name, category, favorited, handleFavorite, handleShare }) {
   return (
     <div>
@@ -29,7 +29,7 @@ function RevenuesHeader({
   );
 }
 
-RevenuesHeader.propTypes = {
+HeaderRevenue.propTypes = {
   image: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
@@ -38,4 +38,4 @@ RevenuesHeader.propTypes = {
   handleShare: PropTypes.func.isRequired,
 };
 
-export default RevenuesHeader;
+export default HeaderRevenue;
