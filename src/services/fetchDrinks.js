@@ -34,7 +34,6 @@ export const getDrinksFirstLetter = async (search) => {
   }
 };
 
-
 export const getDrinks = async () => {
   const url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
   const fetchDrinks = await fetch(url);
@@ -54,6 +53,7 @@ export const filterDrinks = async (category) => {
   const fetchDrinksByFilter = await fetch(url);
   const data = await fetchDrinksByFilter.json();
   return data.drinks;
+};
 
 export const getDrinksId = async (id) => {
   try {
@@ -65,5 +65,4 @@ export const getDrinksId = async (id) => {
   } catch (error) {
     console.log(error);
   }
-
 };
