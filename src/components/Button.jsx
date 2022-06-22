@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function Button({ children, onClick, disabled, dataTestId }) {
+function Button({ name, onClick, disabled, dataTestId }) {
   return (
     <button
       type="button"
@@ -9,13 +9,13 @@ function Button({ children, onClick, disabled, dataTestId }) {
       disabled={ disabled }
       data-testid={ dataTestId }
     >
-      {children}
+      {name}
     </button>
   );
 }
 
 Button.propTypes = {
-  children: PropTypes.node.isRequired,
+  name: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
   disabled: PropTypes.bool,
   dataTestId: PropTypes.string,

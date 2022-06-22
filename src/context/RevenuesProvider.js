@@ -26,9 +26,9 @@ function RevenuesProvider({ children }) {
     }
   };
 
-  const getDataByName = async (fetchOption) => {
+  const getDataByName = async (fetchOption, name) => {
     if (fetchOption === 'foods') {
-      const data = await fetchFoods.getFoodsName(searchValue);
+      const data = await fetchFoods.getFoodsName(name || searchValue);
       setDataRevenues(data);
       setExibitionRevenues(data);
     }
