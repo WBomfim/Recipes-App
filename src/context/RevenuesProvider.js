@@ -10,7 +10,49 @@ function RevenuesProvider({ children }) {
   const [exibitionDetails, setExibitionDetails] = useState([]);
   const [searchValue, setSearchValue] = useState('');
   const [searchOptions, setSearchOptions] = useState('');
+
+  // const [dataDrinks, setDataDrinks] = useState([]);
+  // const [dataFoods, setDataFoods] = useState([]);
+  // const [foodsCategories, setFoodCategories] = useState([]);
+  // const [drinksCategories, setDrinksCategories] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [categorySelect, setCategorySelect] = useState({
+    type: '',
+    category: '',
+  });
+  const [filteredRecipes, SetFilteredRecipes] = useState([]);
+
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     const drinks = await fetchDrinks.getDrinks();
+  //     const foods = await fetchFoods.getFoods();
+  //     const foodCategory = await fetchFoods.getCategoriesFoods();
+  //     const drinkCategory = await fetchFoods.getCategoriesFoods();
+  //     setDataDrinks(drinks);
+  //     setDataFoods(foods);
+  //     setFoodCategories(foodCategory);
+  //     setDrinksCategories(drinkCategory);
+  //   };
+
+  //   getData();
+  // }, []);
+
+  useEffect(() => {
+    if (categorySelect.category !== '') {
+      const filteringByCategory = async () => {
+        if (categorySelect.type === 'drinks') {
+          const data = await fetchDrinks.filterDrinks(categorySelect.category);
+          return setExibitionRevenues([...data]);
+        }
+        const data = await fetchFoods.filterFoods(categorySelect.category);
+        return setExibitionRevenues([...data]);
+      };
+      filteringByCategory();
+    }
+  }, [categorySelect]);
+
   const [ingredientsList, setIngredientsList] = useState([]);
+
 
   const getDataByIngredients = async (fetchOption) => {
     if (fetchOption === 'foods') {
@@ -111,9 +153,27 @@ function RevenuesProvider({ children }) {
     getDataByIngredients,
     getDataByName,
     getDataByFirstLetter,
+
+
+    // dataDrinks,
+    // dataFoods,
+
+    // foodsCategories,
+    // drinksCategories,
+
+    categories,
+    setCategories,
+
+    categorySelect,
+    setCategorySelect,
+
+    filteredRecipes,
+    SetFilteredRecipes,
+
     getDataById,
     handleFavorite,
     handleShare,
+
   };
 
   return (
