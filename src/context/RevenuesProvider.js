@@ -52,6 +52,28 @@ function RevenuesProvider({ children }) {
     }
   };
 
+  const getDataById = async (id, type) => {
+    if (type === 'foods') {
+      const data = await fetchFoods.getFoodsId(id);
+      setDataRevenues(data);
+      setExibitionRevenues(data);
+    }
+
+    if (type === 'drinks') {
+      const data = await fetchDrinks.getDrinksId(id);
+      setDataRevenues(data);
+      setExibitionRevenues(data);
+    }
+  };
+
+  const handleFavorite = () => {
+    console.log(favorite);
+  };
+
+  const handleShare = () => {
+    console.log(share);
+  };
+
   const context = {
     dataRevenues,
     setDataRevenues,
@@ -68,6 +90,9 @@ function RevenuesProvider({ children }) {
     getDataByIngredients,
     getDataByName,
     getDataByFirstLetter,
+    getDataById,
+    handleFavorite,
+    handleShare,
   };
 
   return (

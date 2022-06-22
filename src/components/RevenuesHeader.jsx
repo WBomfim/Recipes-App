@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import RevenuesContext from '../context/RevenuesContext';
 
 function RevenuesHeader({
-  image, name, category, favorited, handleFavorite, handleShare }) {
+  image, name, category, favorited }) {
+  const { handleFavorite, handleShare } = useContext(RevenuesContext);
+
   return (
     <div>
-      <img data-testid="recipe-photo" src={ image } alt={ `imagem-${nome}` } />
+      <img data-testid="recipe-photo" src={ image } alt={ `imagem-${name}` } />
       <h1 data-testid="recipe-title">{ name }</h1>
       <p data-testid="recipe-category">{ category }</p>
       <button
@@ -34,8 +37,6 @@ RevenuesHeader.propTypes = {
   name: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
   favorited: PropTypes.bool.isRequired,
-  handleFavorite: PropTypes.func.isRequired,
-  handleShare: PropTypes.func.isRequired,
 };
 
 export default RevenuesHeader;
