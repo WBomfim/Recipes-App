@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from 'react';
-// import CardFoods from '../components/CardFoods';
 import Categories from '../components/Categories';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
