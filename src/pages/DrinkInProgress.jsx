@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import RevenuesContext from '../context/RevenuesContext';
 /* import HeaderRevenue from '../components/HeaderRevenue';
-import ShowProgress from '../components/ShowProgress'; */
+import ShowDetailsProcess from '../components/ShowDetailsProcess'; */
 import Button from '../components/Button';
 
 function DrinkInProgress() {
@@ -17,7 +17,7 @@ function DrinkInProgress() {
   return (
     <>
       {/* <HeaderRevenue />
-      <ShowProgress /> */}
+      <ShowDetailsProcess /> */}
       <Button />
     </>
   );
