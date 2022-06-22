@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function Ingredients({ ingredients }) {
+function ShowDetailsRevenues({ ingredients, instructions }) {
   return (
     <div>
       <h2>Ingredients</h2>
@@ -16,12 +16,15 @@ function Ingredients({ ingredients }) {
           </li>
         ))}
       </ul>
+      <h2>Instructions</h2>
+      <p data-testid="instructions">{ instructions }</p>
     </div>
   );
 }
 
-Ingredients.propTypes = {
+ShowDetailsRevenues.propTypes = {
   ingredients: PropTypes.arrayOf(PropTypes.any).isRequired,
+  instructions: PropTypes.string.isRequired,
 };
 
-export default Ingredients;
+export default ShowDetailsRevenues;

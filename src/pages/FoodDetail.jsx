@@ -2,24 +2,28 @@ import React, { useEffect, useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import RevenuesContext from '../context/RevenuesContext';
 import RevenuesHeader from '../components/RevenuesHeader';
-import Ingredients from '../components/Ingredients';
-import Instructions from '../components/Instructions';
-import VideoRevenues from '../components/VideoRevenues';
-import Button from '../components/Button';
-import CardRevenues from '../components/CardRevenues';
+import ShowDetailsRevenues from '../components/ShowDetailsRevenues';
+// import VideoRevenues from '../components/VideoRevenues';
+// import Button from '../components/Button';
+// import CardRevenues from '../components/CardRevenues';
 
 function FoodDetail() {
   const [ingredients, setIngredients] = useState([]);
   const { id } = useParams();
-  const { getDataById, exibitionRevenues } = useContext(RevenuesContext);
+  const {
+    getDataById,
+    exibitionDetails,
+    handleFavorite,
+    handleShare,
+  } = useContext(RevenuesContext);
 
   useEffect(() => {
-    getDataById(id, 'foods');
+    getDataById('foods', id);
   }, []);
 
   useEffect(() => {
     const TWENTY = 20;
-    const [revenue] = exibitionRevenues;
+    const [revenue] = exibitionDetails;
     let arrayIngredients = [];
     if (revenue) {
       for (let i = 1; i <= TWENTY; i += 1) {
@@ -31,27 +35,30 @@ function FoodDetail() {
       }
       setIngredients(arrayIngredients);
     }
-  }, [exibitionRevenues]);
+  }, [exibitionDetails]);
 
   return (
     <div>
-      {exibitionRevenues.length > 0
-      && exibitionRevenues.map((revenue) => (
+      {exibitionDetails.length > 0
+      && exibitionDetails.map((revenue) => (
         <div key={ revenue.idMeal }>
           <RevenuesHeader
             image={ revenue.strMealThumb }
             name={ revenue.strMeal }
             category={ revenue.strCategory }
             favorited
+            handleFavorite={ handleFavorite }
+            handleShare={ handleShare }
           />
-          <Ingredients ingredients={ ingredients } />
-          <Instructions instructions={ revenue.strInstructions } />
-          <VideoRevenues video={ revenue.strYoutube } />
-          <CardRevenues />
-          <Button />
+          <ShowDetailsRevenues
+            ingredients={ ingredients }
+            instructions={ revenue.strInstructions }
+          />
+          {/* <VideoRevenues video={ revenue.strYoutube } /> */}
+          {/* <CardRevenues /> */}
+          {/* <Button /> */}
         </div>
       ))}
-      {/* {exibitionRevenues.length > 0 && <Ingredients ingredients={ ingredients } />} */}
     </div>
   );
 }

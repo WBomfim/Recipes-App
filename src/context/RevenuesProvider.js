@@ -7,6 +7,7 @@ import * as fetchDrinks from '../services/fetchDrinks';
 function RevenuesProvider({ children }) {
   const [dataRevenues, setDataRevenues] = useState([]);
   const [exibitionRevenues, setExibitionRevenues] = useState([]);
+  const [exibitionDetails, setExibitionDetails] = useState([]);
   const [searchValue, setSearchValue] = useState('');
   const [searchOptions, setSearchOptions] = useState('');
 
@@ -52,26 +53,24 @@ function RevenuesProvider({ children }) {
     }
   };
 
-  const getDataById = async (id, type) => {
-    if (type === 'foods') {
+  const getDataById = async (fetchOption, id) => {
+    if (fetchOption === 'foods') {
       const data = await fetchFoods.getFoodsId(id);
-      setDataRevenues(data);
-      setExibitionRevenues(data);
+      setExibitionDetails(data);
     }
 
-    if (type === 'drinks') {
+    if (fetchOption === 'drinks') {
       const data = await fetchDrinks.getDrinksId(id);
-      setDataRevenues(data);
-      setExibitionRevenues(data);
+      setExibitionDetails(data);
     }
   };
 
   const handleFavorite = () => {
-    console.log(favorite);
+    console.log('em andamento');
   };
 
   const handleShare = () => {
-    console.log(share);
+    console.log('em andamento');
   };
 
   const context = {
@@ -80,6 +79,9 @@ function RevenuesProvider({ children }) {
 
     exibitionRevenues,
     setExibitionRevenues,
+
+    exibitionDetails,
+    setExibitionDetails,
 
     searchValue,
     setSearchValue,
