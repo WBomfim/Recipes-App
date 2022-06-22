@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import RevenuesContext from '../context/RevenuesContext';
 import RevenuesHeader from '../components/RevenuesHeader';
 import Ingredients from '../components/Ingredients';
+import Instructions from '../components/Instructions';
 
 function FoodDetail() {
   const [ingredients, setIngredients] = useState([]);
@@ -31,16 +32,20 @@ function FoodDetail() {
 
   return (
     <div>
-      {exibitionRevenues.map((revenue) => (
-        <RevenuesHeader
-          key={ revenue.idMeal }
-          image={ revenue.strMealThumb }
-          name={ revenue.strMeal }
-          category={ revenue.strCategory }
-          favorited
-        />
+      {exibitionRevenues.length > 0
+      && exibitionRevenues.map((revenue) => (
+        <div key={ revenue.idMeal }>
+          <RevenuesHeader
+            image={ revenue.strMealThumb }
+            name={ revenue.strMeal }
+            category={ revenue.strCategory }
+            favorited
+          />
+          <Ingredients ingredients={ ingredients } />
+          <Instructions instructions={ revenue.strInstructions } />
+        </div>
       ))}
-      {ingredients.length > 0 && <Ingredients ingredients={ ingredients } />}
+      {/* {exibitionRevenues.length > 0 && <Ingredients ingredients={ ingredients } />} */}
     </div>
   );
 }
