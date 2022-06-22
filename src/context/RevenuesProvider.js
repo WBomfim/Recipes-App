@@ -3,47 +3,47 @@ import PropTypes from 'prop-types';
 import RevenuesContext from './RevenuesContext';
 import * as fetchFoods from '../services/fetchFoods';
 import * as fetchDrinks from '../services/fetchDrinks';
-import * as fetchCategories from '../services/fetchCategories';
 
 function RevenuesProvider({ children }) {
   const [dataRevenues, setDataRevenues] = useState([]);
   const [exibitionRevenues, setExibitionRevenues] = useState([]);
   const [searchValue, setSearchValue] = useState('');
   const [searchOptions, setSearchOptions] = useState('');
-  const [dataDrinks, setDataDrinks] = useState([]);
-  const [dataFoods, setDataFoods] = useState([]);
-  const [foodsCategories, setFoodCategories] = useState([]);
-  const [drinksCategories, setDrinksCategories] = useState([]);
+  // const [dataDrinks, setDataDrinks] = useState([]);
+  // const [dataFoods, setDataFoods] = useState([]);
+  // const [foodsCategories, setFoodCategories] = useState([]);
+  // const [drinksCategories, setDrinksCategories] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [categorySelect, setCategorySelect] = useState({
     type: '',
     category: '',
   });
   const [filteredRecipes, SetFilteredRecipes] = useState([]);
 
-  useEffect(() => {
-    const getData = async () => {
-      const drinks = await fetchDrinks.getDrinks();
-      const foods = await fetchFoods.getFoods();
-      const foodCategory = await fetchCategories.getCategoriesFoods();
-      const drinkCategory = await fetchCategories.getCategoriesDrinks();
-      setDataDrinks(drinks);
-      setDataFoods(foods);
-      setFoodCategories(foodCategory);
-      setDrinksCategories(drinkCategory);
-    };
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     const drinks = await fetchDrinks.getDrinks();
+  //     const foods = await fetchFoods.getFoods();
+  //     const foodCategory = await fetchFoods.getCategoriesFoods();
+  //     const drinkCategory = await fetchFoods.getCategoriesFoods();
+  //     setDataDrinks(drinks);
+  //     setDataFoods(foods);
+  //     setFoodCategories(foodCategory);
+  //     setDrinksCategories(drinkCategory);
+  //   };
 
-    getData();
-  }, []);
+  //   getData();
+  // }, []);
 
   useEffect(() => {
     if (categorySelect.category !== '') {
       const filteringByCategory = async () => {
         if (categorySelect.type === 'drinks') {
-          const data = await fetchCategories.filterDrinks(categorySelect.category);
-          return SetFilteredRecipes([...data]);
+          const data = await fetchDrinks.filterDrinks(categorySelect.category);
+          return setExibitionRevenues([...data]);
         }
-        const data = await fetchCategories.filterFoods(categorySelect.category);
-        return SetFilteredRecipes([...data]);
+        const data = await fetchFoods.filterFoods(categorySelect.category);
+        return setExibitionRevenues([...data]);
       };
       filteringByCategory();
     }
@@ -108,16 +108,20 @@ function RevenuesProvider({ children }) {
     getDataByName,
     getDataByFirstLetter,
 
-    dataDrinks,
-    dataFoods,
+    // dataDrinks,
+    // dataFoods,
 
-    foodsCategories,
-    drinksCategories,
+    // foodsCategories,
+    // drinksCategories,
+
+    categories,
+    setCategories,
 
     categorySelect,
     setCategorySelect,
 
     filteredRecipes,
+    SetFilteredRecipes,
   };
 
   return (
