@@ -48,9 +48,10 @@ function RevenuesProvider({ children }) {
     }
   };
 
-  const getDataByName = async (fetchOption, name) => {
+  const getDataByName = async (fetchOption) => {
     if (fetchOption === 'foods') {
-      const data = await fetchFoods.getFoodsName(name || searchValue);
+      const data = await fetchFoods.getFoodsName(searchValue);
+      console.log(data);
       setDataRevenues(data);
       setExibitionRevenues(data);
     }
@@ -88,12 +89,34 @@ function RevenuesProvider({ children }) {
     }
   };
 
+  const getData = async (fetchOption) => {
+    if (fetchOption === 'foods') {
+      const data = await fetchFoods.getFoods();
+      setDataRevenues(data);
+      setExibitionRevenues(data);
+    }
+
+    if (fetchOption === 'drinks') {
+      const data = await fetchDrinks.getDrinks();
+      setDataRevenues(data);
+      setExibitionRevenues(data);
+    }
+  };
+
   useEffect(() => {
     const TWENTY = 20;
+    const FIFTEEN = 15;
+    let maxIngrd = null;
     const [revenue] = exibitionDetails;
     let arrayIngredients = [];
     if (revenue) {
-      for (let i = 1; i <= TWENTY; i += 1) {
+      if (revenue.idDrink) {
+        maxIngrd = FIFTEEN;
+      } else {
+        maxIngrd = TWENTY;
+      }
+
+      for (let i = 1; i <= maxIngrd; i += 1) {
         if (revenue[`strIngredient${i}`] !== ''
         && revenue[`strIngredient${i}`] !== null) {
           arrayIngredients = [...arrayIngredients,
@@ -133,6 +156,7 @@ function RevenuesProvider({ children }) {
     getDataByIngredients,
     getDataByName,
     getDataByFirstLetter,
+    getData,
 
     categories,
     setCategories,
