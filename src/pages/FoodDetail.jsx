@@ -6,6 +6,7 @@ import ShowDetailsRevenues from '../components/ShowDetailsRevenues';
 import VideoRevenues from '../components/VideoRevenues';
 import Button from '../components/Button';
 import CardRevenues from '../components/CardRevenues';
+import '../styles/FoodDetails.css';
 
 function FoodDetail() {
   const { id } = useParams();
@@ -15,7 +16,7 @@ function FoodDetail() {
     handleFavorite,
     handleShare,
     ingredientsList,
-    getDataByName,
+    getData,
     exibitionRevenues,
   } = useContext(RevenuesContext);
   const [revenueDetails] = exibitionDetails;
@@ -23,13 +24,8 @@ function FoodDetail() {
 
   useEffect(() => {
     getDataById('foods', id);
+    getData('drinks');
   }, []);
-
-  useEffect(() => {
-    if (revenueDetails) {
-      getDataByName('drinks', revenueDetails.strMeal);
-    }
-  }, [exibitionDetails]);
 
   return (
     <div>
@@ -49,20 +45,22 @@ function FoodDetail() {
             instructions={ revenueDetails.strInstructions }
           />
           <VideoRevenues video={ revenueDetails.strYoutube } />
-          {exibitionRevenues && (
-            exibitionRevenues.map((revenue, index) => (
-              index < MAX_RECOMENDATIONS_DRINKS ? (
-                <CardRevenues
-                  key={ revenue.idMeal }
-                  index={ index }
-                  image={ revenue.strDrinkThumb || revenue.strMealThumb }
-                  name={ revenue.strDrink || revenue.strMeal }
-                  category={ revenue.strCategory }
-                  nameCard="recomendation-card"
-                />
-              ) : null
-            ))
-          )}
+          <div className="card-revenues-container">
+            {exibitionRevenues && (
+              exibitionRevenues.map((revenue, index) => (
+                index < MAX_RECOMENDATIONS_DRINKS ? (
+                  <CardRevenues
+                    key={ revenue.idDrink }
+                    index={ index }
+                    image={ revenue.strDrinkThumb || revenue.strMealThumb }
+                    name={ revenue.strDrink || revenue.strMeal }
+                    category={ revenue.strCategory }
+                    nameCard="recomendation-card"
+                  />
+                ) : null
+              ))
+            )}
+          </div>
           <Button
             name="Start Recipe"
             dataTestId="start-recipe-btn"
