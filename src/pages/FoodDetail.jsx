@@ -4,6 +4,9 @@ import RevenuesContext from '../context/RevenuesContext';
 import RevenuesHeader from '../components/RevenuesHeader';
 import Ingredients from '../components/Ingredients';
 import Instructions from '../components/Instructions';
+import VideoRevenues from '../components/VideoRevenues';
+import Button from '../components/Button';
+import CardRevenues from '../components/CardRevenues';
 
 function FoodDetail() {
   const [ingredients, setIngredients] = useState([]);
@@ -43,6 +46,9 @@ function FoodDetail() {
           />
           <Ingredients ingredients={ ingredients } />
           <Instructions instructions={ revenue.strInstructions } />
+          <VideoRevenues video={ revenue.strYoutube } />
+          <CardRevenues />
+          <Button />
         </div>
       ))}
       {/* {exibitionRevenues.length > 0 && <Ingredients ingredients={ ingredients } />} */}

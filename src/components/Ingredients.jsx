@@ -7,7 +7,13 @@ function Ingredients({ ingredients }) {
       <h2>Ingredients</h2>
       <ul>
         {ingredients.map((ingr, index) => (
-          <li key={ index }>{ingr}</li>
+          <li
+            key={ index }
+            data-testid={ `${index}-ingredient-name-and-measure` }
+          >
+            {ingr}
+
+          </li>
         ))}
       </ul>
     </div>

@@ -5,7 +5,7 @@ function Instructions({ instructions }) {
   return (
     <div>
       <h2>Instructions</h2>
-      <p>{ instructions }</p>
+      <p data-testid="instructions">{ instructions }</p>
     </div>
   );
 }
