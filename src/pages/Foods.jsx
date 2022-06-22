@@ -7,7 +7,7 @@ import ShowRevenues from '../components/ShowRevenues';
 function Foods() {
   return (
     <section>
-      <Header title="Foods" />
+      <Header title="Foods" buttonSearch />
       <SearchBar />
       <ShowRevenues />
       <Footer />

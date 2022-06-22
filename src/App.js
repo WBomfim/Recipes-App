@@ -23,11 +23,11 @@ function App() {
     <Switch>
       <Route exact path="/" component={ Login } />
       <Route exact path="/foods" component={ Foods } />
-      <Route path="/foods/:id" component={ FoodDetail } />
-      <Route path="/foods/:id/in-progress" component={ FoodInProgress } />
+      <Route exact path="/foods/:id" component={ FoodDetail } />
+      <Route exact path="/foods/:id/in-progress" component={ FoodInProgress } />
       <Route exact path="/drinks" component={ Drinks } />
-      <Route path="/drinks/:id" component={ DrinkDetail } />
-      <Route path="/drinks/:id/in-progress" component={ DrinkInProgress } />
+      <Route exact path="/drinks/:id" component={ DrinkDetail } />
+      <Route exact path="/drinks/:id/in-progress" component={ DrinkInProgress } />
       <Route exact path="/explore" component={ Explore } />
       <Route exact path="/explore/foods" component={ ExploreFoods } />
       <Route exact path="/explore/drinks" component={ ExploreDrinks } />
