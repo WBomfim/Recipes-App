@@ -29,7 +29,7 @@ function Foods() {
 
   return (
     <section>
-      <Header title="Foods" />
+      <Header title="Foods" buttonSearch />
       <SearchBar />
       <div>
         <Categories categories={ categories } recipeType="foods" />

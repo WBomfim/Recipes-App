@@ -7,8 +7,10 @@ import * as fetchDrinks from '../services/fetchDrinks';
 function RevenuesProvider({ children }) {
   const [dataRevenues, setDataRevenues] = useState([]);
   const [exibitionRevenues, setExibitionRevenues] = useState([]);
+  const [exibitionDetails, setExibitionDetails] = useState([]);
   const [searchValue, setSearchValue] = useState('');
   const [searchOptions, setSearchOptions] = useState('');
+
   // const [dataDrinks, setDataDrinks] = useState([]);
   // const [dataFoods, setDataFoods] = useState([]);
   // const [foodsCategories, setFoodCategories] = useState([]);
@@ -48,6 +50,9 @@ function RevenuesProvider({ children }) {
       filteringByCategory();
     }
   }, [categorySelect]);
+
+  const [ingredientsList, setIngredientsList] = useState([]);
+
 
   const getDataByIngredients = async (fetchOption) => {
     if (fetchOption === 'foods') {
@@ -91,6 +96,42 @@ function RevenuesProvider({ children }) {
     }
   };
 
+  const getDataById = async (fetchOption, id) => {
+    if (fetchOption === 'foods') {
+      const data = await fetchFoods.getFoodsId(id);
+      setExibitionDetails(data);
+    }
+
+    if (fetchOption === 'drinks') {
+      const data = await fetchDrinks.getDrinksId(id);
+      setExibitionDetails(data);
+    }
+  };
+
+  useEffect(() => {
+    const TWENTY = 20;
+    const [revenue] = exibitionDetails;
+    let arrayIngredients = [];
+    if (revenue) {
+      for (let i = 1; i <= TWENTY; i += 1) {
+        if (revenue[`strIngredient${i}`] !== ''
+        && revenue[`strIngredient${i}`] !== null) {
+          arrayIngredients = [...arrayIngredients,
+            `${revenue[`strIngredient${i}`]} - ${revenue[`strMeasure${i}`]}`];
+        }
+      }
+      setIngredientsList(arrayIngredients);
+    }
+  }, [exibitionDetails]);
+
+  const handleFavorite = () => {
+    console.log('em andamento');
+  };
+
+  const handleShare = () => {
+    console.log('em andamento');
+  };
+
   const context = {
     dataRevenues,
     setDataRevenues,
@@ -98,15 +139,21 @@ function RevenuesProvider({ children }) {
     exibitionRevenues,
     setExibitionRevenues,
 
+    exibitionDetails,
+    setExibitionDetails,
+
     searchValue,
     setSearchValue,
 
     searchOptions,
     setSearchOptions,
 
+    ingredientsList,
+
     getDataByIngredients,
     getDataByName,
     getDataByFirstLetter,
+
 
     // dataDrinks,
     // dataFoods,
@@ -122,6 +169,11 @@ function RevenuesProvider({ children }) {
 
     filteredRecipes,
     SetFilteredRecipes,
+
+    getDataById,
+    handleFavorite,
+    handleShare,
+
   };
 
   return (

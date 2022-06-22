@@ -33,7 +33,7 @@ function Drinks() {
 
   return (
     <section>
-      <Header title="Drinks" />
+      <Header title="Drinks" buttonSearch />
       <SearchBar />
       <div>
         <Categories categories={ categories } recipeType="drinks" />

@@ -1,7 +1,16 @@
 import React from 'react';
+import HeaderRevenue from '../components/HeaderRevenue';
+import ShowDetailsProcess from '../components/ShowDetailsProcess';
+import Button from '../components/Button';
 
 function DrinkDetail() {
-  return <div>DrinkDetail</div>;
+  return (
+    <>
+      <HeaderRevenue />
+      <ShowDetailsProcess />
+      <Button />
+    </>
+  );
 }
 
 export default DrinkDetail;
