@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import RevenuesContext from './RevenuesContext';
 import * as fetchFoods from '../services/fetchFoods';
@@ -10,6 +10,7 @@ function RevenuesProvider({ children }) {
   const [exibitionDetails, setExibitionDetails] = useState([]);
   const [searchValue, setSearchValue] = useState('');
   const [searchOptions, setSearchOptions] = useState('');
+  const [ingredientsList, setIngredientsList] = useState([]);
 
   const getDataByIngredients = async (fetchOption) => {
     if (fetchOption === 'foods') {
@@ -65,6 +66,22 @@ function RevenuesProvider({ children }) {
     }
   };
 
+  useEffect(() => {
+    const TWENTY = 20;
+    const [revenue] = exibitionDetails;
+    let arrayIngredients = [];
+    if (revenue) {
+      for (let i = 1; i <= TWENTY; i += 1) {
+        if (revenue[`strIngredient${i}`] !== ''
+        && revenue[`strIngredient${i}`] !== null) {
+          arrayIngredients = [...arrayIngredients,
+            `${revenue[`strIngredient${i}`]} - ${revenue[`strMeasure${i}`]}`];
+        }
+      }
+      setIngredientsList(arrayIngredients);
+    }
+  }, [exibitionDetails]);
+
   const handleFavorite = () => {
     console.log('em andamento');
   };
@@ -88,6 +105,8 @@ function RevenuesProvider({ children }) {
 
     searchOptions,
     setSearchOptions,
+
+    ingredientsList,
 
     getDataByIngredients,
     getDataByName,
