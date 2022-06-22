@@ -1,12 +1,14 @@
 import React from 'react';
-import RevenuesHeader from '../components/RevenuesHeader';
+import HeaderRevenue from '../components/HeaderRevenue';
 import ShowProgress from '../components/ShowProgress';
+import Button from '../components/Button';
 
 function DrinkInProgress() {
   return (
     <>
-      <RevenuesHeader />
+      <HeaderRevenue />
       <ShowProgress />
+      <Button />
     </>
   );
 }
