@@ -13,7 +13,6 @@ function RevenuesProvider({ children }) {
   const [searchOptions, setSearchOptions] = useState('');
   const [doneRecipes, setDoneRecipies] = useState('');
   const [progressRecipies, setProgressRecipies] = useState('');
-
   const [categories, setCategories] = useState([]);
   const [categorySelect, setCategorySelect] = useState({
     type: '',

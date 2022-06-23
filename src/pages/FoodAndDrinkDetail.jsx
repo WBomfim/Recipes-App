@@ -64,6 +64,7 @@ function FoodAndDrinkDetail() {
                 index < MAX_RECOMENDATIONS_DRINKS ? (
                   <CardRevenues
                     key={ revenue.idDrink || revenue.idMeal }
+                    id={ revenue.idDrink || revenue.idMeal }
                     index={ index }
                     image={ revenue.strDrinkThumb || revenue.strMealThumb }
                     name={ revenue.strDrink || revenue.strMeal }
