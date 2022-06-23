@@ -27,7 +27,7 @@ function CardRevenues({ category, maxCard, nameCard }) {
               key={ revenue.idMeal || revenue.idDrink }
               onClick={ () => handleClick(revenue.idMeal || revenue.idDrink) }
               type="button"
-              data-testid={ `${index}-${nameCard}` } // ${index}-recipe-card`
+              data-testid={ `${index}-${nameCard}` }
             >
               <div>
                 {/* utilizar css para mudar o tamanho das imagens */}
