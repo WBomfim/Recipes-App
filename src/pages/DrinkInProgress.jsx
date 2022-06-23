@@ -7,7 +7,7 @@ import Button from '../components/Button';
 
 function DrinkInProgress() {
   const { getDataById } = useContext(RevenuesContext);
-  /* const id = useLocation().pathname.replace(/\D/g, ''); */
+  /* const id = useLocation().pathname.replace(/\D/g, ' '); */
 
   useEffect(() => {
     getDataById('drinks', '17005');
