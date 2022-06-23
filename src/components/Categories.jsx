@@ -1,17 +1,36 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
+import { useLocation } from 'react-router-dom';
 import RevenuesContext from '../context/RevenuesContext';
 
-function Categories({ categories, recipeType }) {
-  const { setCategorySelect } = useContext(RevenuesContext);
-  const five = 5;
+function Categories() {
+  const {
+    dataRevenues,
+    setCategorySelect,
+    categorySelect,
+    categories,
+    setExibitionRevenues,
+  } = useContext(RevenuesContext);
 
-  const onClickButton = (categoryName) => {
-    setCategorySelect({ type: recipeType, category: categoryName[0] });
+  const five = 5;
+  const location = useLocation().pathname.split('/')[1];
+
+  const onClickButton = async (categoryName) => {
+    if (categorySelect.category === categoryName[0]) {
+      setExibitionRevenues(dataRevenues);
+    } else {
+      setCategorySelect({ type: location, category: categoryName[0] });
+    }
   };
 
   return (
     <section>
+      <button
+        type="button"
+        data-testid="All-category-filter"
+        onClick={ () => setExibitionRevenues(dataRevenues) }
+      >
+        All
+      </button>
       { categories.map((category) => Object.values(category))
         .slice(0, five)
         .map((categoryName) => (
@@ -28,10 +47,5 @@ function Categories({ categories, recipeType }) {
     </section>
   );
 }
-
-Categories.propTypes = {
-  categories: PropTypes.arrayOf(PropTypes.object).isRequired,
-  recipeType: PropTypes.string.isRequired,
-};
 
 export default Categories;

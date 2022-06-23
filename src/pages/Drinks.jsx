@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from 'react';
-// import CardDrinks from '../components/CardDrinks';
 import Categories from '../components/Categories';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
@@ -10,14 +9,10 @@ import { getCategoriesDrinks, getDrinks } from '../services/fetchDrinks';
 
 function Drinks() {
   const {
-    // dataDrinks,
-    // drinksCategories,
-    // categorySelect,
-    // filteredRecipes,
     setDataRevenues,
     setExibitionRevenues,
     setCategories,
-    categories } = useContext(RevenuesContext);
+  } = useContext(RevenuesContext);
 
   useEffect(() => {
     const getData = async () => {
@@ -36,14 +31,9 @@ function Drinks() {
       <Header title="Drinks" buttonSearch />
       <SearchBar />
       <div>
-        <Categories categories={ categories } recipeType="drinks" />
+        <Categories />
       </div>
-
       <div>
-        {/* <CardDrinks
-          recipes={ categorySelect.type !== '' ? filteredRecipes : dataDrinks }
-        /> */}
-
         <ShowRevenues />
       </div>
       <Footer />

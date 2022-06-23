@@ -7,8 +7,8 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 function HeaderRevenue({
   image, name, category, favorited, handleFavorite, handleShare }) {
   return (
-    <div>
-      <img data-testid="recipe-photo" src={ image } alt={ `imagem-${nome}` } />
+    <section>
+      <img data-testid="recipe-photo" src={ image } alt={ `imagem-${name}` } />
       <h1 data-testid="recipe-title">{ name }</h1>
       <p data-testid="recipe-category">{ category }</p>
       <button
@@ -25,7 +25,7 @@ function HeaderRevenue({
       >
         <img src={ favorited ? blackHeartIcon : whiteHeartIcon } alt="heart-Icon" />
       </button>
-    </div>
+    </section>
   );
 }
 

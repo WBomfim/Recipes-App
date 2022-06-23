@@ -1,0 +1,5 @@
+.card-revenues-container {
+  display: flex;
+  overflow-x: scroll;
+  width: auto;
+}

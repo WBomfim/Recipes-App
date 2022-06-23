@@ -8,15 +8,11 @@ function RevenuesProvider({ children }) {
   const [dataRevenues, setDataRevenues] = useState([]);
   const [exibitionRevenues, setExibitionRevenues] = useState([]);
   const [exibitionDetails, setExibitionDetails] = useState([]);
+  const [ingredientsList, setIngredientsList] = useState([]);
   const [searchValue, setSearchValue] = useState('');
   const [searchOptions, setSearchOptions] = useState('');
-
   const [categories, setCategories] = useState([]);
-  const [categorySelect, setCategorySelect] = useState({
-    type: '',
-    category: '',
-  });
-  const [filteredRecipes, SetFilteredRecipes] = useState([]);
+  const [categorySelect, setCategorySelect] = useState({ type: '', category: '' });
 
   useEffect(() => {
     if (categorySelect.category !== '') {
@@ -32,8 +28,6 @@ function RevenuesProvider({ children }) {
     }
   }, [categorySelect]);
 
-  const [ingredientsList, setIngredientsList] = useState([]);
-
   const getDataByIngredients = async (fetchOption) => {
     if (fetchOption === 'foods') {
       const data = await fetchFoods.getFoodsIngredients(searchValue);
@@ -48,9 +42,9 @@ function RevenuesProvider({ children }) {
     }
   };
 
-  const getDataByName = async (fetchOption, name) => {
+  const getDataByName = async (fetchOption) => {
     if (fetchOption === 'foods') {
-      const data = await fetchFoods.getFoodsName(name || searchValue);
+      const data = await fetchFoods.getFoodsName(searchValue);
       setDataRevenues(data);
       setExibitionRevenues(data);
     }
@@ -88,12 +82,34 @@ function RevenuesProvider({ children }) {
     }
   };
 
+  const getData = async (fetchOption) => {
+    if (fetchOption === 'foods') {
+      const data = await fetchFoods.getFoods();
+      setDataRevenues(data);
+      setExibitionRevenues(data);
+    }
+
+    if (fetchOption === 'drinks') {
+      const data = await fetchDrinks.getDrinks();
+      setDataRevenues(data);
+      setExibitionRevenues(data);
+    }
+  };
+
   useEffect(() => {
     const TWENTY = 20;
+    const FIFTEEN = 15;
+    let maxIngrd = null;
     const [revenue] = exibitionDetails;
     let arrayIngredients = [];
     if (revenue) {
-      for (let i = 1; i <= TWENTY; i += 1) {
+      if (revenue.idDrink) {
+        maxIngrd = FIFTEEN;
+      } else {
+        maxIngrd = TWENTY;
+      }
+
+      for (let i = 1; i <= maxIngrd; i += 1) {
         if (revenue[`strIngredient${i}`] !== ''
         && revenue[`strIngredient${i}`] !== null) {
           arrayIngredients = [...arrayIngredients,
@@ -133,6 +149,7 @@ function RevenuesProvider({ children }) {
     getDataByIngredients,
     getDataByName,
     getDataByFirstLetter,
+    getData,
 
     categories,
     setCategories,
@@ -140,13 +157,9 @@ function RevenuesProvider({ children }) {
     categorySelect,
     setCategorySelect,
 
-    filteredRecipes,
-    SetFilteredRecipes,
-
     getDataById,
     handleFavorite,
     handleShare,
-
   };
 
   return (
