@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory, useLocation } from 'react-router-dom';
+import RevenuesContext from '../context/RevenuesContext';
 
-function CardRevenues({ id, index, image, name, category, nameCard }) {
+function CardRevenues({ category, maxCard, nameCard }) {
+  const { exibitionRevenues } = useContext(RevenuesContext);
   const location = useLocation().pathname.split('/')[1];
   const history = useHistory();
 
-  const handleClick = () => {
+  const handleClick = (id) => {
     if (location === 'foods') {
       history.push(`/foods/${id}`);
     }
@@ -18,40 +20,48 @@ function CardRevenues({ id, index, image, name, category, nameCard }) {
 
   return (
     <div>
-      <button
-        onClick={ () => handleClick() }
-        type="button"
-        data-testid={ `${index}-${nameCard}` }
-      >
-        <div>
-          {/* utilizar css para mudar o tamanho das imagens */}
-          <img
-            width="200px"
-            height="200px"
-            src={ image }
-            alt={ `imagem-${name}` }
-            data-testid={ `${index}-card-img` }
-          />
-          <h3 data-testid={ `${index}-card-name` }>{ name }</h3>
-          {category && <p>{ category }</p>}
-        </div>
-      </button>
+      {exibitionRevenues && (
+        exibitionRevenues.map((revenue, index) => (
+          index < maxCard ? (
+            <button
+              key={ revenue.idMeal || revenue.idDrink }
+              onClick={ () => handleClick(revenue.idMeal || revenue.idDrink) }
+              type="button"
+              data-testid={ `${index}-${nameCard}` }
+            >
+              <div>
+                {/* utilizar css para mudar o tamanho das imagens */}
+                <img
+                  width="200px"
+                  height="200px"
+                  src={ revenue.strDrinkThumb || revenue.strMealThumb }
+                  alt={ `imagem-${revenue.strDrink || revenue.strMeal}` }
+                  data-testid={ `${index}-card-img` }
+                />
+                <h3
+                  data-testid={ `${index}-card-name` }
+                >
+                  { revenue.strDrink || revenue.strMeal }
+
+                </h3>
+                {category && <p>{ revenue.strCategory }</p>}
+              </div>
+            </button>
+          ) : null
+        ))
+      )}
     </div>
   );
 }
 
 CardRevenues.propTypes = {
-  index: PropTypes.number.isRequired,
-  image: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  category: PropTypes.string,
+  maxCard: PropTypes.number.isRequired,
+  category: PropTypes.bool,
   nameCard: PropTypes.string.isRequired,
-  id: PropTypes.string,
 };
 
 CardRevenues.defaultProps = {
   category: null,
-  id: null,
 };
 
 export default CardRevenues;
