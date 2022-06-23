@@ -12,10 +12,12 @@ function ShowRevenues() {
         exibitionRevenues.map((revenue, index) => (
           index < MAX_EXIBITION_DRINKS ? (
             <CardRevenues
-              key={ index }
+              id={ revenue.idMeal || revenue.idDrink }
+              key={ revenue.idMeal || revenue.idDrink }
               index={ index }
-              imagem={ revenue.strDrinkThumb || revenue.strMealThumb }
-              nome={ revenue.strDrink || revenue.strMeal }
+              image={ revenue.strDrinkThumb || revenue.strMealThumb }
+              name={ revenue.strDrink || revenue.strMeal }
+              nameCard="recipe-card"
             />
           ) : null
         ))

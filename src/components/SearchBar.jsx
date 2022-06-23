@@ -2,6 +2,11 @@ import React, { useContext, useCallback, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import RevenuesContext from '../context/RevenuesContext';
 
+const resetFilter = {
+  type: '',
+  category: '',
+};
+
 function SearchBar() {
   const {
     searchValue,
@@ -11,6 +16,8 @@ function SearchBar() {
     getDataByIngredients,
     getDataByName,
     getDataByFirstLetter,
+    setCategorySelect,
+    categorySelect,
   } = useContext(RevenuesContext);
 
   const history = useHistory();
@@ -25,15 +32,19 @@ function SearchBar() {
     if (!exibitionRevenues) {
       global.alert('Sorry, we haven\'t found any recipes for these filters.');
     } else {
-      if (exibitionRevenues.length === 1 && location === '/foods') {
+      if (exibitionRevenues.length === 1
+        && location === '/foods'
+        && categorySelect.category === '') {
         history.push(`/foods/${exibitionRevenues[0].idMeal}`);
       }
 
-      if (exibitionRevenues.length === 1 && location === '/drinks') {
+      if (exibitionRevenues.length === 1
+        && location === '/drinks'
+        && categorySelect.category === '') {
         history.push(`/drinks/${exibitionRevenues[0].idDrink}`);
       }
     }
-  }, [exibitionRevenues, history, location]);
+  }, [exibitionRevenues, history, location, categorySelect]);
 
   useEffect(() => {
     changeExibition();
@@ -43,11 +54,13 @@ function SearchBar() {
     if (searchOptions === 'ingredients') {
       getDataByIngredients(locationName);
       changeExibition();
+      setCategorySelect(resetFilter);
     }
 
     if (searchOptions === 'name') {
       getDataByName(locationName);
       changeExibition();
+      setCategorySelect(resetFilter);
     }
 
     if (searchOptions === 'first-letter') {
@@ -56,6 +69,7 @@ function SearchBar() {
       } else {
         getDataByFirstLetter(locationName);
         changeExibition();
+        setCategorySelect(resetFilter);
       }
     }
   };
