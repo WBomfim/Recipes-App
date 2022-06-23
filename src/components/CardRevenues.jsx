@@ -57,6 +57,7 @@ function CardRevenues({ category, maxCard, nameCard }) {
 CardRevenues.propTypes = {
   maxCard: PropTypes.number.isRequired,
   category: PropTypes.bool,
+  nameCard: PropTypes.string.isRequired,
 };
 
 CardRevenues.defaultProps = {

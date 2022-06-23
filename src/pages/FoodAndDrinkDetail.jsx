@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation, useHistory } from 'react-router-dom';
 import RevenuesContext from '../context/RevenuesContext';
 import HeaderRevenue from '../components/HeaderRevenue';
 import ShowDetailsRevenues from '../components/ShowDetailsRevenues';
@@ -10,6 +10,7 @@ import '../styles/FoodAndDrinkDetails.css';
 
 function FoodAndDrinkDetail() {
   const { id } = useParams();
+  const history = useHistory();
   const {
     getDataById,
     exibitionDetails,
@@ -67,7 +68,7 @@ function FoodAndDrinkDetail() {
                 name={ progressRecipies ? 'Continue Recipe' : 'Start Recipe' }
                 dataTestId="start-recipe-btn"
                 disabled={ false }
-                onClick={ () => console.log('button') }
+                onClick={ () => history.push(`${location}/in-progress`) }
               />)}
         </div>
       )}
