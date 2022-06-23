@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { setTokens, setUserEmail } from '../helpers/localStorageFunc';
+import setUserEmail from '../helpers/storageEmail';
+import setTokens from '../helpers/storageTokens';
 
 function Login() {
   const [email, setEmail] = useState('');

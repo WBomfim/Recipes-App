@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Categories from '../components/Categories';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
@@ -6,6 +7,7 @@ import SearchBar from '../components/SearchBar';
 import CardRevenues from '../components/CardRevenues';
 import RevenuesContext from '../context/RevenuesContext';
 import { getCategoriesDrinks, getDrinks } from '../services/fetchDrinks';
+import { getCategoriesFoods, getFoods } from '../services/fetchFoods';
 
 function FoodsAndDrinks() {
   const {
@@ -14,22 +16,43 @@ function FoodsAndDrinks() {
     setCategories,
   } = useContext(RevenuesContext);
   const MAX_CARDS = 12;
+  const location = useLocation().pathname.split('/')[1];
+
+  const nameTitle = () => {
+    if (location === 'foods') {
+      return 'Foods';
+    }
+
+    if (location === 'drinks') {
+      return 'Drinks';
+    }
+  };
 
   useEffect(() => {
     const getData = async () => {
-      const drinks = await getDrinks();
-      const drinkCategory = await getCategoriesDrinks();
-      setDataRevenues(drinks);
-      setExibitionRevenues(drinks);
-      setCategories(drinkCategory);
+      if (location === 'foods') {
+        const foods = await getFoods();
+        const foodsCategory = await getCategoriesFoods();
+        setDataRevenues(foods);
+        setExibitionRevenues(foods);
+        setCategories(foodsCategory);
+      }
+
+      if (location === 'drinks') {
+        const drinks = await getDrinks();
+        const drinkCategory = await getCategoriesDrinks();
+        setDataRevenues(drinks);
+        setExibitionRevenues(drinks);
+        setCategories(drinkCategory);
+      }
     };
 
     getData();
-  }, []);
+  }, [location]);
 
   return (
     <section>
-      <Header title="Drinks" buttonSearch />
+      <Header title={ nameTitle() } buttonSearch />
       <SearchBar />
       <div>
         <Categories />

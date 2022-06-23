@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import RevenuesContext from './RevenuesContext';
 import * as fetchFoods from '../services/fetchFoods';
 import * as fetchDrinks from '../services/fetchDrinks';
-import { getDoneRecipes, getInProgressRecipes } from '../helpers/localStorageFunc';
+import { getDoneRecipes, getInProgressRecipes } from '../helpers/storageInProgress';
 
 function RevenuesProvider({ children }) {
   const [dataRevenues, setDataRevenues] = useState([]);
