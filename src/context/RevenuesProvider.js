@@ -8,15 +8,11 @@ function RevenuesProvider({ children }) {
   const [dataRevenues, setDataRevenues] = useState([]);
   const [exibitionRevenues, setExibitionRevenues] = useState([]);
   const [exibitionDetails, setExibitionDetails] = useState([]);
+  const [ingredientsList, setIngredientsList] = useState([]);
   const [searchValue, setSearchValue] = useState('');
   const [searchOptions, setSearchOptions] = useState('');
-
   const [categories, setCategories] = useState([]);
-  const [categorySelect, setCategorySelect] = useState({
-    type: '',
-    category: '',
-  });
-  const [filteredRecipes, SetFilteredRecipes] = useState([]);
+  const [categorySelect, setCategorySelect] = useState({ type: '', category: '' });
 
   useEffect(() => {
     if (categorySelect.category !== '') {
@@ -31,8 +27,6 @@ function RevenuesProvider({ children }) {
       filteringByCategory();
     }
   }, [categorySelect]);
-
-  const [ingredientsList, setIngredientsList] = useState([]);
 
   const getDataByIngredients = async (fetchOption) => {
     if (fetchOption === 'foods') {
@@ -51,7 +45,6 @@ function RevenuesProvider({ children }) {
   const getDataByName = async (fetchOption) => {
     if (fetchOption === 'foods') {
       const data = await fetchFoods.getFoodsName(searchValue);
-      console.log(data);
       setDataRevenues(data);
       setExibitionRevenues(data);
     }
@@ -164,13 +157,9 @@ function RevenuesProvider({ children }) {
     categorySelect,
     setCategorySelect,
 
-    filteredRecipes,
-    SetFilteredRecipes,
-
     getDataById,
     handleFavorite,
     handleShare,
-
   };
 
   return (

@@ -5,14 +5,17 @@ import { useHistory, useLocation } from 'react-router-dom';
 function CardRevenues({ id, index, image, name, category, nameCard }) {
   const location = useLocation().pathname.split('/')[1];
   const history = useHistory();
+
   const handleClick = () => {
     if (location === 'foods') {
       history.push(`/foods/${id}`);
     }
+
     if (location === 'drinks') {
       history.push(`/drinks/${id}`);
     }
   };
+
   return (
     <div>
       <button

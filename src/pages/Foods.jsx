@@ -33,9 +33,7 @@ function Foods() {
       <div>
         <Categories />
       </div>
-
       <div>
-        {/* <CardFoods recipes={ categorySelect.type !== '' ? filteredRecipes : dataFoods } /> */}
         <ShowRevenues />
       </div>
       <Footer />

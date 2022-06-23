@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import RevenuesContext from '../context/RevenuesContext';
-import RevenuesHeader from '../components/RevenuesHeader';
+import HeaderRevenue from '../components/HeaderRevenue';
 import ShowDetailsRevenues from '../components/ShowDetailsRevenues';
 import Button from '../components/Button';
 import CardRevenues from '../components/CardRevenues';
@@ -30,7 +30,7 @@ function DrinkDetail() {
       {revenueDetails
       && (
         <div>
-          <RevenuesHeader
+          <HeaderRevenue
             image={ revenueDetails.strDrinkThumb }
             name={ revenueDetails.strDrink }
             category={ revenueDetails.strAlcoholic }
@@ -47,7 +47,8 @@ function DrinkDetail() {
               exibitionRevenues.map((revenue, index) => (
                 index < MAX_RECOMENDATIONS_FOODS ? (
                   <CardRevenues
-                    key={ revenue.idDrink }
+                    key={ revenue.idMeal }
+                    id={ revenue.idMeal }
                     index={ index }
                     image={ revenue.strDrinkThumb || revenue.strMealThumb }
                     name={ revenue.strDrink || revenue.strMeal }
