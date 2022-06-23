@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import RevenuesContext from '../context/RevenuesContext';
 
 function ShowDetailsRevenues() {
   const {
@@ -14,7 +15,7 @@ function ShowDetailsRevenues() {
         {ingredientsList.map((ingr, index) => (
           <li
             key={ index }
-            data-testid={ `${index}-ingredient-step` }
+            data-testid={ `${index}-ingredient-name-and-measure` }
           >
             {ingr}
 

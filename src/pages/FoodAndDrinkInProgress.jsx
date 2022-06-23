@@ -12,6 +12,7 @@ function FoodInProgress() {
     handleFavorite,
     handleShare,
   } = useContext(RevenuesContext);
+  const [revenueDetails] = exibitionDetails;
   const location = useLocation().pathname.split('/')[1];
   const { id } = useParams();
 
@@ -28,7 +29,7 @@ function FoodInProgress() {
 
   return (
     <div>
-      {exibitionDetails.length > 0 && (
+      {revenueDetails && (
         <>
           <HeaderRevenue
             favorited
