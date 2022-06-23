@@ -15,8 +15,12 @@ CardRevenues.propTypes = {
   index: PropTypes.number.isRequired,
   image: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  category: PropTypes.string.isRequired,
+  category: PropTypes.string,
   nameCard: PropTypes.string.isRequired,
+};
+
+CardRevenues.defaultProps = {
+  category: null,
 };
 
 export default CardRevenues;
