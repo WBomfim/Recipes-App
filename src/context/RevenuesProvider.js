@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import RevenuesContext from './RevenuesContext';
 import * as fetchFoods from '../services/fetchFoods';
 import * as fetchDrinks from '../services/fetchDrinks';
+import { getDoneRecipes } from '../helpers/localStorageFunc';
 
 function RevenuesProvider({ children }) {
   const [dataRevenues, setDataRevenues] = useState([]);
@@ -10,6 +11,7 @@ function RevenuesProvider({ children }) {
   const [exibitionDetails, setExibitionDetails] = useState([]);
   const [searchValue, setSearchValue] = useState('');
   const [searchOptions, setSearchOptions] = useState('');
+  const [doneRecipes, setDoneRecipies] = useState();
 
   const [categories, setCategories] = useState([]);
   const [categorySelect, setCategorySelect] = useState({
@@ -127,6 +129,12 @@ function RevenuesProvider({ children }) {
     }
   }, [exibitionDetails]);
 
+  const verifyDoneRecipes = () => {
+    const recipies = getDoneRecipes();
+    const recipiesDone = recipies.some((recipie) => recipie.id === id);
+    setDoneRecipies(recipiesDone);
+  };
+
   const handleFavorite = () => {
     console.log('em andamento');
   };
@@ -152,6 +160,7 @@ function RevenuesProvider({ children }) {
     setSearchOptions,
 
     ingredientsList,
+    doneRecipes,
 
     getDataByIngredients,
     getDataByName,
@@ -170,6 +179,7 @@ function RevenuesProvider({ children }) {
     getDataById,
     handleFavorite,
     handleShare,
+    verifyDoneRecipes,
 
   };
 
