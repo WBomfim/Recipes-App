@@ -21,6 +21,7 @@ function FoodAndDrinkDetail() {
     verifyRecipiesStorage,
     doneRecipes,
     progressRecipies,
+    alertShare,
   } = useContext(RevenuesContext);
   const location = useLocation().pathname;
 
@@ -38,7 +39,7 @@ function FoodAndDrinkDetail() {
     }
     verifyRecipiesStorage();
   }, []);
-  // teste
+
   return (
     <div>
       {revenueDetails
@@ -49,6 +50,7 @@ function FoodAndDrinkDetail() {
             handleFavorite={ handleFavorite }
             handleShare={ handleShare }
           />
+          {alertShare && <span>Link copied!</span>}
           <ShowDetailsRevenues
             ingredients={ ingredientsList }
             instructions={ revenueDetails.strInstructions }

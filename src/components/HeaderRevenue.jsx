@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import RevenuesContext from '../context/RevenuesContext';
 import shareIcon from '../images/shareIcon.svg';
@@ -7,6 +8,7 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 function HeaderRevenue({ favorited, handleFavorite, handleShare }) {
   const { exibitionDetails } = useContext(RevenuesContext);
+  const location = useLocation().pathname;
   const [revenueDetails] = exibitionDetails;
 
   return (
@@ -22,11 +24,17 @@ function HeaderRevenue({ favorited, handleFavorite, handleShare }) {
         { revenueDetails.strMeal || revenueDetails.strDrink }
 
       </h1>
-      <p data-testid="recipe-category">{ revenueDetails.strCategory }</p>
+      <p
+        data-testid="recipe-category"
+      >
+        { revenueDetails.strAlcoholic
+          ? revenueDetails.strAlcoholic : revenueDetails.strCategory }
+
+      </p>
       <button
         type="button"
         data-testid="share-btn"
-        onClick={ handleShare }
+        onClick={ () => handleShare(`http://localhost:3000${location}`) }
       >
         <img src={ shareIcon } alt="share-Icon" />
       </button>
