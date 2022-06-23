@@ -1,7 +1,7 @@
 import React from 'react';
 // import CardRevenues from './CardRevenues';
 
-function ShowDetails() {
+function ShowDetailsProcess() {
   return (
     <div>
       <h2>Ingredients</h2>
@@ -14,4 +14,4 @@ function ShowDetails() {
   );
 }
 
-export default ShowDetails;
+export default ShowDetailsProcess;
