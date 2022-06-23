@@ -12,7 +12,7 @@ function Foods() {
     setDataRevenues,
     setExibitionRevenues,
     setCategories,
-    categories } = useContext(RevenuesContext);
+  } = useContext(RevenuesContext);
 
   useEffect(() => {
     const getData = async () => {
@@ -31,7 +31,7 @@ function Foods() {
       <Header title="Foods" buttonSearch />
       <SearchBar />
       <div>
-        <Categories categories={ categories } recipeType="foods" />
+        <Categories />
       </div>
 
       <div>
