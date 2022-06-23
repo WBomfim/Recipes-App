@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import RevenuesContext from './RevenuesContext';
 import * as fetchFoods from '../services/fetchFoods';
 import * as fetchDrinks from '../services/fetchDrinks';
+import { getDoneRecipes, getInProgressRecipes } from '../helpers/localStorageFunc';
 
 function RevenuesProvider({ children }) {
   const [dataRevenues, setDataRevenues] = useState([]);
@@ -11,6 +12,8 @@ function RevenuesProvider({ children }) {
   const [ingredientsList, setIngredientsList] = useState([]);
   const [searchValue, setSearchValue] = useState('');
   const [searchOptions, setSearchOptions] = useState('');
+  const [doneRecipes, setDoneRecipies] = useState('');
+  const [progressRecipies, setProgressRecipies] = useState('');
   const [categories, setCategories] = useState([]);
   const [categorySelect, setCategorySelect] = useState({ type: '', category: '' });
 
@@ -120,6 +123,18 @@ function RevenuesProvider({ children }) {
     }
   }, [exibitionDetails]);
 
+  const verifyRecipiesStorage = () => {
+    const recipiesDone = getDoneRecipes();
+    const recipiesInProgress = getInProgressRecipes();
+
+    const recipiesDoneVerified = recipiesDone.some((recipie) => recipie.id === id);
+    const recipiesInProgressVerified = recipiesInProgress
+      .some((recipie) => recipie.id === id);
+
+    setDoneRecipies(recipiesDoneVerified);
+    setProgressRecipies(recipiesInProgressVerified);
+  };
+
   const handleFavorite = () => {
     console.log('em andamento');
   };
@@ -145,6 +160,8 @@ function RevenuesProvider({ children }) {
     setSearchOptions,
 
     ingredientsList,
+    doneRecipes,
+    progressRecipies,
 
     getDataByIngredients,
     getDataByName,
@@ -160,6 +177,8 @@ function RevenuesProvider({ children }) {
     getDataById,
     handleFavorite,
     handleShare,
+    verifyRecipiesStorage,
+
   };
 
   return (

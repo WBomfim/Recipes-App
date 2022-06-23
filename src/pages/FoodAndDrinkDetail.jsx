@@ -1,14 +1,14 @@
 import React, { useEffect, useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import RevenuesContext from '../context/RevenuesContext';
 import HeaderRevenue from '../components/HeaderRevenue';
 import ShowDetailsRevenues from '../components/ShowDetailsRevenues';
 import VideoRevenues from '../components/VideoRevenues';
 import Button from '../components/Button';
 import CardRevenues from '../components/CardRevenues';
-import '../styles/FoodDetails.css';
+import '../styles/FoodAndDrinkDetails.css';
 
-function FoodDetail() {
+function FoodAndDrinkDetail() {
   const { id } = useParams();
   const {
     getDataById,
@@ -18,13 +18,25 @@ function FoodDetail() {
     ingredientsList,
     getData,
     exibitionRevenues,
+    verifyRecipiesStorage,
+    doneRecipes,
+    progressRecipies,
   } = useContext(RevenuesContext);
+  const location = useLocation().pathname;
+
+  const locationName = location.split('/')[1];
   const [revenueDetails] = exibitionDetails;
   const MAX_RECOMENDATIONS_DRINKS = 6;
 
   useEffect(() => {
-    getDataById('foods', id);
-    getData('drinks');
+    if (locationName === 'foods') {
+      getDataById('foods', id);
+      getData('drinks');
+    } else {
+      getDataById('drinks', id);
+      getData('foods');
+    }
+    verifyRecipiesStorage();
   }, []);
 
   return (
@@ -33,8 +45,8 @@ function FoodDetail() {
       && (
         <div>
           <HeaderRevenue
-            image={ revenueDetails.strMealThumb }
-            name={ revenueDetails.strMeal }
+            image={ revenueDetails.strMealThumb || revenueDetails.strDrinkThumb }
+            name={ revenueDetails.strMeal || revenueDetails.strDrink }
             category={ revenueDetails.strCategory }
             favorited
             handleFavorite={ handleFavorite }
@@ -44,14 +56,15 @@ function FoodDetail() {
             ingredients={ ingredientsList }
             instructions={ revenueDetails.strInstructions }
           />
-          <VideoRevenues video={ revenueDetails.strYoutube } />
+          {revenueDetails.strYoutube
+          && <VideoRevenues video={ revenueDetails.strYoutube } />}
           <div className="card-revenues-container">
             {exibitionRevenues && (
               exibitionRevenues.map((revenue, index) => (
                 index < MAX_RECOMENDATIONS_DRINKS ? (
                   <CardRevenues
-                    key={ revenue.idDrink }
-                    id={ revenue.idDrink }
+                    key={ revenue.idDrink || revenue.idMeal }
+                    id={ revenue.idDrink || revenue.idMeal }
                     index={ index }
                     image={ revenue.strDrinkThumb || revenue.strMealThumb }
                     name={ revenue.strDrink || revenue.strMeal }
@@ -62,16 +75,18 @@ function FoodDetail() {
               ))
             )}
           </div>
-          <Button
-            name="Start Recipe"
-            dataTestId="start-recipe-btn"
-            disabled={ false }
-            onClick={ () => console.log('button') }
-          />
+          {doneRecipes ? null
+            : (
+              <Button
+                name={ progressRecipies ? 'Continue Recipe' : 'Start Recipe' }
+                dataTestId="start-recipe-btn"
+                disabled={ false }
+                onClick={ () => console.log('button') }
+              />)}
         </div>
       )}
     </div>
   );
 }
 
-export default FoodDetail;
+export default FoodAndDrinkDetail;
