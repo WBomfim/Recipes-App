@@ -38,7 +38,7 @@ function FoodAndDrinkDetail() {
     }
     verifyRecipiesStorage();
   }, []);
-
+  // teste
   return (
     <div>
       {revenueDetails
