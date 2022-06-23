@@ -6,7 +6,7 @@ import ShowDetailsRevenues from '../components/ShowDetailsRevenues';
 import VideoRevenues from '../components/VideoRevenues';
 import Button from '../components/Button';
 import CardRevenues from '../components/CardRevenues';
-import '../styles/FoodDetails.css';
+import '../styles/FoodAndDrinkDetails.css';
 
 function FoodAndDrinkDetail() {
   const { id } = useParams();
@@ -18,8 +18,9 @@ function FoodAndDrinkDetail() {
     ingredientsList,
     getData,
     exibitionRevenues,
-    verifyDoneRecipes,
+    verifyRecipiesStorage,
     doneRecipes,
+    progressRecipies,
   } = useContext(RevenuesContext);
   const location = useLocation().pathname;
 
@@ -35,7 +36,7 @@ function FoodAndDrinkDetail() {
       getDataById('drinks', id);
       getData('foods');
     }
-    verifyDoneRecipes();
+    verifyRecipiesStorage();
   }, []);
 
   return (
@@ -76,7 +77,7 @@ function FoodAndDrinkDetail() {
           {doneRecipes ? null
             : (
               <Button
-                name="Start Recipe"
+                name={ progressRecipies ? 'Continue Recipe' : 'Start Recipe' }
                 dataTestId="start-recipe-btn"
                 disabled={ false }
                 onClick={ () => console.log('button') }

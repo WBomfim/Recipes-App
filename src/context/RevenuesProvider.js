@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import RevenuesContext from './RevenuesContext';
 import * as fetchFoods from '../services/fetchFoods';
 import * as fetchDrinks from '../services/fetchDrinks';
-import { getDoneRecipes } from '../helpers/localStorageFunc';
+import { getDoneRecipes, getInProgressRecipes } from '../helpers/localStorageFunc';
 
 function RevenuesProvider({ children }) {
   const [dataRevenues, setDataRevenues] = useState([]);
@@ -11,7 +11,8 @@ function RevenuesProvider({ children }) {
   const [exibitionDetails, setExibitionDetails] = useState([]);
   const [searchValue, setSearchValue] = useState('');
   const [searchOptions, setSearchOptions] = useState('');
-  const [doneRecipes, setDoneRecipies] = useState();
+  const [doneRecipes, setDoneRecipies] = useState('');
+  const [progressRecipies, setProgressRecipies] = useState('');
 
   const [categories, setCategories] = useState([]);
   const [categorySelect, setCategorySelect] = useState({
@@ -129,10 +130,16 @@ function RevenuesProvider({ children }) {
     }
   }, [exibitionDetails]);
 
-  const verifyDoneRecipes = () => {
-    const recipies = getDoneRecipes();
-    const recipiesDone = recipies.some((recipie) => recipie.id === id);
-    setDoneRecipies(recipiesDone);
+  const verifyRecipiesStorage = () => {
+    const recipiesDone = getDoneRecipes();
+    const recipiesInProgress = getInProgressRecipes();
+
+    const recipiesDoneVerified = recipiesDone.some((recipie) => recipie.id === id);
+    const recipiesInProgressVerified = recipiesInProgress
+      .some((recipie) => recipie.id === id);
+
+    setDoneRecipies(recipiesDoneVerified);
+    setProgressRecipies(recipiesInProgressVerified);
   };
 
   const handleFavorite = () => {
@@ -161,6 +168,7 @@ function RevenuesProvider({ children }) {
 
     ingredientsList,
     doneRecipes,
+    progressRecipies,
 
     getDataByIngredients,
     getDataByName,
@@ -179,7 +187,7 @@ function RevenuesProvider({ children }) {
     getDataById,
     handleFavorite,
     handleShare,
-    verifyDoneRecipes,
+    verifyRecipiesStorage,
 
   };
 
