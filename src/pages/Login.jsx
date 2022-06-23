@@ -1,28 +1,29 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { setTokens, setUserEmail } from '../helpers/localStorageFunc';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassord] = useState('');
-  // const [disabled, setDisabled] = useState(''); *TERMINAR
+  const [disabled, setDisabled] = useState(true);
 
-  const onHandleChangeEmail = ({ target }) => {
-    setEmail(target.value);
-  };
-  const onHandleChangePassword = ({ target }) => {
-    setPassord(target.value);
-  };
+  const history = useHistory();
 
-  const onDisabled = () => {// TERMINAR
+  useEffect(() => {
     const verification = 6;
-    if (!email.contain('@') && !email.contain('.com') && email.length < verification) {
-      setDisabled(true);
-    } else {
-      setDisabled(false);
-    }
-  };
+    const errors = [
+      !email || !email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/),
+      !password || password.length <= verification,
+    ];
+    const hasErrors = errors.some((error) => error);
+    setDisabled(hasErrors);
+  }, [email, password]);
 
-  // const history = useHistory(); TERMINAR
+  const onHandleClick = () => {
+    setTokens();
+    setUserEmail(email);
+    history.push('/foods');
+  };
 
   return (
     <form>
@@ -30,11 +31,12 @@ function Login() {
       <div>
         <label htmlFor="email">
           <input
-            type="email"
+            type="text"
             name="email"
             data-testid="email-input"
             value={ email }
-            onChange={ onHandleChangeEmail }
+            onChange={ ({ target }) => { setEmail(target.value); } }
+            placeholder="enter a valid email"
           />
         </label>
         <label htmlFor="password">
@@ -43,15 +45,15 @@ function Login() {
             name="password"
             data-testid="password-input"
             value={ password }
-            onChange={ onHandleChangePassword }
+            onChange={ ({ target }) => { setPassord(target.value); } }
+            placeholder="enter a valid password"
           />
         </label>
-
         <button
           data-testid="login-submit-btn"
           type="button"
-          // onClick={ () => history.push('/foods') } TERMINAR
-          // disabled={ onDisabled } TERMINAR
+          disabled={ disabled }
+          onClick={ onHandleClick }
         >
           Enter
         </button>
