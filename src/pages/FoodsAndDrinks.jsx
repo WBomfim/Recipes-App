@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Categories from '../components/Categories';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
@@ -14,6 +15,17 @@ function FoodsAndDrinks() {
     setCategories,
   } = useContext(RevenuesContext);
   const MAX_CARDS = 12;
+  const location = useLocation().pathname.split('/')[1];
+
+  const nameTitle = () => {
+    if (location === 'foods') {
+      return 'Foods';
+    }
+
+    if (location === 'drinks') {
+      return 'Drinks';
+    }
+  };
 
   useEffect(() => {
     const getData = async () => {
@@ -29,7 +41,7 @@ function FoodsAndDrinks() {
 
   return (
     <section>
-      <Header title="Drinks" buttonSearch />
+      <Header title={ nameTitle() } buttonSearch />
       <SearchBar />
       <div>
         <Categories />
