@@ -1,15 +1,13 @@
 import React from 'react';
-import HeaderRevenue from '../components/HeaderRevenue';
-import ShowProgress from '../components/ShowProgress';
+/* import HeaderRevenue from '../components/HeaderRevenue'; */
 import Button from '../components/Button';
 
 function FoodInProgress() {
   return (
-    <>
-      <HeaderRevenue />
-      <ShowProgress />
+    <div>
+      {/* <HeaderRevenue /> */}
       <Button />
-    </>
+    </div>
   );
 }
 

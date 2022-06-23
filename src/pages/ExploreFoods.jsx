@@ -5,8 +5,9 @@ import Header from '../components/Header';
 
 function ExploreFoods() {
   const history = useHistory();
+
   return (
-    <div>
+    <>
       <Header title="Explore Foods" />
       <section>
         <button
@@ -32,7 +33,7 @@ function ExploreFoods() {
         </button>
       </section>
       <Footer />
-    </div>
+    </>
   );
 }
 

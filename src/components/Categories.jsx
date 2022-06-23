@@ -1,33 +1,22 @@
 import React, { useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import RevenuesContext from '../context/RevenuesContext';
-import { getFoods } from '../services/fetchFoods';
-import { getDrinks } from '../services/fetchDrinks';
 
 function Categories() {
   const {
+    dataRevenues,
     setCategorySelect,
     categorySelect,
     categories,
-    setExibitionRevenues } = useContext(RevenuesContext);
+    setExibitionRevenues,
+  } = useContext(RevenuesContext);
 
   const five = 5;
   const location = useLocation().pathname.split('/')[1];
 
-  const getAllRecipes = async () => {
-    if (location === 'foods') {
-      const foods = await getFoods();
-      setExibitionRevenues(foods);
-    }
-
-    if (location === 'drinks') {
-      const drinks = await getDrinks();
-      setExibitionRevenues(drinks);
-    }
-  };
   const onClickButton = async (categoryName) => {
     if (categorySelect.category === categoryName[0]) {
-      await getAllRecipes();
+      setExibitionRevenues(dataRevenues);
     } else {
       setCategorySelect({ type: location, category: categoryName[0] });
     }
@@ -35,11 +24,10 @@ function Categories() {
 
   return (
     <section>
-
       <button
         type="button"
         data-testid="All-category-filter"
-        onClick={ () => getAllRecipes() }
+        onClick={ () => setExibitionRevenues(dataRevenues) }
       >
         All
       </button>

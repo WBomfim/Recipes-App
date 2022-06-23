@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-// import { useLocation } from 'react-router-dom';
+/* import { useLocation } from 'react-router-dom'; */
 import RevenuesContext from '../context/RevenuesContext';
 /* import HeaderRevenue from '../components/HeaderRevenue';
 import ShowDetailsProcess from '../components/ShowDetailsProcess'; */

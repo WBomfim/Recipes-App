@@ -1,17 +1,30 @@
 import React from 'react';
-// import CardRevenues from './CardRevenues';
+import PropTypes from 'prop-types';
 
-function ShowDetailsProcess() {
+function ShowDetailsRevenues({ ingredients, instructions }) {
   return (
-    <div>
+    <section>
       <h2>Ingredients</h2>
-      {/* <p data-testid="`${index}-ingredient-name-and-measure`">{ ingredients }</p> */}
+      <ul>
+        {ingredients.map((ingr, index) => (
+          <li
+            key={ index }
+            data-testid={ `${index}-ingredient-name-and-measure` }
+          >
+            {ingr}
+
+          </li>
+        ))}
+      </ul>
       <h2>Instructions</h2>
       <p data-testid="instructions">{ instructions }</p>
-      {/* <video src={ video } data-testid="video" />
-      <CardRevenues data-testid="`${index}-recomendation-card`" /> */}
-    </div>
+    </section>
   );
 }
 
-export default ShowDetailsProcess;
+ShowDetailsRevenues.propTypes = {
+  ingredients: PropTypes.arrayOf(PropTypes.any).isRequired,
+  instructions: PropTypes.string.isRequired,
+};
+
+export default ShowDetailsRevenues;
