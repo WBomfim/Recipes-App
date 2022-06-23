@@ -1,15 +1,21 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
+import RevenuesContext from '../context/RevenuesContext';
 
-function ShowDetailsRevenues({ ingredients, instructions }) {
+function ShowDetailsProcess() {
+  const {
+    exibitionDetails,
+    ingredientsList,
+  } = useContext(RevenuesContext);
+  const [revenueDetails] = exibitionDetails;
+
   return (
     <section>
       <h2>Ingredients</h2>
       <ul>
-        {ingredients.map((ingr, index) => (
+        {ingredientsList.map((ingr, index) => (
           <li
             key={ index }
-            data-testid={ `${index}-ingredient-name-and-measure` }
+            data-testid={ `${index}-ingredient-step` }
           >
             {ingr}
 
@@ -17,14 +23,9 @@ function ShowDetailsRevenues({ ingredients, instructions }) {
         ))}
       </ul>
       <h2>Instructions</h2>
-      <p data-testid="instructions">{ instructions }</p>
+      <p data-testid="instructions">{ revenueDetails.strInstructions }</p>
     </section>
   );
 }
 
-ShowDetailsRevenues.propTypes = {
-  ingredients: PropTypes.arrayOf(PropTypes.any).isRequired,
-  instructions: PropTypes.string.isRequired,
-};
-
-export default ShowDetailsRevenues;
+export default ShowDetailsProcess;

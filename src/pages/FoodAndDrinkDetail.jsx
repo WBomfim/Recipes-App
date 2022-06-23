@@ -16,7 +16,6 @@ function FoodAndDrinkDetail() {
     exibitionDetails,
     handleFavorite,
     handleShare,
-    ingredientsList,
     getData,
     verifyRecipiesStorage,
     doneRecipes,
@@ -49,10 +48,7 @@ function FoodAndDrinkDetail() {
             handleFavorite={ handleFavorite }
             handleShare={ handleShare }
           />
-          <ShowDetailsRevenues
-            ingredients={ ingredientsList }
-            instructions={ revenueDetails.strInstructions }
-          />
+          <ShowDetailsRevenues />
           {revenueDetails.strYoutube
           && <VideoRevenues
             video={ revenueDetails.strYoutube }
