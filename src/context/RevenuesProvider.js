@@ -5,6 +5,8 @@ import * as fetchFoods from '../services/fetchFoods';
 import * as fetchDrinks from '../services/fetchDrinks';
 import { getDoneRecipes, getInProgressRecipes } from '../helpers/storageInProgress';
 
+const copy = require('clipboard-copy');
+
 function RevenuesProvider({ children }) {
   const [dataRevenues, setDataRevenues] = useState([]);
   const [exibitionRevenues, setExibitionRevenues] = useState([]);
@@ -16,6 +18,8 @@ function RevenuesProvider({ children }) {
   const [progressRecipies, setProgressRecipies] = useState('');
   const [categories, setCategories] = useState([]);
   const [categorySelect, setCategorySelect] = useState({ type: '', category: '' });
+  const [alertShare, setAlertShare] = useState(false);
+  const [click, setClick] = useState(false);
 
   useEffect(() => {
     if (categorySelect.category !== '') {
@@ -139,8 +143,9 @@ function RevenuesProvider({ children }) {
     console.log('em andamento');
   };
 
-  const handleShare = () => {
-    console.log('em andamento');
+  const handleShare = (url) => {
+    copy(url);
+    setAlertShare(true);
   };
 
   const context = {
@@ -158,6 +163,12 @@ function RevenuesProvider({ children }) {
 
     searchOptions,
     setSearchOptions,
+
+    alertShare,
+    setAlertShare,
+
+    click,
+    setClick,
 
     ingredientsList,
     doneRecipes,
