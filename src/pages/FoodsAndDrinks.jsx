@@ -3,24 +3,25 @@ import Categories from '../components/Categories';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import SearchBar from '../components/SearchBar';
+import CardRevenues from '../components/CardRevenues';
 import RevenuesContext from '../context/RevenuesContext';
-import { getCategoriesFoods, getFoods } from '../services/fetchFoods';
-import ShowRevenues from '../components/ShowRevenues';
+import { getCategoriesDrinks, getDrinks } from '../services/fetchDrinks';
 
-function Foods() {
+function FoodsAndDrinks() {
   const {
     setDataRevenues,
     setExibitionRevenues,
     setCategories,
   } = useContext(RevenuesContext);
+  const MAX_CARDS = 12;
 
   useEffect(() => {
     const getData = async () => {
-      const foods = await getFoods();
-      const foodCategory = await getCategoriesFoods();
-      setDataRevenues(foods);
-      setExibitionRevenues(foods);
-      setCategories(foodCategory);
+      const drinks = await getDrinks();
+      const drinkCategory = await getCategoriesDrinks();
+      setDataRevenues(drinks);
+      setExibitionRevenues(drinks);
+      setCategories(drinkCategory);
     };
 
     getData();
@@ -28,17 +29,17 @@ function Foods() {
 
   return (
     <section>
-      <Header title="Foods" buttonSearch />
+      <Header title="Drinks" buttonSearch />
       <SearchBar />
       <div>
         <Categories />
       </div>
       <div>
-        <ShowRevenues />
+        <CardRevenues maxCard={ MAX_CARDS } nameCard="recipe-card" />
       </div>
       <Footer />
     </section>
   );
 }
 
-export default Foods;
+export default FoodsAndDrinks;
