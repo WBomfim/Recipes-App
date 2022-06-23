@@ -7,6 +7,7 @@ import SearchBar from '../components/SearchBar';
 import CardRevenues from '../components/CardRevenues';
 import RevenuesContext from '../context/RevenuesContext';
 import { getCategoriesDrinks, getDrinks } from '../services/fetchDrinks';
+import { getCategoriesFoods, getFoods } from '../services/fetchFoods';
 
 function FoodsAndDrinks() {
   const {
@@ -29,15 +30,25 @@ function FoodsAndDrinks() {
 
   useEffect(() => {
     const getData = async () => {
-      const drinks = await getDrinks();
-      const drinkCategory = await getCategoriesDrinks();
-      setDataRevenues(drinks);
-      setExibitionRevenues(drinks);
-      setCategories(drinkCategory);
+      if (location === 'foods') {
+        const foods = await getFoods();
+        const foodsCategory = await getCategoriesFoods();
+        setDataRevenues(foods);
+        setExibitionRevenues(foods);
+        setCategories(foodsCategory);
+      }
+
+      if (location === 'drinks') {
+        const drinks = await getDrinks();
+        const drinkCategory = await getCategoriesDrinks();
+        setDataRevenues(drinks);
+        setExibitionRevenues(drinks);
+        setCategories(drinkCategory);
+      }
     };
 
     getData();
-  }, []);
+  }, [location]);
 
   return (
     <section>
