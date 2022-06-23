@@ -27,7 +27,6 @@ function FoodAndDrinkDetail() {
   const locationName = location.split('/')[1];
   const [revenueDetails] = exibitionDetails;
   const MAX_RECOMENDATIONS_DRINKS = 6;
-  // const testeMerge = 5;
 
   useEffect(() => {
     if (locationName === 'foods') {
