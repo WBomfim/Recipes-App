@@ -8,11 +8,10 @@ import Button from '../components/Button';
 function FoodInProgress() {
   const {
     getDataById,
-    exibitionDetails,
+    ingredientsList,
     handleFavorite,
     handleShare,
   } = useContext(RevenuesContext);
-  const [revenueDetails] = exibitionDetails;
   const location = useLocation().pathname.split('/')[1];
   const { id } = useParams();
 
@@ -29,7 +28,7 @@ function FoodInProgress() {
 
   return (
     <div>
-      {revenueDetails && (
+      {ingredientsList.length > 0 && (
         <>
           <HeaderRevenue
             favorited
