@@ -16,9 +16,8 @@ function FoodAndDrinkDetail() {
     exibitionDetails,
     handleFavorite,
     handleShare,
-    ingredientsList,
     getData,
-    verifyRecipiesStorage,
+    /* verifyRecipiesStorage, */
     doneRecipes,
     progressRecipies,
     alertShare,
@@ -37,7 +36,7 @@ function FoodAndDrinkDetail() {
       getDataById('drinks', id);
       getData('foods');
     }
-    verifyRecipiesStorage();
+    /* verifyRecipiesStorage(); */
   }, []);
 
   return (
@@ -51,10 +50,7 @@ function FoodAndDrinkDetail() {
             handleShare={ handleShare }
           />
           {alertShare && <span>Link copied!</span>}
-          <ShowDetailsRevenues
-            ingredients={ ingredientsList }
-            instructions={ revenueDetails.strInstructions }
-          />
+          <ShowDetailsRevenues />
           {revenueDetails.strYoutube
           && <VideoRevenues
             video={ revenueDetails.strYoutube }

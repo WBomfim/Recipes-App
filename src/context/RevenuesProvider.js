@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import RevenuesContext from './RevenuesContext';
 import * as fetchFoods from '../services/fetchFoods';
 import * as fetchDrinks from '../services/fetchDrinks';
-import { getDoneRecipes, getInProgressRecipes } from '../helpers/storageInProgress';
+import { getInProgressRecipes } from '../helpers/storageInProgress';
+import getDoneRecipes from '../helpers/storageDoneRecipes';
 
 const copy = require('clipboard-copy');
 
@@ -12,6 +13,7 @@ function RevenuesProvider({ children }) {
   const [exibitionRevenues, setExibitionRevenues] = useState([]);
   const [exibitionDetails, setExibitionDetails] = useState([]);
   const [ingredientsList, setIngredientsList] = useState([]);
+  const [ingredientsSelected, setIngredientsSelected] = useState([]);
   const [searchValue, setSearchValue] = useState('');
   const [searchOptions, setSearchOptions] = useState('');
   const [doneRecipes, setDoneRecipies] = useState('');
@@ -173,6 +175,8 @@ function RevenuesProvider({ children }) {
     ingredientsList,
     doneRecipes,
     progressRecipies,
+    ingredientsSelected,
+    setIngredientsSelected,
 
     getDataByIngredients,
     getDataByName,
@@ -189,7 +193,6 @@ function RevenuesProvider({ children }) {
     handleFavorite,
     handleShare,
     verifyRecipiesStorage,
-
   };
 
   return (
