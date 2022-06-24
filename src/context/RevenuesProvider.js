@@ -4,7 +4,7 @@ import RevenuesContext from './RevenuesContext';
 import * as fetchFoods from '../services/fetchFoods';
 import * as fetchDrinks from '../services/fetchDrinks';
 import { getDoneRecipes, getInProgressRecipes } from '../helpers/storageInProgress';
-import getFavoriteRecipes from '../helpers/storageFavorited';
+import { getFavoriteRecipes, saveFavoriteRecipes } from '../helpers/storageFavorited';
 
 const copy = require('clipboard-copy');
 
@@ -21,7 +21,8 @@ function RevenuesProvider({ children }) {
   const [categorySelect, setCategorySelect] = useState({ type: '', category: '' });
   const [alertShare, setAlertShare] = useState(false);
   const [click, setClick] = useState(false);
-  const [favoritedBoll, setFavoritedBoll] = useState();
+  const [isFavorited, setIsFavorited] = useState();
+  const [saveFavorite, setSaveFavorite] = useState([]);
 
   useEffect(() => {
     if (categorySelect.category !== '') {
@@ -133,7 +134,6 @@ function RevenuesProvider({ children }) {
     const recipiesDone = getDoneRecipes();
     const favoriteRecipies = getFavoriteRecipes();
     const recipiesInProgress = getInProgressRecipes();
-    console.log(favoriteRecipies, recipiesDone, id);
 
     if (recipiesInProgress) {
       const idRecipiesProgress = Object.keys(recipiesInProgress[option]);
@@ -147,11 +147,21 @@ function RevenuesProvider({ children }) {
     const recipiesFavoriteds = favoriteRecipies
       .some((recipie) => recipie.id === id);
     setDoneRecipies(recipiesDoneVerified);
-    setFavoritedBoll(recipiesFavoriteds);
+    setIsFavorited(recipiesFavoriteds);
   };
 
-  const handleFavorite = () => {
-    console.log('em andamento');
+  const handleFavorite = (revenue) => {
+    if (!isFavorited) {
+      saveFavoriteRecipes([...saveFavorite, revenue]);
+      setSaveFavorite([...saveFavorite, revenue]);
+    } else {
+      const recipesFavoriteds = getFavoriteRecipes();
+      const deleteRecipesFavoriteds = recipesFavoriteds
+        .filter((recipe) => recipe.id !== revenue.id);
+      saveFavoriteRecipes(deleteRecipesFavoriteds);
+      setSaveFavorite(deleteRecipesFavoriteds);
+    }
+    setIsFavorited(!isFavorited);
   };
 
   const handleShare = (url) => {
@@ -184,7 +194,7 @@ function RevenuesProvider({ children }) {
     ingredientsList,
     doneRecipes,
     progressRecipies,
-    favoritedBoll,
+    isFavorited,
 
     getDataByIngredients,
     getDataByName,

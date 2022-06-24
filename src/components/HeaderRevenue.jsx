@@ -7,9 +7,20 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 function HeaderRevenue({ handleFavorite, handleShare }) {
-  const { exibitionDetails, favoritedBoll } = useContext(RevenuesContext);
+  const { exibitionDetails, isFavorited } = useContext(RevenuesContext);
   const location = useLocation().pathname;
+  const locationName = location.split('/')[1];
   const [revenueDetails] = exibitionDetails;
+
+  const revenueSaveStorage = {
+    id: revenueDetails.idMeal || revenueDetails.idDrink,
+    type: locationName,
+    nationality: revenueDetails.strArea || '',
+    category: revenueDetails.strCategory,
+    alcoholicOrNot: revenueDetails.strAlcoholic || '',
+    name: revenueDetails.strMeal || revenueDetails.strDrink,
+    image: revenueDetails.strMealThumb || revenueDetails.strDrinkThumb,
+  };
 
   return (
     <section>
@@ -40,11 +51,11 @@ function HeaderRevenue({ handleFavorite, handleShare }) {
       </button>
       <button
         type="button"
-        onClick={ handleFavorite }
+        onClick={ () => handleFavorite(revenueSaveStorage) }
       >
         <img
           data-testid="favorite-btn"
-          src={ favoritedBoll ? blackHeartIcon : whiteHeartIcon }
+          src={ isFavorited ? blackHeartIcon : whiteHeartIcon }
           alt="heart-Icon"
         />
       </button>

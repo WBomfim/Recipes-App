@@ -1,5 +1,7 @@
-const getFavoriteRecipes = () => (
+export const getFavoriteRecipes = () => (
   JSON.parse(localStorage.getItem('favoriteRecipes')) || []
 );
 
-export default getFavoriteRecipes;
+export const saveFavoriteRecipes = (revenue) => {
+  localStorage.setItem('favoriteRecipes', JSON.stringify(revenue));
+};
