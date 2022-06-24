@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import RevenuesContext from '../context/RevenuesContext';
 import * as storageInProgress from '../helpers/storageInProgress';
 import '../styles/ShowDetailsProcess.css';
@@ -12,19 +12,22 @@ function ShowDetailsProcess() {
     setIngredientsSelected,
   } = useContext(RevenuesContext);
   const [revenueDetails] = exibitionDetails;
+  const location = useLocation().pathname.split('/')[1];
   const { id } = useParams();
 
   const handleSelect = (ingredient) => {
     if (ingredientsSelected.includes(ingredient)) {
-      setIngredientsSelected(ingredientsSelected.filter((item) => item !== ingredient));
+      const filteredIngredients = ingredientsSelected
+        .filter((ingredientSelected) => ingredientSelected !== ingredient);
+      setIngredientsSelected(filteredIngredients);
       storageInProgress.addInProgressRecipe({
-        [id]: ingredientsSelected.filter((item) => item !== ingredient),
-      });
+        [id]: filteredIngredients,
+      }, location);
     } else {
       setIngredientsSelected([...ingredientsSelected, ingredient]);
       storageInProgress.addInProgressRecipe({
         [id]: [...ingredientsSelected, ingredient],
-      });
+      }, location);
     }
   };
 
