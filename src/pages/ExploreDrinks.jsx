@@ -2,9 +2,15 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import { getDrinksRandom } from '../services/fetchDrinks';
 
 function ExploreDrinks() {
   const history = useHistory();
+
+  const handleClick = async () => {
+    const randomId = await getDrinksRandom();
+    history.push(`/drinks/${randomId}`);
+  };
   return (
     <div>
       <Header title="Explore Drinks" />
@@ -19,7 +25,7 @@ function ExploreDrinks() {
         <button
           type="button"
           data-testid="explore-surprise"
-          // após implementação da pagina de detalhes req 74
+          onClick={ handleClick }
         >
           Surprise me!
         </button>
