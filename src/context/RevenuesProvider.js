@@ -4,6 +4,7 @@ import RevenuesContext from './RevenuesContext';
 import * as fetchFoods from '../services/fetchFoods';
 import * as fetchDrinks from '../services/fetchDrinks';
 import { getInProgressRecipes } from '../helpers/storageInProgress';
+import { getFavoriteRecipes, saveFavoriteRecipes } from '../helpers/storageFavorited';
 import getDoneRecipes from '../helpers/storageDoneRecipes';
 
 const copy = require('clipboard-copy');
@@ -17,11 +18,13 @@ function RevenuesProvider({ children }) {
   const [searchValue, setSearchValue] = useState('');
   const [searchOptions, setSearchOptions] = useState('');
   const [doneRecipes, setDoneRecipies] = useState('');
-  const [progressRecipies, setProgressRecipies] = useState('');
+  const [progressRecipies, setProgressRecipies] = useState(false);
   const [categories, setCategories] = useState([]);
   const [categorySelect, setCategorySelect] = useState({ type: '', category: '' });
   const [alertShare, setAlertShare] = useState(false);
   const [click, setClick] = useState(false);
+  const [isFavorited, setIsFavorited] = useState();
+  const [saveFavorite, setSaveFavorite] = useState([]);
 
   useEffect(() => {
     if (categorySelect.category !== '') {
@@ -129,20 +132,41 @@ function RevenuesProvider({ children }) {
     }
   }, [exibitionDetails]);
 
-  const verifyRecipiesStorage = () => {
+  const verifyRecipiesStorage = (id, option) => {
     const recipiesDone = getDoneRecipes();
+    const favoriteRecipies = getFavoriteRecipes();
     const recipiesInProgress = getInProgressRecipes();
+    if (recipiesInProgress) {
+      console.log(option);
+      console.log(recipiesInProgress);
+      const idRecipiesProgress = Object.keys(recipiesInProgress);
+      console.log(idRecipiesProgress);
+      const recipiesInProgressVerified = idRecipiesProgress
+        .some((recipie) => recipie === id);
+      setProgressRecipies(recipiesInProgressVerified);
+    }
 
-    const recipiesDoneVerified = recipiesDone.some((recipie) => recipie.id === id);
-    const recipiesInProgressVerified = recipiesInProgress
+    const recipiesDoneVerified = recipiesDone
       .some((recipie) => recipie.id === id);
-
+    const recipiesFavoriteds = favoriteRecipies
+      .some((recipie) => recipie.id === id);
     setDoneRecipies(recipiesDoneVerified);
-    setProgressRecipies(recipiesInProgressVerified);
+    setIsFavorited(recipiesFavoriteds);
   };
 
-  const handleFavorite = () => {
-    console.log('em andamento');
+  const handleFavorite = (revenue) => {
+    if (!isFavorited) {
+      saveFavoriteRecipes([...saveFavorite, revenue]);
+      setSaveFavorite([...saveFavorite, revenue]);
+    } else {
+      const recipesFavoriteds = getFavoriteRecipes();
+      const deleteRecipesFavoriteds = recipesFavoriteds
+        .filter((recipe) => recipe.id !== revenue.id);
+      saveFavoriteRecipes(deleteRecipesFavoriteds);
+      setSaveFavorite(deleteRecipesFavoriteds);
+    }
+    setIsFavorited(!isFavorited);
+    console.log(JSON.parse(localStorage.getItem('favoriteRecipes')));
   };
 
   const handleShare = (url) => {
@@ -175,6 +199,7 @@ function RevenuesProvider({ children }) {
     ingredientsList,
     doneRecipes,
     progressRecipies,
+    isFavorited,
     ingredientsSelected,
     setIngredientsSelected,
 

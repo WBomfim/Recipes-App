@@ -6,10 +6,21 @@ import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 
-function HeaderRevenue({ favorited, handleFavorite, handleShare }) {
-  const { exibitionDetails } = useContext(RevenuesContext);
+function HeaderRevenue({ handleFavorite, handleShare }) {
+  const { exibitionDetails, isFavorited } = useContext(RevenuesContext);
   const location = useLocation().pathname;
+  const locationName = location.split('s')[0].split('/')[1];
   const [revenueDetails] = exibitionDetails;
+
+  const revenueSaveStorage = {
+    id: revenueDetails.idMeal || revenueDetails.idDrink,
+    type: locationName,
+    nationality: revenueDetails.strArea || '',
+    category: revenueDetails.strCategory,
+    alcoholicOrNot: revenueDetails.strAlcoholic || '',
+    name: revenueDetails.strMeal || revenueDetails.strDrink,
+    image: revenueDetails.strMealThumb || revenueDetails.strDrinkThumb,
+  };
 
   return (
     <section>
@@ -40,17 +51,19 @@ function HeaderRevenue({ favorited, handleFavorite, handleShare }) {
       </button>
       <button
         type="button"
-        data-testid="favorite-btn"
-        onClick={ handleFavorite }
+        onClick={ () => handleFavorite(revenueSaveStorage) }
       >
-        <img src={ favorited ? blackHeartIcon : whiteHeartIcon } alt="heart-Icon" />
+        <img
+          data-testid="favorite-btn"
+          src={ isFavorited ? blackHeartIcon : whiteHeartIcon }
+          alt="heart-Icon"
+        />
       </button>
     </section>
   );
 }
 
 HeaderRevenue.propTypes = {
-  favorited: PropTypes.bool.isRequired,
   handleFavorite: PropTypes.func.isRequired,
   handleShare: PropTypes.func.isRequired,
 };
