@@ -18,7 +18,7 @@ function RevenuesProvider({ children }) {
   const [searchValue, setSearchValue] = useState('');
   const [searchOptions, setSearchOptions] = useState('');
   const [doneRecipes, setDoneRecipies] = useState('');
-  const [progressRecipies, setProgressRecipies] = useState('');
+  const [progressRecipies, setProgressRecipies] = useState(false);
   const [categories, setCategories] = useState([]);
   const [categorySelect, setCategorySelect] = useState({ type: '', category: '' });
   const [alertShare, setAlertShare] = useState(false);
@@ -136,9 +136,11 @@ function RevenuesProvider({ children }) {
     const recipiesDone = getDoneRecipes();
     const favoriteRecipies = getFavoriteRecipes();
     const recipiesInProgress = getInProgressRecipes();
-
     if (recipiesInProgress) {
-      const idRecipiesProgress = Object.keys(recipiesInProgress[option]);
+      console.log(option);
+      console.log(recipiesInProgress);
+      const idRecipiesProgress = Object.keys(recipiesInProgress);
+      console.log(idRecipiesProgress);
       const recipiesInProgressVerified = idRecipiesProgress
         .some((recipie) => recipie === id);
       setProgressRecipies(recipiesInProgressVerified);
@@ -164,6 +166,7 @@ function RevenuesProvider({ children }) {
       setSaveFavorite(deleteRecipesFavoriteds);
     }
     setIsFavorited(!isFavorited);
+    console.log(JSON.parse(localStorage.getItem('favoriteRecipes')));
   };
 
   const handleShare = (url) => {

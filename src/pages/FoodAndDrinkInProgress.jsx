@@ -14,6 +14,7 @@ function FoodInProgress() {
     setIngredientsSelected,
     handleFavorite,
     handleShare,
+    alertShare,
   } = useContext(RevenuesContext);
   const history = useHistory();
   const location = useLocation().pathname.split('/')[1];
@@ -48,6 +49,7 @@ function FoodInProgress() {
             handleFavorite={ handleFavorite }
             handleShare={ handleShare }
           />
+          {alertShare && <span>Link copied!</span>}
           <ShowDetailsProcess />
           <Button
             name="Finish Recipe"

@@ -9,7 +9,7 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 function HeaderRevenue({ handleFavorite, handleShare }) {
   const { exibitionDetails, isFavorited } = useContext(RevenuesContext);
   const location = useLocation().pathname;
-  const locationName = location.split('/')[1];
+  const locationName = location.split('s')[0].split('/')[1];
   const [revenueDetails] = exibitionDetails;
 
   const revenueSaveStorage = {
