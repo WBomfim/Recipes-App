@@ -193,7 +193,6 @@ function RevenuesProvider({ children }) {
     handleFavorite,
     handleShare,
     verifyRecipiesStorage,
-
   };
 
   return (

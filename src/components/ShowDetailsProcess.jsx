@@ -31,27 +31,25 @@ function ShowDetailsProcess() {
   return (
     <section>
       <h2>Ingredients</h2>
-      {ingredientsList.length > 0 && (
-        <ul>
-          {ingredientsList.map((ingredient, index) => (
-            <li
-              key={ index }
-              className={ ingredientsSelected.includes(ingredient) ? 'selected' : '' }
-              data-testid={ `${index}-ingredient-step` }
-            >
-              <label htmlFor={ index }>
-                <input
-                  id={ index }
-                  type="checkbox"
-                  checked={ ingredientsSelected.includes(ingredient) }
-                  onChange={ () => handleSelect(ingredient) }
-                />
-                { ingredient }
-              </label>
-            </li>
-          ))}
-        </ul>
-      )}
+      <ul>
+        {ingredientsList.map((ingredient, index) => (
+          <li
+            key={ index }
+            className={ ingredientsSelected.includes(ingredient) ? 'selected' : '' }
+            data-testid={ `${index}-ingredient-step` }
+          >
+            <label htmlFor={ index }>
+              <input
+                id={ index }
+                type="checkbox"
+                checked={ ingredientsSelected.includes(ingredient) }
+                onChange={ () => handleSelect(ingredient) }
+              />
+              { ingredient }
+            </label>
+          </li>
+        ))}
+      </ul>
       <h2>Instructions</h2>
       <p data-testid="instructions">{ revenueDetails.strInstructions }</p>
     </section>

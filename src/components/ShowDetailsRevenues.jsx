@@ -12,12 +12,12 @@ function ShowDetailsRevenues() {
     <section>
       <h2>Ingredients</h2>
       <ul>
-        {ingredientsList.map((ingr, index) => (
+        {ingredientsList.map((ingredient, index) => (
           <li
             key={ index }
             data-testid={ `${index}-ingredient-name-and-measure` }
           >
-            {ingr}
+            {ingredient}
 
           </li>
         ))}
