@@ -1,32 +1,31 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
+import { useParams } from 'react-router-dom';
 import RevenuesContext from '../context/RevenuesContext';
+import * as storageInProgress from '../helpers/storageInProgress';
+import '../styles/ShowDetailsProcess.css';
 
 function ShowDetailsProcess() {
   const {
     exibitionDetails,
-    setExibitionDetails,
     ingredientsList,
+    ingredientsSelected,
+    setIngredientsSelected,
   } = useContext(RevenuesContext);
   const [revenueDetails] = exibitionDetails;
-  const { progressList } = revenueDetails;
+  const { id } = useParams();
 
-  useEffect(() => {
-    const createCheckedList = () => {
-      const newObject = revenueDetails;
-      const checkedList = [];
-      ingredientsList.forEach(() => {
-        checkedList.push(false);
+  const handleSelect = (ingredient) => {
+    if (ingredientsSelected.includes(ingredient)) {
+      setIngredientsSelected(ingredientsSelected.filter((item) => item !== ingredient));
+      storageInProgress.addInProgressRecipe({
+        [id]: ingredientsSelected.filter((item) => item !== ingredient),
       });
-      newObject.progressList = checkedList;
-      setExibitionDetails([newObject]);
-    };
-    createCheckedList();
-  }, []);
-
-  const handleSelect = ({ target }) => {
-    const newObject = revenueDetails;
-    newObject.progressList[target.id] = !newObject.progressList[target.id];
-    setExibitionDetails([newObject]);
+    } else {
+      setIngredientsSelected([...ingredientsSelected, ingredient]);
+      storageInProgress.addInProgressRecipe({
+        [id]: [...ingredientsSelected, ingredient],
+      });
+    }
   };
 
   return (
@@ -37,14 +36,15 @@ function ShowDetailsProcess() {
           {ingredientsList.map((ingredient, index) => (
             <li
               key={ index }
+              className={ ingredientsSelected.includes(ingredient) ? 'selected' : '' }
               data-testid={ `${index}-ingredient-step` }
             >
               <label htmlFor={ index }>
                 <input
                   id={ index }
                   type="checkbox"
-                  checked={ progressList === undefined ? false : progressList[index] }
-                  onChange={ (event) => handleSelect(event) }
+                  checked={ ingredientsSelected.includes(ingredient) }
+                  onChange={ () => handleSelect(ingredient) }
                 />
                 { ingredient }
               </label>

@@ -17,7 +17,7 @@ function FoodAndDrinkDetail() {
     handleFavorite,
     handleShare,
     getData,
-    verifyRecipiesStorage,
+    /* verifyRecipiesStorage, */
     doneRecipes,
     progressRecipies,
     alertShare,
@@ -36,7 +36,7 @@ function FoodAndDrinkDetail() {
       getDataById('drinks', id);
       getData('foods');
     }
-    verifyRecipiesStorage();
+    /* verifyRecipiesStorage(); */
   }, []);
 
   return (
