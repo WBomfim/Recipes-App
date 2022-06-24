@@ -9,6 +9,7 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 function HeaderRevenue({ handleFavorite, handleShare }) {
   const { exibitionDetails, isFavorited } = useContext(RevenuesContext);
   const location = useLocation().pathname;
+  const locationClipboard = location.split('/');
   const locationName = location.split('s')[0].split('/')[1];
   const [revenueDetails] = exibitionDetails;
 
@@ -45,7 +46,7 @@ function HeaderRevenue({ handleFavorite, handleShare }) {
       <button
         type="button"
         data-testid="share-btn"
-        onClick={ () => handleShare(`http://localhost:3000${location}`) }
+        onClick={ () => handleShare(`http://localhost:3000/${locationClipboard[1]}/${locationClipboard[2]}`) }
       >
         <img src={ shareIcon } alt="share-Icon" />
       </button>
