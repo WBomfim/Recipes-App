@@ -170,6 +170,7 @@ function RevenuesProvider({ children }) {
   };
 
   const handleShare = (url) => {
+    console.log(url);
     copy(url);
     setAlertShare(true);
   };

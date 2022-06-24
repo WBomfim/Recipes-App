@@ -15,6 +15,7 @@ function FoodInProgress() {
     handleFavorite,
     handleShare,
     alertShare,
+    verifyRecipiesStorage,
   } = useContext(RevenuesContext);
   const history = useHistory();
   const location = useLocation().pathname.split('/')[1];
@@ -38,6 +39,7 @@ function FoodInProgress() {
 
     getData();
     getStorageInProgress();
+    verifyRecipiesStorage(id, null);
   }, []);
 
   return (
