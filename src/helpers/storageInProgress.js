@@ -1,7 +1,12 @@
-export const getDoneRecipes = () => (
-  JSON.parse(localStorage.getItem('doneRecipes')) || []
-);
+export const getInProgressRecipes = () => {
+  if (!localStorage.getItem('InProgressRecipes')) {
+    localStorage.setItem('InProgressRecipes', JSON.stringify({}));
+  }
+  return JSON.parse(localStorage.getItem('InProgressRecipes'));
+};
 
-export const getInProgressRecipes = () => (
-  JSON.parse(localStorage.getItem('inProgressRecipes'))
-);
+export const addInProgressRecipe = (recipe) => {
+  const inProgressRecipes = getInProgressRecipes();
+  const newInProgressRecipes = { ...inProgressRecipes, ...recipe };
+  localStorage.setItem('InProgressRecipes', JSON.stringify(newInProgressRecipes));
+};
