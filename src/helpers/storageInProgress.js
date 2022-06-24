@@ -3,5 +3,5 @@ export const getDoneRecipes = () => (
 );
 
 export const getInProgressRecipes = () => (
-  JSON.parse(localStorage.getItem('inProgressRecipes')) || []
+  JSON.parse(localStorage.getItem('inProgressRecipes'))
 );

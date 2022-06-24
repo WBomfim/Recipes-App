@@ -4,6 +4,7 @@ import RevenuesContext from './RevenuesContext';
 import * as fetchFoods from '../services/fetchFoods';
 import * as fetchDrinks from '../services/fetchDrinks';
 import { getDoneRecipes, getInProgressRecipes } from '../helpers/storageInProgress';
+import getFavoriteRecipes from '../helpers/storageFavorited';
 
 const copy = require('clipboard-copy');
 
@@ -20,6 +21,7 @@ function RevenuesProvider({ children }) {
   const [categorySelect, setCategorySelect] = useState({ type: '', category: '' });
   const [alertShare, setAlertShare] = useState(false);
   const [click, setClick] = useState(false);
+  const [favoritedBoll, setFavoritedBoll] = useState();
 
   useEffect(() => {
     if (categorySelect.category !== '') {
@@ -127,16 +129,25 @@ function RevenuesProvider({ children }) {
     }
   }, [exibitionDetails]);
 
-  const verifyRecipiesStorage = () => {
+  const verifyRecipiesStorage = (id, option) => {
     const recipiesDone = getDoneRecipes();
+    const favoriteRecipies = getFavoriteRecipes();
     const recipiesInProgress = getInProgressRecipes();
+    console.log(favoriteRecipies, recipiesDone, id);
 
-    const recipiesDoneVerified = recipiesDone.some((recipie) => recipie.id === id);
-    const recipiesInProgressVerified = recipiesInProgress
+    if (recipiesInProgress) {
+      const idRecipiesProgress = Object.keys(recipiesInProgress[option]);
+      const recipiesInProgressVerified = idRecipiesProgress
+        .some((recipie) => recipie === id);
+      setProgressRecipies(recipiesInProgressVerified);
+    }
+
+    const recipiesDoneVerified = recipiesDone
       .some((recipie) => recipie.id === id);
-
+    const recipiesFavoriteds = favoriteRecipies
+      .some((recipie) => recipie.id === id);
     setDoneRecipies(recipiesDoneVerified);
-    setProgressRecipies(recipiesInProgressVerified);
+    setFavoritedBoll(recipiesFavoriteds);
   };
 
   const handleFavorite = () => {
@@ -173,6 +184,7 @@ function RevenuesProvider({ children }) {
     ingredientsList,
     doneRecipes,
     progressRecipies,
+    favoritedBoll,
 
     getDataByIngredients,
     getDataByName,

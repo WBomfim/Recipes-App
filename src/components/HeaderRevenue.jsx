@@ -6,8 +6,8 @@ import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 
-function HeaderRevenue({ favorited, handleFavorite, handleShare }) {
-  const { exibitionDetails } = useContext(RevenuesContext);
+function HeaderRevenue({ handleFavorite, handleShare }) {
+  const { exibitionDetails, favoritedBoll } = useContext(RevenuesContext);
   const location = useLocation().pathname;
   const [revenueDetails] = exibitionDetails;
 
@@ -40,17 +40,19 @@ function HeaderRevenue({ favorited, handleFavorite, handleShare }) {
       </button>
       <button
         type="button"
-        data-testid="favorite-btn"
         onClick={ handleFavorite }
       >
-        <img src={ favorited ? blackHeartIcon : whiteHeartIcon } alt="heart-Icon" />
+        <img
+          data-testid="favorite-btn"
+          src={ favoritedBoll ? blackHeartIcon : whiteHeartIcon }
+          alt="heart-Icon"
+        />
       </button>
     </section>
   );
 }
 
 HeaderRevenue.propTypes = {
-  favorited: PropTypes.bool.isRequired,
   handleFavorite: PropTypes.func.isRequired,
   handleShare: PropTypes.func.isRequired,
 };

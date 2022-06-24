@@ -33,11 +33,12 @@ function FoodAndDrinkDetail() {
     if (locationName === 'foods') {
       getDataById('foods', id);
       getData('drinks');
+      verifyRecipiesStorage(id, 'meals');
     } else {
       getDataById('drinks', id);
       getData('foods');
+      verifyRecipiesStorage(id, 'cocktails');
     }
-    verifyRecipiesStorage();
   }, []);
 
   return (
@@ -46,7 +47,6 @@ function FoodAndDrinkDetail() {
       && (
         <div>
           <HeaderRevenue
-            favorited
             handleFavorite={ handleFavorite }
             handleShare={ handleShare }
           />
