@@ -32,8 +32,12 @@ function FoodInProgress() {
 
     const getStorageInProgress = () => {
       const storage = storageInProgress.getInProgressRecipes();
-      if (storage[id]) {
-        setIngredientsSelected(storage[id]);
+      if (location === 'drinks' && storage.cocktails[id]) {
+        setIngredientsSelected(storage.cocktails[id]);
+      }
+
+      if (location === 'foods' && storage.meals[id]) {
+        setIngredientsSelected(storage.meals[id]);
       }
     };
 
