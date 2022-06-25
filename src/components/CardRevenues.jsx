@@ -1,20 +1,21 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation, useParams } from 'react-router-dom';
 import RevenuesContext from '../context/RevenuesContext';
 
 function CardRevenues({ category, maxCard, nameCard }) {
   const { exibitionRevenues } = useContext(RevenuesContext);
   const location = useLocation().pathname.split('/')[1];
   const history = useHistory();
+  const { id } = useParams();
 
-  const handleClick = (id) => {
+  const handleClick = (idUrl) => {
     if (location === 'foods') {
-      history.push(`/foods/${id}`);
+      history.push(`/foods/${idUrl}`);
     }
 
     if (location === 'drinks') {
-      history.push(`/drinks/${id}`);
+      history.push(`/drinks/${idUrl}`);
     }
   };
 
@@ -32,17 +33,17 @@ function CardRevenues({ category, maxCard, nameCard }) {
               <div>
                 {/* utilizar css para mudar o tamanho das imagens */}
                 <img
-                  width="200px"
-                  height="200px"
+                  width="155px"
+                  height="150px"
                   src={ revenue.strDrinkThumb || revenue.strMealThumb }
                   alt={ `imagem-${revenue.strDrink || revenue.strMeal}` }
                   data-testid={ `${index}-card-img` }
                 />
                 <h3
-                  data-testid={ `${index}-card-name` }
+                  data-testid={ id
+                    ? `${index}-recomendation-title` : `${index}-card-name` }
                 >
                   { revenue.strDrink || revenue.strMeal }
-
                 </h3>
                 {category && <p>{ revenue.strCategory }</p>}
               </div>
