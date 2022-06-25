@@ -10,6 +10,18 @@ export const getDrinksIngredients = async (search) => {
   }
 };
 
+export const getAllDrinksIngredients = async () => {
+  try {
+    const response = await fetch(
+      'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list',
+    );
+    const data = await response.json();
+    return data.drinks;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const getDrinksName = async (search) => {
   try {
     const response = await fetch(
