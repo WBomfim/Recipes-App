@@ -20,6 +20,7 @@ function FoodInProgress() {
   const history = useHistory();
   const location = useLocation().pathname.split('/')[1];
   const { id } = useParams();
+  const savedKey = location === 'foods' ? 'meals' : 'cocktails';
 
   useEffect(() => {
     const getData = async () => {
@@ -43,7 +44,7 @@ function FoodInProgress() {
 
     getData();
     getStorageInProgress();
-    verifyRecipiesStorage(id, null);
+    verifyRecipiesStorage(id, savedKey);
   }, []);
 
   return (

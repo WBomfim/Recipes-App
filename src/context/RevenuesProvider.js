@@ -128,29 +128,25 @@ function RevenuesProvider({ children }) {
             `${revenue[`strIngredient${i}`]} - ${revenue[`strMeasure${i}`]}`];
         }
       }
-      setIngredientsList(arrayIngredients);
     }
+    setIngredientsList(arrayIngredients);
   }, [exibitionDetails]);
 
   const verifyRecipiesStorage = (id, option) => {
     const recipiesDone = getDoneRecipes();
     const favoriteRecipies = getFavoriteRecipes();
     const recipiesInProgress = getInProgressRecipes();
-    if (recipiesInProgress) {
-      console.log(option);
-      console.log(recipiesInProgress);
-      const idRecipiesProgress = Object.keys(recipiesInProgress);
-      console.log(idRecipiesProgress);
-      const recipiesInProgressVerified = idRecipiesProgress
-        .some((recipie) => recipie === id);
-      setProgressRecipies(recipiesInProgressVerified);
-    }
+
+    const recipiesInProgressVerified = Object.keys(recipiesInProgress[option])
+      .some((recipie) => recipie === id);
+    setProgressRecipies(recipiesInProgressVerified);
 
     const recipiesDoneVerified = recipiesDone
       .some((recipie) => recipie.id === id);
+    setDoneRecipies(recipiesDoneVerified);
+
     const recipiesFavoriteds = favoriteRecipies
       .some((recipie) => recipie.id === id);
-    setDoneRecipies(recipiesDoneVerified);
     setIsFavorited(recipiesFavoriteds);
   };
 
@@ -166,7 +162,6 @@ function RevenuesProvider({ children }) {
       setSaveFavorite(deleteRecipesFavoriteds);
     }
     setIsFavorited(!isFavorited);
-    console.log(JSON.parse(localStorage.getItem('favoriteRecipes')));
   };
 
   const handleShare = (url) => {
