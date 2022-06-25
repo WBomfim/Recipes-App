@@ -90,3 +90,10 @@ export const getFoodsId = async (id) => {
     console.log(error);
   }
 };
+
+export const getFoodsRandom = async () => {
+  const url = 'https://www.themealdb.com/api/json/v1/1/random.php';
+  const getIdRandom = await fetch(url);
+  const data = await getIdRandom.json();
+  return data.meals[0].idMeal;
+};

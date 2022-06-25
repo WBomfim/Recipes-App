@@ -88,3 +88,10 @@ export const getDrinksId = async (id) => {
     console.log(error);
   }
 };
+
+export const getDrinksRandom = async () => {
+  const url = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
+  const getIdRandom = await fetch(url);
+  const data = await getIdRandom.json();
+  return data.drinks[0].idDrink;
+};
