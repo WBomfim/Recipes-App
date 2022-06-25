@@ -23,7 +23,6 @@ function FoodAndDrinkDetail() {
     alertShare,
   } = useContext(RevenuesContext);
   const location = useLocation().pathname;
-
   const locationName = location.split('/')[1];
   const [revenueDetails] = exibitionDetails;
   const MAX_CARDS = 6;
@@ -55,19 +54,23 @@ function FoodAndDrinkDetail() {
           && <VideoRevenues
             video={ revenueDetails.strYoutube }
           />}
-          <CardRevenues
-            nameCard="recomendation-card"
-            maxCard={ MAX_CARDS }
-            category
-          />
+          <div className="container-recomendatio">
+            <CardRevenues
+              nameCard="recomendation-card"
+              maxCard={ MAX_CARDS }
+              category
+            />
+          </div>
           {doneRecipes ? null
             : (
-              <Button
-                name={ progressRecipies ? 'Continue Recipe' : 'Start Recipe' }
-                dataTestId="start-recipe-btn"
-                disabled={ false }
-                onClick={ () => history.push(`${location}/in-progress`) }
-              />)}
+              <div className="container-recomendation">
+                <Button
+                  name={ progressRecipies ? 'Continue Recipe' : 'Start Recipe' }
+                  dataTestId="start-recipe-btn"
+                  disabled={ false }
+                  onClick={ () => history.push(`${location}/in-progress`) }
+                />
+              </div>)}
         </div>
       )}
     </div>

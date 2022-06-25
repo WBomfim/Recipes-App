@@ -4,17 +4,26 @@ import { useHistory, useLocation } from 'react-router-dom';
 import RevenuesContext from '../context/RevenuesContext';
 
 function CardRevenues({ category, maxCard, nameCard }) {
-  const { exibitionRevenues } = useContext(RevenuesContext);
+  const {
+    exibitionRevenues,
+    getDataByIngredientsExplore,
+    setExibitionIngredient,
+  } = useContext(RevenuesContext);
   const location = useLocation().pathname.split('/')[1];
+  const locationExplore = useLocation().pathname.split('/');
   const history = useHistory();
 
-  const handleClick = (id) => {
-    if (location === 'foods') {
-      history.push(`/foods/${id}`);
+  const handleClick = async (param) => {
+    if (locationExplore[3] === 'ingredients') {
+      await getDataByIngredientsExplore(locationExplore[2], param);
+      setExibitionIngredient(true);
+      history.push(`/${locationExplore[2]}`);
     }
-
+    if (location === 'foods') {
+      history.push(`/foods/${param}`);
+    }
     if (location === 'drinks') {
-      history.push(`/drinks/${id}`);
+      history.push(`/drinks/${param}`);
     }
   };
 
@@ -24,8 +33,13 @@ function CardRevenues({ category, maxCard, nameCard }) {
         exibitionRevenues.map((revenue, index) => (
           index < maxCard ? (
             <button
-              key={ revenue.idMeal || revenue.idDrink }
-              onClick={ () => handleClick(revenue.idMeal || revenue.idDrink) }
+              key={ revenue.idMeal || revenue.idDrink || index }
+              onClick={ () => handleClick(
+                revenue.idMeal
+                || revenue.idDrink
+                || revenue.strIngredient
+                || revenue.strIngredient1,
+              ) }
               type="button"
               data-testid={ `${index}-${nameCard}` }
             >
@@ -34,14 +48,17 @@ function CardRevenues({ category, maxCard, nameCard }) {
                 <img
                   width="200px"
                   height="200px"
-                  src={ revenue.strDrinkThumb || revenue.strMealThumb }
+                  src={ revenue.strDrinkThumb || revenue.strMealThumb || `https://www.${locationExplore[2] === 'foods' ? 'themealdb' : 'thecocktaildb'}.com/images/ingredients/${revenue.strIngredient || revenue.strIngredient1}-Small.png` }
                   alt={ `imagem-${revenue.strDrink || revenue.strMeal}` }
                   data-testid={ `${index}-card-img` }
                 />
                 <h3
                   data-testid={ `${index}-card-name` }
                 >
-                  { revenue.strDrink || revenue.strMeal }
+                  { revenue.strDrink
+                  || revenue.strMeal
+                  || revenue.strIngredient
+                  || revenue.strIngredient1}
 
                 </h3>
                 {category && <p>{ revenue.strCategory }</p>}

@@ -25,6 +25,7 @@ function RevenuesProvider({ children }) {
   const [click, setClick] = useState(false);
   const [isFavorited, setIsFavorited] = useState();
   const [saveFavorite, setSaveFavorite] = useState([]);
+  const [exibitionIngredient, setExibitionIngredient] = useState();
 
   useEffect(() => {
     if (categorySelect.category !== '') {
@@ -45,10 +46,32 @@ function RevenuesProvider({ children }) {
       const data = await fetchFoods.getFoodsIngredients(searchValue);
       setDataRevenues(data);
       setExibitionRevenues(data);
-    }
-
-    if (fetchOption === 'drinks') {
+    } else if (fetchOption === 'drinks') {
       const data = await fetchDrinks.getDrinksIngredients(searchValue);
+      setDataRevenues(data);
+      setExibitionRevenues(data);
+    }
+  };
+
+  const getDataByIngredientsExplore = async (fetchOption, fetchIngredients) => {
+    if (fetchOption === 'foods') {
+      const data = await fetchFoods.getFoodsIngredients(fetchIngredients);
+      setDataRevenues(data);
+      setExibitionRevenues(data);
+    } else if (fetchOption === 'drinks') {
+      const data = await fetchDrinks.getDrinksIngredients(fetchIngredients);
+      setDataRevenues(data);
+      setExibitionRevenues(data);
+    }
+  };
+
+  const getDataAllByIngredients = async (fetchIngredients) => {
+    if (fetchIngredients === 'foods') {
+      const data = await fetchFoods.getAllFoodsIngredients();
+      setDataRevenues(data);
+      setExibitionRevenues(data);
+    } else if (fetchIngredients === 'drinks') {
+      const data = await fetchDrinks.getAllDrinksIngredients();
       setDataRevenues(data);
       setExibitionRevenues(data);
     }
@@ -59,9 +82,7 @@ function RevenuesProvider({ children }) {
       const data = await fetchFoods.getFoodsName(searchValue);
       setDataRevenues(data);
       setExibitionRevenues(data);
-    }
-
-    if (fetchOption === 'drinks') {
+    } else if (fetchOption === 'drinks') {
       const data = await fetchDrinks.getDrinksName(searchValue);
       setDataRevenues(data);
       setExibitionRevenues(data);
@@ -73,9 +94,7 @@ function RevenuesProvider({ children }) {
       const data = await fetchFoods.getFoodsFirstLetter(searchValue);
       setDataRevenues(data);
       setExibitionRevenues(data);
-    }
-
-    if (fetchOption === 'drinks') {
+    } else if (fetchOption === 'drinks') {
       const data = await fetchDrinks.getDrinksFirstLetter(searchValue);
       setDataRevenues(data);
       setExibitionRevenues(data);
@@ -86,9 +105,7 @@ function RevenuesProvider({ children }) {
     if (fetchOption === 'foods') {
       const data = await fetchFoods.getFoodsId(id);
       setExibitionDetails(data);
-    }
-
-    if (fetchOption === 'drinks') {
+    } else if (fetchOption === 'drinks') {
       const data = await fetchDrinks.getDrinksId(id);
       setExibitionDetails(data);
     }
@@ -99,9 +116,7 @@ function RevenuesProvider({ children }) {
       const data = await fetchFoods.getFoods();
       setDataRevenues(data);
       setExibitionRevenues(data);
-    }
-
-    if (fetchOption === 'drinks') {
+    } else if (fetchOption === 'drinks') {
       const data = await fetchDrinks.getDrinks();
       setDataRevenues(data);
       setExibitionRevenues(data);
@@ -136,11 +151,9 @@ function RevenuesProvider({ children }) {
     const recipiesDone = getDoneRecipes();
     const favoriteRecipies = getFavoriteRecipes();
     const recipiesInProgress = getInProgressRecipes();
+    console.log(option);
     if (recipiesInProgress) {
-      console.log(option);
-      console.log(recipiesInProgress);
       const idRecipiesProgress = Object.keys(recipiesInProgress);
-      console.log(idRecipiesProgress);
       const recipiesInProgressVerified = idRecipiesProgress
         .some((recipie) => recipie === id);
       setProgressRecipies(recipiesInProgressVerified);
@@ -170,7 +183,6 @@ function RevenuesProvider({ children }) {
   };
 
   const handleShare = (url) => {
-    console.log(url);
     copy(url);
     setAlertShare(true);
   };
@@ -178,43 +190,36 @@ function RevenuesProvider({ children }) {
   const context = {
     dataRevenues,
     setDataRevenues,
-
     exibitionRevenues,
     setExibitionRevenues,
-
     exibitionDetails,
     setExibitionDetails,
-
     searchValue,
     setSearchValue,
-
     searchOptions,
     setSearchOptions,
-
     alertShare,
     setAlertShare,
-
     click,
     setClick,
-
+    exibitionIngredient,
+    setExibitionIngredient,
     ingredientsList,
     doneRecipes,
     progressRecipies,
     isFavorited,
     ingredientsSelected,
     setIngredientsSelected,
-
+    categories,
+    setCategories,
+    categorySelect,
+    setCategorySelect,
     getDataByIngredients,
+    getDataByIngredientsExplore,
     getDataByName,
     getDataByFirstLetter,
     getData,
-
-    categories,
-    setCategories,
-
-    categorySelect,
-    setCategorySelect,
-
+    getDataAllByIngredients,
     getDataById,
     handleFavorite,
     handleShare,
