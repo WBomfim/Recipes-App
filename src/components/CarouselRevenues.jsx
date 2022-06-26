@@ -18,30 +18,28 @@ function CarouselRevenues() {
 
   return (
     <section className="carousel">
-      {exibitionRevenues.map((revenue, index) => (
-        index < MAX_CARDS ? (
-          <button
-            key={ revenue.idMeal || revenue.idDrink }
-            onClick={ () => handleClick(revenue.idMeal || revenue.idDrink) }
-            type="button"
-            data-testid={ `${index}-recomendation-card` }
-          >
-            {/* utilizar css para mudar o tamanho das imagens */}
-            <img
-              width="153px"
-              height="150px"
-              src={ revenue.strDrinkThumb || revenue.strMealThumb }
-              alt={ `imagem-${revenue.strDrink || revenue.strMeal}` }
-              data-testid={ `${index}-card-img` }
-            />
-            <div>
-              <h3 data-testid={ `${index}-recomendation-title` }>
-                { revenue.strDrink || revenue.strMeal }
-              </h3>
-              <p>{ revenue.strCategory }</p>
-            </div>
-          </button>
-        ) : null
+      {exibitionRevenues.slice(0, MAX_CARDS).map((revenue, index) => (
+        <button
+          key={ revenue.idMeal || revenue.idDrink }
+          onClick={ () => handleClick(revenue.idMeal || revenue.idDrink) }
+          type="button"
+          data-testid={ `${index}-recomendation-card` }
+        >
+          {/* utilizar css para mudar o tamanho das imagens */}
+          <img
+            width="153px"
+            height="150px"
+            src={ revenue.strDrinkThumb || revenue.strMealThumb }
+            alt={ `imagem-${revenue.strDrink || revenue.strMeal}` }
+            data-testid={ `${index}-card-img` }
+          />
+          <div>
+            <h3 data-testid={ `${index}-recomendation-title` }>
+              { revenue.strDrink || revenue.strMeal }
+            </h3>
+            <p>{ revenue.strCategory }</p>
+          </div>
+        </button>
       ))}
     </section>
   );

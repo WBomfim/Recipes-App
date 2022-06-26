@@ -23,29 +23,27 @@ function CardExploreRevenues() {
 
   return (
     <section>
-      {exibitionRevenues.map((revenue, index) => (
-        index < MAX_CARDS ? (
-          <button
-            key={ index }
-            onClick={ () => handleClick(revenue.strIngredient || revenue.strIngredient1) }
-            type="button"
-            data-testid={ `${index}-ingredient-card` }
+      {exibitionRevenues.slice(0, MAX_CARDS).map((revenue, index) => (
+        <button
+          key={ index }
+          onClick={ () => handleClick(revenue.strIngredient || revenue.strIngredient1) }
+          type="button"
+          data-testid={ `${index}-ingredient-card` }
+        >
+          {/* utilizar css para mudar o tamanho das imagens */}
+          <img
+            width="153px"
+            height="150px"
+            src={ `https://www.${location[2] === 'foods' ? 'themealdb' : 'thecocktaildb'}.com/images/ingredients/${revenue.strIngredient || revenue.strIngredient1}-Small.png` }
+            alt={ `imagem-${revenue.strIngredient || revenue.strIngredient1}` }
+            data-testid={ `${index}-card-img` }
+          />
+          <h3
+            data-testid={ `${index}-card-name` }
           >
-            {/* utilizar css para mudar o tamanho das imagens */}
-            <img
-              width="153px"
-              height="150px"
-              src={ `https://www.${location[2] === 'foods' ? 'themealdb' : 'thecocktaildb'}.com/images/ingredients/${revenue.strIngredient || revenue.strIngredient1}-Small.png` }
-              alt={ `imagem-${revenue.strIngredient || revenue.strIngredient1}` }
-              data-testid={ `${index}-card-img` }
-            />
-            <h3
-              data-testid={ `${index}-card-name` }
-            >
-              { revenue.strIngredient || revenue.strIngredient1 }
-            </h3>
-          </button>
-        ) : null
+            { revenue.strIngredient || revenue.strIngredient1 }
+          </h3>
+        </button>
       ))}
     </section>
   );

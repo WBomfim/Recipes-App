@@ -18,29 +18,27 @@ function CardRevenues() {
 
   return (
     <section className="cards">
-      {exibitionRevenues.map((revenue, index) => (
-        index < MAX_CARDS ? (
-          <button
-            key={ revenue.idMeal || revenue.idDrink }
-            onClick={ () => handleClick(revenue.idMeal || revenue.idDrink) }
-            type="button"
-            data-testid={ `${index}-recipe-card` }
+      {exibitionRevenues.slice(0, MAX_CARDS).map((revenue, index) => (
+        <button
+          key={ revenue.idMeal || revenue.idDrink }
+          onClick={ () => handleClick(revenue.idMeal || revenue.idDrink) }
+          type="button"
+          data-testid={ `${index}-recipe-card` }
+        >
+          {/* utilizar css para mudar o tamanho das imagens */}
+          <img
+            width="153px"
+            height="150px"
+            src={ revenue.strDrinkThumb || revenue.strMealThumb }
+            alt={ `imagem-${revenue.strDrink || revenue.strMeal}` }
+            data-testid={ `${index}-card-img` }
+          />
+          <h3
+            data-testid={ `${index}-card-name` }
           >
-            {/* utilizar css para mudar o tamanho das imagens */}
-            <img
-              width="153px"
-              height="150px"
-              src={ revenue.strDrinkThumb || revenue.strMealThumb }
-              alt={ `imagem-${revenue.strDrink || revenue.strMeal}` }
-              data-testid={ `${index}-card-img` }
-            />
-            <h3
-              data-testid={ `${index}-card-name` }
-            >
-              { revenue.strDrink || revenue.strMeal }
-            </h3>
-          </button>
-        ) : null
+            { revenue.strDrink || revenue.strMeal }
+          </h3>
+        </button>
       ))}
     </section>
   );
