@@ -9,8 +9,6 @@ import CarouselRevenues from '../components/CarouselRevenues';
 import '../styles/FoodAndDrinkDetails.css';
 
 function FoodAndDrinkDetail() {
-  const { id } = useParams();
-  const history = useHistory();
   const {
     getDataById,
     exibitionDetails,
@@ -20,47 +18,44 @@ function FoodAndDrinkDetail() {
     progressRecipies,
     alertShare,
   } = useContext(RevenuesContext);
+
+  const { id } = useParams();
+  const history = useHistory();
   const location = useLocation().pathname;
   const locationName = location.split('/')[1];
   const [revenueDetails] = exibitionDetails;
+  const inverseLocation = locationName === 'foods' ? 'drinks' : 'foods';
+  const keyStorage = locationName === 'foods' ? 'meals' : 'cocktails';
 
   useEffect(() => {
-    if (locationName === 'foods') {
-      getDataById('foods', id);
-      getData('drinks');
-      verifyRecipiesStorage(id, 'meals');
-    } else {
-      getDataById('drinks', id);
-      getData('foods');
-      verifyRecipiesStorage(id, 'cocktails');
-    }
+    getDataById(locationName, id);
+    getData(inverseLocation);
+    verifyRecipiesStorage(id, keyStorage);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location]);
+  }, []);
+
+  if (!revenueDetails) return null;
 
   return (
-    <div>
-      {revenueDetails
-      && (
-        <div>
-          <HeaderRevenue />
-          {alertShare && <span>Link copied!</span>}
-          <ShowDetailsRevenues />
-          {revenueDetails.strYoutube
+    <>
+      <HeaderRevenue />
+      {alertShare && <span>Link copied!</span>}
+      <ShowDetailsRevenues />
+      {revenueDetails.strYoutube
           && <VideoRevenues />}
-          <CarouselRevenues />
-          {doneRecipes ? null
-            : (
-              <div className="container-recomendation">
-                <Button
-                  name={ progressRecipies ? 'Continue Recipe' : 'Start Recipe' }
-                  dataTestId="start-recipe-btn"
-                  disabled={ false }
-                  onClick={ () => history.push(`${location}/in-progress`) }
-                />
-              </div>)}
-        </div>
-      )}
-    </div>
+      <CarouselRevenues />
+      {doneRecipes ? null
+        : (
+          <div className="container-recomendation">
+            <Button
+              name={ progressRecipies ? 'Continue Recipe' : 'Start Recipe' }
+              dataTestId="start-recipe-btn"
+              disabled={ false }
+              onClick={ () => history.push(`${location}/in-progress`) }
+            />
+          </div>
+        )}
+    </>
   );
 }
 
