@@ -11,6 +11,7 @@ function ShowDetailsProcess() {
     ingredientsSelected,
     setIngredientsSelected,
   } = useContext(RevenuesContext);
+
   const [revenueDetails] = exibitionDetails;
   const location = useLocation().pathname.split('/')[1];
   const { id } = useParams();
