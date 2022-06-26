@@ -7,16 +7,11 @@ import CardExploreRevenues from '../components/CardExploreRevenues';
 
 function ExploreFoodDrinkIngredients() {
   const { getDataAllByIngredients } = useContext(RevenuesContext);
-  const location = useLocation().pathname;
-  const locationName = location.split('/')[2];
+  const location = useLocation().pathname.split('/')[2];
 
   useEffect(() => {
-    if (locationName === 'foods') {
-      getDataAllByIngredients('foods');
-    }
-    if (locationName === 'drinks') {
-      getDataAllByIngredients('drinks');
-    }
+    getDataAllByIngredients(location);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
