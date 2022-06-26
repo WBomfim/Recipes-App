@@ -46,9 +46,7 @@ function FoodAndDrinkDetail() {
           {alertShare && <span>Link copied!</span>}
           <ShowDetailsRevenues />
           {revenueDetails.strYoutube
-          && <VideoRevenues
-            video={ revenueDetails.strYoutube }
-          />}
+          && <VideoRevenues />}
           <CarouselRevenues />
           {doneRecipes ? null
             : (

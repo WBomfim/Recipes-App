@@ -1,8 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
+import RevenuesContext from '../context/RevenuesContext';
 
-function VideoRevenues({ video }) {
-  const correctEndpoint = video.split('=')[1];
+function VideoRevenues() {
+  const { exibitionDetails } = useContext(RevenuesContext);
+  const [revenueDetails] = exibitionDetails;
+  const correctEndpoint = revenueDetails.strYoutube.split('=')[1];
 
   return (
     <div>
@@ -10,9 +12,5 @@ function VideoRevenues({ video }) {
     </div>
   );
 }
-
-VideoRevenues.propTypes = {
-  video: PropTypes.string.isRequired,
-};
 
 export default VideoRevenues;
