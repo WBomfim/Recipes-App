@@ -1,13 +1,18 @@
 import React, { useContext } from 'react';
 import { useLocation } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import RevenuesContext from '../context/RevenuesContext';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 
-function HeaderRevenue({ handleFavorite, handleShare }) {
-  const { exibitionDetails, isFavorited } = useContext(RevenuesContext);
+function HeaderRevenue() {
+  const {
+    exibitionDetails,
+    handleFavorite,
+    handleShare,
+    isFavorited,
+  } = useContext(RevenuesContext);
+
   const location = useLocation().pathname;
   const locationClipboard = location.split('/');
   const locationName = location.split('s')[0].split('/')[1];
@@ -39,8 +44,7 @@ function HeaderRevenue({ handleFavorite, handleShare }) {
       <p
         data-testid="recipe-category"
       >
-        { revenueDetails.strAlcoholic
-          ? revenueDetails.strAlcoholic : revenueDetails.strCategory }
+        { revenueDetails.strAlcoholic || revenueDetails.strCategory }
 
       </p>
       <button
@@ -63,10 +67,5 @@ function HeaderRevenue({ handleFavorite, handleShare }) {
     </section>
   );
 }
-
-HeaderRevenue.propTypes = {
-  handleFavorite: PropTypes.func.isRequired,
-  handleShare: PropTypes.func.isRequired,
-};
 
 export default HeaderRevenue;

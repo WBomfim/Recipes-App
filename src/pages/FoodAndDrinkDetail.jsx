@@ -14,8 +14,6 @@ function FoodAndDrinkDetail() {
   const {
     getDataById,
     exibitionDetails,
-    handleFavorite,
-    handleShare,
     getData,
     verifyRecipiesStorage,
     doneRecipes,
@@ -44,10 +42,7 @@ function FoodAndDrinkDetail() {
       {revenueDetails
       && (
         <div>
-          <HeaderRevenue
-            handleFavorite={ handleFavorite }
-            handleShare={ handleShare }
-          />
+          <HeaderRevenue />
           {alertShare && <span>Link copied!</span>}
           <ShowDetailsRevenues />
           {revenueDetails.strYoutube

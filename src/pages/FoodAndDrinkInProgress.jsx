@@ -12,8 +12,6 @@ function FoodInProgress() {
     ingredientsList,
     ingredientsSelected,
     setIngredientsSelected,
-    handleFavorite,
-    handleShare,
     alertShare,
     verifyRecipiesStorage,
   } = useContext(RevenuesContext);
@@ -51,11 +49,7 @@ function FoodInProgress() {
     <div>
       {ingredientsList.length > 0 && (
         <>
-          <HeaderRevenue
-            favorited
-            handleFavorite={ handleFavorite }
-            handleShare={ handleShare }
-          />
+          <HeaderRevenue />
           {alertShare && <span>Link copied!</span>}
           <ShowDetailsProcess />
           <Button
