@@ -93,7 +93,11 @@ export const getFoodsId = async (id) => {
 
 export const getFoodsRandom = async () => {
   const url = 'https://www.themealdb.com/api/json/v1/1/random.php';
-  const getIdRandom = await fetch(url);
-  const data = await getIdRandom.json();
-  return data.meals[0].idMeal;
+  try {
+    const getIdRandom = await fetch(url);
+    const data = await getIdRandom.json();
+    return data.meals[0].idMeal;
+  } catch (error) {
+    console.log(error);
+  }
 };
