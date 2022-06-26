@@ -11,10 +11,10 @@ function Categories() {
     setExibitionRevenues,
   } = useContext(RevenuesContext);
 
-  const five = 5;
   const location = useLocation().pathname.split('/')[1];
+  const MAX_CATEGORY = 5;
 
-  const onClickButton = async (categoryName) => {
+  const onClickButton = (categoryName) => {
     if (categorySelect.category === categoryName[0]) {
       setExibitionRevenues(dataRevenues);
     } else {
@@ -31,8 +31,7 @@ function Categories() {
       >
         All
       </button>
-      { categories.map((category) => Object.values(category))
-        .slice(0, five)
+      {categories.map((category) => Object.values(category)).slice(0, MAX_CATEGORY)
         .map((categoryName) => (
           <button
             type="button"
@@ -41,7 +40,6 @@ function Categories() {
             onClick={ () => onClickButton(categoryName) }
           >
             {categoryName}
-
           </button>
         ))}
     </section>
