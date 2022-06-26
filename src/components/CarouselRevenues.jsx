@@ -10,8 +10,8 @@ function CarouselRevenues() {
   const history = useHistory();
   const MAX_CARDS = 6;
 
-  const handleClick = (idUrl) => {
-    history.push(`/${inverseLocation}/${idUrl}`);
+  const handleClick = (id) => {
+    history.push(`/${inverseLocation}/${id}`);
   };
 
   if (!exibitionRevenues) return null;
