@@ -41,20 +41,18 @@ function FoodAndDrinkDetail() {
       <HeaderRevenue />
       {alertShare && <span>Link copied!</span>}
       <ShowDetailsRevenues />
-      {revenueDetails.strYoutube
-          && <VideoRevenues />}
+      {revenueDetails.strYoutube && <VideoRevenues />}
       <CarouselRevenues />
-      {doneRecipes ? null
-        : (
-          <div className="container-recomendation">
-            <Button
-              name={ progressRecipies ? 'Continue Recipe' : 'Start Recipe' }
-              dataTestId="start-recipe-btn"
-              disabled={ false }
-              onClick={ () => history.push(`${location}/in-progress`) }
-            />
-          </div>
-        )}
+      {doneRecipes ? null : (
+        <div className="container-recomendation">
+          <Button
+            name={ progressRecipies ? 'Continue Recipe' : 'Start Recipe' }
+            dataTestId="start-recipe-btn"
+            disabled={ false }
+            onClick={ () => history.push(`${location}/in-progress`) }
+          />
+        </div>
+      )}
     </>
   );
 }
