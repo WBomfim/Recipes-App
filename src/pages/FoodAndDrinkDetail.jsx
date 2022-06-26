@@ -5,7 +5,7 @@ import HeaderRevenue from '../components/HeaderRevenue';
 import ShowDetailsRevenues from '../components/ShowDetailsRevenues';
 import VideoRevenues from '../components/VideoRevenues';
 import Button from '../components/Button';
-import CardRevenues from '../components/CardRevenues';
+import CarouselRevenues from '../components/CarouselRevenues';
 import '../styles/FoodAndDrinkDetails.css';
 
 function FoodAndDrinkDetail() {
@@ -26,7 +26,6 @@ function FoodAndDrinkDetail() {
 
   const locationName = location.split('/')[1];
   const [revenueDetails] = exibitionDetails;
-  const MAX_CARDS = 6;
 
   useEffect(() => {
     if (locationName === 'foods') {
@@ -38,7 +37,8 @@ function FoodAndDrinkDetail() {
       getData('foods');
       verifyRecipiesStorage(id, 'cocktails');
     }
-  }, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location]);
 
   return (
     <div>
@@ -55,11 +55,7 @@ function FoodAndDrinkDetail() {
           && <VideoRevenues
             video={ revenueDetails.strYoutube }
           />}
-          <CardRevenues
-            nameCard="recomendation-card"
-            maxCard={ MAX_CARDS }
-            category
-          />
+          <CarouselRevenues />
           {doneRecipes ? null
             : (
               <Button

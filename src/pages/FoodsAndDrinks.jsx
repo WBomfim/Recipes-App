@@ -15,7 +15,6 @@ function FoodsAndDrinks() {
     setExibitionRevenues,
     setCategories,
   } = useContext(RevenuesContext);
-  const MAX_CARDS = 12;
   const location = useLocation().pathname.split('/')[1];
 
   const nameTitle = () => {
@@ -48,6 +47,7 @@ function FoodsAndDrinks() {
     };
 
     getData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
 
   return (
@@ -58,7 +58,7 @@ function FoodsAndDrinks() {
         <Categories />
       </div>
       <div>
-        <CardRevenues maxCard={ MAX_CARDS } nameCard="recipe-card" />
+        <CardRevenues />
       </div>
       <Footer />
     </section>
