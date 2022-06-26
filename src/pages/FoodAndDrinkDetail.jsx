@@ -23,7 +23,6 @@ function FoodAndDrinkDetail() {
     alertShare,
   } = useContext(RevenuesContext);
   const location = useLocation().pathname;
-
   const locationName = location.split('/')[1];
   const [revenueDetails] = exibitionDetails;
 
@@ -58,12 +57,14 @@ function FoodAndDrinkDetail() {
           <CarouselRevenues />
           {doneRecipes ? null
             : (
-              <Button
-                name={ progressRecipies ? 'Continue Recipe' : 'Start Recipe' }
-                dataTestId="start-recipe-btn"
-                disabled={ false }
-                onClick={ () => history.push(`${location}/in-progress`) }
-              />)}
+              <div className="container-recomendation">
+                <Button
+                  name={ progressRecipies ? 'Continue Recipe' : 'Start Recipe' }
+                  dataTestId="start-recipe-btn"
+                  disabled={ false }
+                  onClick={ () => history.push(`${location}/in-progress`) }
+                />
+              </div>)}
         </div>
       )}
     </div>

@@ -14,9 +14,9 @@ function FoodsAndDrinks() {
     setDataRevenues,
     setExibitionRevenues,
     setCategories,
+    exibitionIngredient,
   } = useContext(RevenuesContext);
   const location = useLocation().pathname.split('/')[1];
-
   const nameTitle = () => {
     if (location === 'foods') {
       return 'Foods';
@@ -33,16 +33,20 @@ function FoodsAndDrinks() {
         const foods = await getFoods();
         const foodsCategory = await getCategoriesFoods();
         setDataRevenues(foods);
-        setExibitionRevenues(foods);
         setCategories(foodsCategory);
+        if (!exibitionIngredient) {
+          setExibitionRevenues(foods);
+        }
       }
 
       if (location === 'drinks') {
         const drinks = await getDrinks();
         const drinkCategory = await getCategoriesDrinks();
         setDataRevenues(drinks);
-        setExibitionRevenues(drinks);
         setCategories(drinkCategory);
+        if (!exibitionIngredient) {
+          setExibitionRevenues(drinks);
+        }
       }
     };
 

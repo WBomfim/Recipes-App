@@ -15,3 +15,9 @@
   position: fixed;
   width: 640px;
 }
+
+.container-recomendation {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}

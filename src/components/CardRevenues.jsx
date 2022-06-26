@@ -5,12 +5,13 @@ import '../styles/CardRevenues.css';
 
 function CardRevenues() {
   const { exibitionRevenues } = useContext(RevenuesContext);
+
   const location = useLocation().pathname.split('/')[1];
   const history = useHistory();
   const MAX_CARDS = 12;
 
-  const handleClick = (idUrl) => {
-    history.push(`/${location}/${idUrl}`);
+  const handleClick = (id) => {
+    history.push(`/${location}/${id}`);
   };
 
   if (!exibitionRevenues) return null;
