@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
 import RevenuesContext from '../context/RevenuesContext';
+import '../styles/CardRevenues.css';
 
 function CardRevenues({ category, maxCard, nameCard }) {
   const { exibitionRevenues } = useContext(RevenuesContext);
@@ -20,7 +21,7 @@ function CardRevenues({ category, maxCard, nameCard }) {
   };
 
   return (
-    <div>
+    <section className="carousel">
       {exibitionRevenues && (
         exibitionRevenues.map((revenue, index) => (
           index < maxCard ? (
@@ -33,7 +34,7 @@ function CardRevenues({ category, maxCard, nameCard }) {
               <div>
                 {/* utilizar css para mudar o tamanho das imagens */}
                 <img
-                  width="155px"
+                  width="153px"
                   height="150px"
                   src={ revenue.strDrinkThumb || revenue.strMealThumb }
                   alt={ `imagem-${revenue.strDrink || revenue.strMeal}` }
@@ -51,7 +52,7 @@ function CardRevenues({ category, maxCard, nameCard }) {
           ) : null
         ))
       )}
-    </div>
+    </section>
   );
 }
 
