@@ -16,16 +16,9 @@ function FoodsAndDrinks() {
     setCategories,
     exibitionIngredient,
   } = useContext(RevenuesContext);
-  const location = useLocation().pathname.split('/')[1];
-  const nameTitle = () => {
-    if (location === 'foods') {
-      return 'Foods';
-    }
 
-    if (location === 'drinks') {
-      return 'Drinks';
-    }
-  };
+  const location = useLocation().pathname.split('/')[1];
+  const title = location[0].toUpperCase() + location.slice(1);
 
   useEffect(() => {
     const getData = async () => {
@@ -55,17 +48,13 @@ function FoodsAndDrinks() {
   }, [location]);
 
   return (
-    <section>
-      <Header title={ nameTitle() } buttonSearch />
+    <>
+      <Header title={ title } buttonSearch />
       <SearchBar />
-      <div>
-        <Categories />
-      </div>
-      <div>
-        <CardRevenues />
-      </div>
+      <Categories />
+      <CardRevenues />
       <Footer />
-    </section>
+    </>
   );
 }
 
