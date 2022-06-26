@@ -2,11 +2,6 @@ import React, { useContext, useCallback, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import RevenuesContext from '../context/RevenuesContext';
 
-const resetFilter = {
-  type: '',
-  category: '',
-};
-
 function SearchBar() {
   const {
     searchValue,
@@ -20,9 +15,12 @@ function SearchBar() {
     categorySelect,
   } = useContext(RevenuesContext);
 
+  const location = useLocation().pathname.split('/')[1];
   const history = useHistory();
-  const location = useLocation().pathname;
-  const locationName = location.split('/')[1];
+  const resetFilter = {
+    type: '',
+    category: '',
+  };
 
   const handleChangeRadios = ({ target }) => {
     setSearchOptions(target.value);
@@ -33,13 +31,13 @@ function SearchBar() {
       global.alert('Sorry, we haven\'t found any recipes for these filters.');
     } else {
       if (exibitionRevenues.length === 1
-        && location === '/foods'
+        && location === 'foods'
         && categorySelect.category === '') {
         history.push(`/foods/${exibitionRevenues[0].idMeal}`);
       }
 
       if (exibitionRevenues.length === 1
-        && location === '/drinks'
+        && location === 'drinks'
         && categorySelect.category === '') {
         history.push(`/drinks/${exibitionRevenues[0].idDrink}`);
       }
@@ -52,13 +50,13 @@ function SearchBar() {
 
   const getSelectData = () => {
     if (searchOptions === 'ingredients') {
-      getDataByIngredients(locationName);
+      getDataByIngredients(location);
       changeExibition();
       setCategorySelect(resetFilter);
     }
 
     if (searchOptions === 'name') {
-      getDataByName(locationName);
+      getDataByName(location);
       changeExibition();
       setCategorySelect(resetFilter);
     }
@@ -67,7 +65,7 @@ function SearchBar() {
       if (searchValue.length !== 1) {
         global.alert('Your search must have only 1 (one) character');
       } else {
-        getDataByFirstLetter(locationName);
+        getDataByFirstLetter(location);
         changeExibition();
         setCategorySelect(resetFilter);
       }
@@ -116,6 +114,7 @@ function SearchBar() {
           First letter
         </label>
       </div>
+
       <button
         type="button"
         onClick={ getSelectData }
