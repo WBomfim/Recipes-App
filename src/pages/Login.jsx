@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import setUserEmail from '../helpers/storageEmail';
 import setTokens from '../helpers/storageTokens';
+import '../styles/Login.css';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -27,9 +28,9 @@ function Login() {
   };
 
   return (
-    <form>
-      <header>Login</header>
-      <div>
+    <form className="form-login">
+      <h1>Login</h1>
+      <div className="inputs-login">
         <label htmlFor="email">
           <input
             type="text"
@@ -37,7 +38,7 @@ function Login() {
             data-testid="email-input"
             value={ email }
             onChange={ ({ target }) => { setEmail(target.value); } }
-            placeholder="enter a valid email"
+            placeholder="E-mail"
           />
         </label>
         <label htmlFor="password">
@@ -47,7 +48,7 @@ function Login() {
             data-testid="password-input"
             value={ password }
             onChange={ ({ target }) => { setPassord(target.value); } }
-            placeholder="enter a valid password"
+            placeholder="Password"
           />
         </label>
         <button
