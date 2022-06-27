@@ -12,52 +12,47 @@ function FoodInProgress() {
     ingredientsList,
     ingredientsSelected,
     setIngredientsSelected,
-    handleFavorite,
-    handleShare,
+    alertShare,
+    verifyRecipiesStorage,
   } = useContext(RevenuesContext);
+
+  const { id } = useParams();
   const history = useHistory();
   const location = useLocation().pathname.split('/')[1];
-  const { id } = useParams();
+  const savedKey = location === 'foods' ? 'meals' : 'cocktails';
 
   useEffect(() => {
-    const getData = async () => {
-      if (location === 'foods') {
-        await getDataById('foods', id);
-      } else {
-        await getDataById('drinks', id);
-      }
-    };
-
     const getStorageInProgress = () => {
       const storage = storageInProgress.getInProgressRecipes();
-      if (storage[id]) {
-        setIngredientsSelected(storage[id]);
+      if (location === 'drinks' && storage.cocktails[id]) {
+        setIngredientsSelected(storage.cocktails[id]);
+      }
+
+      if (location === 'foods' && storage.meals[id]) {
+        setIngredientsSelected(storage.meals[id]);
       }
     };
 
-    getData();
+    getDataById(location, id);
     getStorageInProgress();
+    verifyRecipiesStorage(id, savedKey);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  if (ingredientsList.length === 0) return null;
+
   return (
-    <div>
-      {ingredientsList.length > 0 && (
-        <>
-          <HeaderRevenue
-            favorited
-            handleFavorite={ handleFavorite }
-            handleShare={ handleShare }
-          />
-          <ShowDetailsProcess />
-          <Button
-            name="Finish Recipe"
-            disabled={ ingredientsList.length !== ingredientsSelected.length }
-            onClick={ () => history.push('/done-recipes') }
-            dataTestId="finish-recipe-btn"
-          />
-        </>
-      )}
-    </div>
+    <>
+      <HeaderRevenue />
+      {alertShare && <span>Link copied!</span>}
+      <ShowDetailsProcess />
+      <Button
+        name="Finish Recipe"
+        disabled={ ingredientsList.length !== ingredientsSelected.length }
+        onClick={ () => history.push('/done-recipes') }
+        dataTestId="finish-recipe-btn"
+      />
+    </>
   );
 }
 

@@ -7,7 +7,7 @@ function Explore() {
   const history = useHistory();
 
   return (
-    <div>
+    <>
       <Header title="Explore" />
       <section>
         <button
@@ -26,7 +26,7 @@ function Explore() {
         </button>
       </section>
       <Footer />
-    </div>
+    </>
   );
 }
 

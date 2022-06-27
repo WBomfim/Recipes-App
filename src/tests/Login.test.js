@@ -164,7 +164,7 @@ describe('7- Salve o e-mail no localStorage na chave user após a submissão', (
 
 describe('8- Redirecione para a tela principal de receitas após a  validação do login',
   () => {
-    it('- A rota muda para a tela principal de receitas de comidas', () => {
+    it('- A rota muda para a tela principal de receitas de comidas', async () => {
       const { history } = renderWithRouter(<Login />);
 
       const emailInput = screen.getByTestId(EMAIL_INPUT);
@@ -172,7 +172,7 @@ describe('8- Redirecione para a tela principal de receitas após a  validação 
       const btnLogin = screen.getByTestId(LOGIN_BTN);
       userEvent.type(emailInput, EMAIL_TEST);
       userEvent.type(passwordInput, PASSWORD_TEST);
-      userEvent.click(btnLogin);
+      await userEvent.click(btnLogin);
 
       const { pathname } = history.location;
       expect(pathname).toEqual('/foods');

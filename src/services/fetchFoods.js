@@ -10,6 +10,20 @@ export const getFoodsIngredients = async (search) => {
   }
 };
 
+export const getAllFoodsIngredients = async () => {
+  try {
+    const response = await fetch(
+      'https://www.themealdb.com/api/json/v1/1/list.php?i=list',
+    );
+    const data = await response.json();
+    return data.meals;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export default getAllFoodsIngredients;
+
 export const getFoodsName = async (search) => {
   try {
     const response = await fetch(
@@ -72,6 +86,17 @@ export const getFoodsId = async (id) => {
     const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
     const data = await response.json();
     return data.meals;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getFoodsRandom = async () => {
+  const url = 'https://www.themealdb.com/api/json/v1/1/random.php';
+  try {
+    const getIdRandom = await fetch(url);
+    const data = await getIdRandom.json();
+    return data.meals[0].idMeal;
   } catch (error) {
     console.log(error);
   }

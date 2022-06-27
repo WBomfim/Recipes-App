@@ -1,0 +1,11 @@
+.carousel {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 70px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+
+.carousel::-webkit-scrollbar {
+  display: none;
+}

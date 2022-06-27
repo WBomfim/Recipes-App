@@ -1,15 +1,32 @@
 import React, { useContext } from 'react';
 import { useLocation } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import RevenuesContext from '../context/RevenuesContext';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 
-function HeaderRevenue({ favorited, handleFavorite, handleShare }) {
-  const { exibitionDetails } = useContext(RevenuesContext);
+function HeaderRevenue() {
+  const {
+    exibitionDetails,
+    handleFavorite,
+    handleShare,
+    isFavorited,
+  } = useContext(RevenuesContext);
+
   const location = useLocation().pathname;
+  const locationClipboard = location.split('/');
+  const locationName = location.split('s')[0].split('/')[1];
   const [revenueDetails] = exibitionDetails;
+
+  const revenueSaveStorage = {
+    id: revenueDetails.idMeal || revenueDetails.idDrink,
+    type: locationName,
+    nationality: revenueDetails.strArea || '',
+    category: revenueDetails.strCategory,
+    alcoholicOrNot: revenueDetails.strAlcoholic || '',
+    name: revenueDetails.strMeal || revenueDetails.strDrink,
+    image: revenueDetails.strMealThumb || revenueDetails.strDrinkThumb,
+  };
 
   return (
     <section>
@@ -27,32 +44,28 @@ function HeaderRevenue({ favorited, handleFavorite, handleShare }) {
       <p
         data-testid="recipe-category"
       >
-        { revenueDetails.strAlcoholic
-          ? revenueDetails.strAlcoholic : revenueDetails.strCategory }
+        { revenueDetails.strAlcoholic || revenueDetails.strCategory }
 
       </p>
       <button
         type="button"
         data-testid="share-btn"
-        onClick={ () => handleShare(`http://localhost:3000${location}`) }
+        onClick={ () => handleShare(`http://localhost:3000/${locationClipboard[1]}/${locationClipboard[2]}`) }
       >
         <img src={ shareIcon } alt="share-Icon" />
       </button>
       <button
         type="button"
-        data-testid="favorite-btn"
-        onClick={ handleFavorite }
+        onClick={ () => handleFavorite(revenueSaveStorage) }
       >
-        <img src={ favorited ? blackHeartIcon : whiteHeartIcon } alt="heart-Icon" />
+        <img
+          data-testid="favorite-btn"
+          src={ isFavorited ? blackHeartIcon : whiteHeartIcon }
+          alt="heart-Icon"
+        />
       </button>
     </section>
   );
 }
-
-HeaderRevenue.propTypes = {
-  favorited: PropTypes.bool.isRequired,
-  handleFavorite: PropTypes.func.isRequired,
-  handleShare: PropTypes.func.isRequired,
-};
 
 export default HeaderRevenue;

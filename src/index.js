@@ -6,11 +6,11 @@ import RevenuesProvider from './context/RevenuesProvider';
 import App from './App';
 
 ReactDOM.render(
-  <BrowserRouter>
-    <RevenuesProvider>
+  <RevenuesProvider>
+    <BrowserRouter>
       <App />
-    </RevenuesProvider>
-  </BrowserRouter>,
+    </BrowserRouter>
+  </RevenuesProvider>,
   document.getElementById('root'),
 );
 
