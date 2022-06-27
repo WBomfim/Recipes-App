@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import setUserEmail from '../helpers/storageEmail';
+import { setUserEmail } from '../helpers/storageEmail';
 import setTokens from '../helpers/storageTokens';
 import '../styles/Login.css';
 
