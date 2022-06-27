@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { getFoodsRandom } from '../services/fetchFoods';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import '../styles/Explore.css';
 
 function ExploreFoods() {
   const history = useHistory();
@@ -15,7 +16,7 @@ function ExploreFoods() {
   return (
     <>
       <Header title="Explore Foods" />
-      <section>
+      <section className="explore-buttons">
         <button
           type="button"
           data-testid="explore-by-ingredient"

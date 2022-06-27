@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import RevenuesContext from '../context/RevenuesContext';
+import '../styles/Header.css';
 
 function Categories() {
   const {
@@ -23,7 +24,7 @@ function Categories() {
   };
 
   return (
-    <section>
+    <section className="filter-buttons">
       <button
         type="button"
         data-testid="All-category-filter"
