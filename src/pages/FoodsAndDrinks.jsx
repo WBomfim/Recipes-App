@@ -8,6 +8,7 @@ import CardRevenues from '../components/CardRevenues';
 import RevenuesContext from '../context/RevenuesContext';
 import { getCategoriesDrinks, getDrinks } from '../services/fetchDrinks';
 import { getCategoriesFoods, getFoods } from '../services/fetchFoods';
+import '../styles/FoodsAndDrinks.css';
 
 function FoodsAndDrinks() {
   const {
@@ -47,13 +48,13 @@ function FoodsAndDrinks() {
   }, [location]);
 
   return (
-    <>
+    <div className="main-page">
       <Header title={ title } buttonSearch />
       <SearchBar />
       <Categories />
       <CardRevenues />
       <Footer />
-    </>
+    </div>
   );
 }
 

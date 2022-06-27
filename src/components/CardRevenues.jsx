@@ -25,10 +25,7 @@ function CardRevenues() {
           type="button"
           data-testid={ `${index}-recipe-card` }
         >
-          {/* utilizar css para mudar o tamanho das imagens */}
           <img
-            width="153px"
-            height="150px"
             src={ revenue.strDrinkThumb || revenue.strMealThumb }
             alt={ `imagem-${revenue.strDrink || revenue.strMeal}` }
             data-testid={ `${index}-card-img` }
