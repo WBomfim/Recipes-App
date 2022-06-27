@@ -2,16 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import { getUserEmail } from '../helpers/storageEmail';
 import '../styles/Profile.css';
 
 function Profile() {
   const history = useHistory();
-
-  const [userEmail, setUserEmail] = useState();
+  const [userEmail, setUserEmail] = useState('Login não efetuado');
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('user'));
-    setUserEmail(user.email);
+    const email = getUserEmail();
+    if (email) {
+      setUserEmail(email);
+    }
   }, []);
 
   const onHandleClick = () => {
@@ -21,11 +23,10 @@ function Profile() {
 
   return (
     <div className="profile-header">
+      {console.log(userEmail)}
       <Header title="Profile" />
       <div className="profile-page">
-        {userEmail && (
-          <p data-testid="profile-email">{userEmail}</p>
-        )}
+        <p data-testid="profile-email">{ userEmail }</p>
         <button
           type="button"
           name="Done Recipes"

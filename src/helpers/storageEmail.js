@@ -1,6 +1,9 @@
-const setUserEmail = (email) => {
+export const setUserEmail = (email) => {
   const userEmail = { email };
   localStorage.setItem('user', JSON.stringify(userEmail));
 };
 
-export default setUserEmail;
+export const getUserEmail = () => {
+  const user = JSON.parse(localStorage.getItem('user')) || '';
+  return user.email;
+};
