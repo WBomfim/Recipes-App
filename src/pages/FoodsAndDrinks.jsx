@@ -16,17 +16,9 @@ function FoodsAndDrinks() {
     setCategories,
     exibitionIngredient,
   } = useContext(RevenuesContext);
-  const MAX_CARDS = 12;
-  const location = useLocation().pathname.split('/')[1];
-  const nameTitle = () => {
-    if (location === 'foods') {
-      return 'Foods';
-    }
 
-    if (location === 'drinks') {
-      return 'Drinks';
-    }
-  };
+  const location = useLocation().pathname.split('/')[1];
+  const title = location[0].toUpperCase() + location.slice(1);
 
   useEffect(() => {
     const getData = async () => {
@@ -50,22 +42,18 @@ function FoodsAndDrinks() {
         }
       }
     };
-
     getData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
 
   return (
-    <section>
-      <Header title={ nameTitle() } buttonSearch />
+    <>
+      <Header title={ title } buttonSearch />
       <SearchBar />
-      <div>
-        <Categories />
-      </div>
-      <div>
-        <CardRevenues maxCard={ MAX_CARDS } nameCard="recipe-card" />
-      </div>
+      <Categories />
+      <CardRevenues />
       <Footer />
-    </section>
+    </>
   );
 }
 

@@ -3,31 +3,21 @@ import { useLocation } from 'react-router-dom';
 import RevenuesContext from '../context/RevenuesContext';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import CardRevenues from '../components/CardRevenues';
+import CardExploreRevenues from '../components/CardExploreRevenues';
 
 function ExploreFoodDrinkIngredients() {
   const { getDataAllByIngredients } = useContext(RevenuesContext);
-  const location = useLocation().pathname;
-  const locationName = location.split('/')[2];
-  const MAX_CARDS = 12;
+  const location = useLocation().pathname.split('/')[2];
 
   useEffect(() => {
-    if (locationName === 'foods') {
-      getDataAllByIngredients('foods');
-    }
-    if (locationName === 'drinks') {
-      getDataAllByIngredients('drinks');
-    }
+    getDataAllByIngredients(location);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <>
       <Header title="Explore Ingredients" />
-      <CardRevenues
-        maxCard={ MAX_CARDS }
-        nameCard="ingredient-card"
-      />
-
+      <CardExploreRevenues />
       <Footer />
     </>
   );

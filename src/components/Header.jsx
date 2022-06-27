@@ -7,8 +7,8 @@ import searchIcon from '../images/searchIcon.svg';
 
 function Header({ title, buttonSearch = false }) {
   const { searchValue, setSearchValue } = useContext(RevenuesContext);
-  const history = useHistory();
   const [search, setSearch] = useState(false);
+  const history = useHistory();
 
   const hendleChange = ({ target }) => {
     setSearchValue(target.value);

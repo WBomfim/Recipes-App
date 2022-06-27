@@ -1,8 +1,8 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { getFoodsRandom } from '../services/fetchFoods';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import { getFoodsRandom } from '../services/fetchFoods';
 
 function ExploreFoods() {
   const history = useHistory();

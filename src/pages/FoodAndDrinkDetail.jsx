@@ -5,75 +5,55 @@ import HeaderRevenue from '../components/HeaderRevenue';
 import ShowDetailsRevenues from '../components/ShowDetailsRevenues';
 import VideoRevenues from '../components/VideoRevenues';
 import Button from '../components/Button';
-import CardRevenues from '../components/CardRevenues';
+import CarouselRevenues from '../components/CarouselRevenues';
 import '../styles/FoodAndDrinkDetails.css';
 
 function FoodAndDrinkDetail() {
-  const { id } = useParams();
-  const history = useHistory();
   const {
     getDataById,
     exibitionDetails,
-    handleFavorite,
-    handleShare,
     getData,
     verifyRecipiesStorage,
     doneRecipes,
     progressRecipies,
     alertShare,
   } = useContext(RevenuesContext);
+
+  const { id } = useParams();
+  const history = useHistory();
   const location = useLocation().pathname;
   const locationName = location.split('/')[1];
   const [revenueDetails] = exibitionDetails;
-  const MAX_CARDS = 6;
+  const inverseLocation = locationName === 'foods' ? 'drinks' : 'foods';
+  const keyStorage = locationName === 'foods' ? 'meals' : 'cocktails';
 
   useEffect(() => {
-    if (locationName === 'foods') {
-      getDataById('foods', id);
-      getData('drinks');
-      verifyRecipiesStorage(id, 'meals');
-    } else {
-      getDataById('drinks', id);
-      getData('foods');
-      verifyRecipiesStorage(id, 'cocktails');
-    }
+    getDataById(locationName, id);
+    getData(inverseLocation);
+    verifyRecipiesStorage(id, keyStorage);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  if (!revenueDetails) return null;
+
   return (
-    <div>
-      {revenueDetails
-      && (
-        <div>
-          <HeaderRevenue
-            handleFavorite={ handleFavorite }
-            handleShare={ handleShare }
+    <>
+      <HeaderRevenue />
+      {alertShare && <span>Link copied!</span>}
+      <ShowDetailsRevenues />
+      {revenueDetails.strYoutube && <VideoRevenues />}
+      <CarouselRevenues />
+      {doneRecipes ? null : (
+        <div className="container-recomendation">
+          <Button
+            name={ progressRecipies ? 'Continue Recipe' : 'Start Recipe' }
+            dataTestId="start-recipe-btn"
+            disabled={ false }
+            onClick={ () => history.push(`${location}/in-progress`) }
           />
-          {alertShare && <span>Link copied!</span>}
-          <ShowDetailsRevenues />
-          {revenueDetails.strYoutube
-          && <VideoRevenues
-            video={ revenueDetails.strYoutube }
-          />}
-          <div className="container-recomendatio">
-            <CardRevenues
-              nameCard="recomendation-card"
-              maxCard={ MAX_CARDS }
-              category
-            />
-          </div>
-          {doneRecipes ? null
-            : (
-              <div className="container-recomendation">
-                <Button
-                  name={ progressRecipies ? 'Continue Recipe' : 'Start Recipe' }
-                  dataTestId="start-recipe-btn"
-                  disabled={ false }
-                  onClick={ () => history.push(`${location}/in-progress`) }
-                />
-              </div>)}
         </div>
       )}
-    </div>
+    </>
   );
 }
 
