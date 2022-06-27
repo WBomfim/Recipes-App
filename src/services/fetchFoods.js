@@ -101,3 +101,25 @@ export const getFoodsRandom = async () => {
     console.log(error);
   }
 };
+
+export const getFoodsNacionalities = async () => {
+  try {
+    const response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?a=list');
+    const data = await response.json();
+    return data.meals;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getFilterNacionalities = async (nacionalities) => {
+  try {
+    const response = await fetch(
+      `https://www.themealdb.com/api/json/v1/1/filter.php?a=${nacionalities}`,
+    );
+    const data = await response.json();
+    return data.meals;
+  } catch (error) {
+    console.log(error);
+  }
+};
