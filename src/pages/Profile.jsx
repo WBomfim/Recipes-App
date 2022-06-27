@@ -7,7 +7,7 @@ import '../styles/Profile.css';
 
 function Profile() {
   const history = useHistory();
-  const [userEmail, setUserEmail] = useState('');
+  const [userEmail, setUserEmail] = useState('Login não efetuado');
 
   useEffect(() => {
     const email = getUserEmail();
