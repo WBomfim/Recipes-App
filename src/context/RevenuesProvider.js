@@ -26,6 +26,7 @@ function RevenuesProvider({ children }) {
   const [isFavorited, setIsFavorited] = useState();
   const [saveFavorite, setSaveFavorite] = useState([]);
   const [exibitionIngredient, setExibitionIngredient] = useState();
+  const [allNacionalities, setAllNacionalities] = useState();
 
   useEffect(() => {
     if (categorySelect.category !== '') {
@@ -201,6 +202,8 @@ function RevenuesProvider({ children }) {
     setClick,
     exibitionIngredient,
     setExibitionIngredient,
+    allNacionalities,
+    setAllNacionalities,
     ingredientsList,
     doneRecipes,
     progressRecipies,
