@@ -56,7 +56,7 @@ describe('21-verifica se o footer renderiza corretamente', () => {
   });
 
   it('Tem footer na tela de principal de receitas de bebidas e comidas', () => {
-    renderWithRouter(<FoodsAndDrinks />);
+    renderWithRouter(<FoodsAndDrinks />, '/drinks');
     const footerDrinksPage = screen.getByTestId('footer');
     expect(footerDrinksPage).toBeInTheDocument();
   });

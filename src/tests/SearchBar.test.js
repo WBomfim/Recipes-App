@@ -1,13 +1,19 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import renderWithRouter from './renderWithRouter';
 import SearchBar from '../components/SearchBar';
+import FoodsAndDrinks from '../pages/FoodsAndDrinks';
 
 describe('13- Verifica a barra de busca', () => {
   it('A barra de busca deve possuir o data-testid="search-input"', () => {
-    renderWithRouter(<SearchBar />);
-    const searchInput = screen.getByTestId('search-input');
+    renderWithRouter(<FoodsAndDrinks />, '/foods');
+    const searchInput = screen.queryByTestId('search-top-btn');
+    userEvent.click(searchInput);
     expect(searchInput).toBeInTheDocument();
+
+    const searchBar = screen.getByTestId('search-input');
+    expect(searchBar).toBeInTheDocument();
   });
 
   it('O radio button deve possuir data-testid="ingredient-search-radio"', () => {
