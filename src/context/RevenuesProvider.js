@@ -5,7 +5,7 @@ import * as fetchFoods from '../services/fetchFoods';
 import * as fetchDrinks from '../services/fetchDrinks';
 import { getInProgressRecipes } from '../helpers/storageInProgress';
 import { getFavoriteRecipes, saveFavoriteRecipes } from '../helpers/storageFavorited';
-import getDoneRecipes from '../helpers/storageDoneRecipes';
+import { getDoneRecipes, addDoneRecipe } from '../helpers/storageDoneRecipes';
 
 const copy = require('clipboard-copy');
 
@@ -179,13 +179,28 @@ function RevenuesProvider({ children }) {
     setIsFavorited(!isFavorited);
   };
 
+  const finishAndSaveRecipe = (locationName) => {
+    const [revenueDetails] = exibitionDetails;
+    const revenueSaveDone = {
+      id: revenueDetails.idMeal || revenueDetails.idDrink,
+      type: locationName,
+      nationality: revenueDetails.strArea || '',
+      category: revenueDetails.strCategory,
+      alcoholicOrNot: revenueDetails.strAlcoholic || '',
+      name: revenueDetails.strMeal || revenueDetails.strDrink,
+      image: revenueDetails.strMealThumb || revenueDetails.strDrinkThumb,
+      doneDate: new Date().toLocaleDateString(),
+      tags: revenueDetails.strTags === null ? [] : revenueDetails.strTags.split(','),
+    };
+    addDoneRecipe(revenueSaveDone);
+  };
+
   const handleShare = (url) => {
     copy(url);
     setAlertShare(true);
   };
 
-  const context = {
-    dataRevenues,
+  const context = { dataRevenues,
     setDataRevenues,
     exibitionRevenues,
     setExibitionRevenues,
@@ -218,6 +233,7 @@ function RevenuesProvider({ children }) {
     getData,
     getDataAllByIngredients,
     getDataById,
+    finishAndSaveRecipe,
     handleFavorite,
     handleShare,
     verifyRecipiesStorage,
