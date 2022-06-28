@@ -1,10 +1,12 @@
 import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import RevenuesContext from '../context/RevenuesContext';
 import shareIcon from '../images/shareIcon.svg';
 import '../styles/CardRevenues.css';
 
 function CardRevenuesStorage() {
   const { exibitionRevenues, handleShare, alertShare } = useContext(RevenuesContext);
+  const history = useHistory();
 
   if (!exibitionRevenues) return null;
 
@@ -15,11 +17,11 @@ function CardRevenuesStorage() {
       </div>
       {exibitionRevenues.map((revenue, index) => (
         <div
-          key={ revenue.id }
-          tabIndex={ revenue.id }
-          onClick={ () => { } }
-          onKeyPress={ () => {} }
+          key={ `${index}-card-storage` }
           role="button"
+          tabIndex={ revenue.id }
+          onKeyPress={ () => {} }
+          onClick={ () => history.push(`/${revenue.type}s/${revenue.id}`) }
           data-testid={ `${index}-recipe-card` }
         >
           {/* utilizar css para mudar o tamanho das imagens */}
