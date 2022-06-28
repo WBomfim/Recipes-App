@@ -5,7 +5,7 @@
   color: white;
   display: flex;
   height: 7%;
-  justify-content: space-around;
+  justify-content: space-evenly;
   left: 0;
   position: fixed;
   top: 0;
@@ -59,4 +59,8 @@
 .filter-buttons button:active {
   background-color: #ecf4ec;
   color: black;
+}
+
+h1 {
+  font-size: large;
 }

@@ -14,7 +14,7 @@ import DoneRecipes from './pages/DoneRecipes';
 import FavoriteRecipes from './pages/FavoriteRecipes';
 import RevenuesProvider from './context/RevenuesProvider';
 import './App.css';
-import NotFound from './pages/NotFound';
+// import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -53,7 +53,7 @@ function App() {
         <Route path="/done-recipes" component={ DoneRecipes } />
         <Route path="/favorite-recipes" component={ FavoriteRecipes } />
       </Switch>
-    </RevenuesProvider>  
+    </RevenuesProvider>
   );
 }
 

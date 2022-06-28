@@ -13,12 +13,14 @@ function Explore() {
       <section className="explore-buttons">
         <button
           type="button"
+          className="button-1"
           data-testid="explore-foods"
           onClick={ () => history.push('/explore/foods') }
         >
           Explore Foods
         </button>
         <button
+          className="button-2"
           type="button"
           data-testid="explore-drinks"
           onClick={ () => history.push('/explore/drinks') }
