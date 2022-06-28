@@ -34,7 +34,6 @@ function FoodInProgress() {
         setIngredientsSelected(storage.meals[id]);
       }
     };
-
     getDataById(location, id);
     getStorageInProgress();
     verifyRecipiesStorage(id, savedKey);

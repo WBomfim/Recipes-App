@@ -31,8 +31,7 @@ function FoodAndDrinkDetail() {
     getDataById(locationName, id);
     getData(inverseLocation);
     verifyRecipiesStorage(id, keyStorage);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [location]);
 
   if (!revenueDetails) return null;
 
