@@ -7,6 +7,7 @@ import {
   getFoodsNacionalities,
   getFilterNacionalities,
   getFoods } from '../services/fetchFoods';
+import '../styles/Explore.css';
 
 function ExploreFoodNationalities() {
   const {
@@ -43,28 +44,31 @@ function ExploreFoodNationalities() {
   };
 
   return (
-    <>
+    <main>
       <Header title="Explore Nationalities" buttonSearch />
-      <select
-        data-testid="explore-by-nationality-dropdown"
-        onChange={ (e) => handleChange(e) }
-      >
-        <option data-testid="All-option">All</option>
-        {allNacionalities
+      <section className="dropdown">
+        <select
+          data-testid="explore-by-nationality-dropdown"
+          onChange={ (e) => handleChange(e) }
+        >
+          <option data-testid="All-option">All</option>
+          {allNacionalities
         && allNacionalities
           .map((nacionality) => Object.values(nacionality))
           .map((nacionalityName) => (
             <option
+              className="dropdown-items"
               key={ nacionalityName }
               data-testid={ `${nacionalityName}-option` }
             >
               {nacionalityName}
             </option>
           ))}
-      </select>
+        </select>
+      </section>
       <CardRevenues />
       <Footer />
-    </>
+    </main>
   );
 }
 

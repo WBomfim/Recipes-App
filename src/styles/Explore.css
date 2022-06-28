@@ -1,4 +1,75 @@
 .explore-buttons {
+  align-items: center;
   display: flex;
-  margin-top: 200px;
+  flex-direction: column;
+  margin-top: 25%;
+}
+
+.button-1, .button-2 {
+  align-items: center;
+  background-color: white;
+  border: none;
+  border-radius: 3px;
+  box-shadow: 2px 2px 2px rgb(173, 171, 171);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  font-size: x-large;
+  font-weight: 700;
+  height: 200px;
+  margin-left: 10px;
+  margin-top: 5%;
+  width: 45%;
+}
+
+.explore-buttons .button-1 {
+  background-image: url('https://images.squarespace-cdn.com/content/v1/5c8fd161e8ba4477ecbf6b05/1640376429116-RE5W8I837ZOEF70JXGFM/AdobeStock_286178925.jpg');
+  background-size: cover;
+}
+
+.button-2 {
+  background-image: url('https://www.diariozonanorte.com.br/wp-content/uploads/2022/02/vinhodoporto_drinks.jpg');
+  background-size: cover;
+}
+
+.dropdown {
+  display: flex;
+  justify-content: center;
+  margin-top: 25%;
+}
+
+.dropdown select {
+  width: 70%;
+}
+
+.dropdown select:after {
+  border: 6px solid transparent;
+  content: '';
+  height: 0;
+  position: absolute;
+  right: 10px;
+  top: 14px;
+  width: 0;
+}
+
+.dropdown option {
+  height: 200px;
+}
+
+.ingredient, .nationality, .surprise {
+  align-items: center;
+  background-color: rgb(149, 90, 238);
+  border: none;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px rgb(80, 80, 80);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  font-weight: 700;
+  height: 50%;
+  justify-content: space-evenly;
+  margin: auto;
+  margin-top: 5px;
+  padding: 3%;
+  width: 25%;
 }
