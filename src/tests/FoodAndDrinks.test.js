@@ -126,21 +126,22 @@ describe('Testa as funcionalidades da barra de pesquisa da rota "/foods"',
       expect(fetchMock).toHaveBeenCalled();
       expect(fetchMock).toHaveBeenCalledTimes(2);
     });
-
-    it('Verifica se é feita a requisição para API na primeira vez',
-      async () => {
-        // eslint-disable-next-line no-unused-vars
-        const fetchMock = jest.spyOn(global, 'fetch').mockResolvedValue({
-          json: jest.fn().mockResolvedValue(fetchAllMeals),
-        });
-        // const fetchMockCategories = jest.spyOn(global, 'fetch').mockResolvedValue({
-        //   json: jest.fn().mockResolvedValue(categoriesList),
-        // });
-        renderWithRouter(<FoodsAndDrinks />, '/foods');
-
-        verifyCards(fetchAllMeals);
-      });
   });
+
+//     it('Verifica se é feita a requisição para API na primeira vez',
+//       async () => {
+//         // eslint-disable-next-line no-unused-vars
+//         const fetchMock = jest.spyOn(global, 'fetch').mockResolvedValue({
+//           json: jest.fn().mockResolvedValue(fetchAllMeals),
+//         });
+//         // const fetchMockCategories = jest.spyOn(global, 'fetch').mockResolvedValue({
+//         //   json: jest.fn().mockResolvedValue(categoriesList),
+//         // });
+//         renderWithRouter(<FoodsAndDrinks />, '/foods');
+
+//         verifyCards(fetchAllMeals);
+//       });
+//   });
 
 // it('Verifica se são renderizados 12 cards com imagem e nome das 12 primeiras comidas',
 //   () => {

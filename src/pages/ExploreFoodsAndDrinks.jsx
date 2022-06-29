@@ -30,6 +30,7 @@ function ExploreFoodsAndDrinks() {
         <button
           className="ingredient"
           type="button"
+          name="By Ingredient"
           data-testid="explore-by-ingredient"
           onClick={ () => history.push(`/explore/${location}/ingredients`) }
         >
@@ -39,6 +40,7 @@ function ExploreFoodsAndDrinks() {
           <button
             className="nationality"
             type="button"
+            name="By Nationality"
             data-testid="explore-by-nationality"
             onClick={ () => history.push('/explore/foods/nationalities') }
           >
@@ -48,6 +50,7 @@ function ExploreFoodsAndDrinks() {
         <button
           className="surprise"
           type="button"
+          name="Surprise me!"
           data-testid="explore-surprise"
           onClick={ handleClick }
         >
