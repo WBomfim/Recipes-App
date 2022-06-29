@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import RevenuesContext from '../context/RevenuesContext';
 import { getDoneRecipes } from '../helpers/storageDoneRecipes';
 import { getFavoriteRecipes } from '../helpers/storageFavorited';
-import '../styles/filterBarStorage.css';
+import '../styles/FilterBarStorage.css';
 
 function FilterBarStorage() {
   const { setExibitionRevenues } = useContext(RevenuesContext);

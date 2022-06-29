@@ -9,7 +9,7 @@ import ExploreFoodsAndDrinks from './pages/ExploreFoodsAndDrinks';
 import ExploreFoodDrinkIngredients from './pages/ExploreFoodDrinkIngredients';
 import ExploreFoodNationalities from './pages/ExploreFoodNationalities';
 import Profile from './pages/Profile';
-import ShowSalvedRecipes from './pages/ShowSalvedRecipes';
+import DoneAndFavoriteRecipes from './pages/DoneAndFavoriteRecipes';
 import NotFound from './pages/NotFound';
 import './App.css';
 
@@ -46,8 +46,8 @@ function App() {
         component={ ExploreFoodNationalities }
       />
       <Route path="/profile" component={ Profile } />
-      <Route path="/done-recipes" component={ ShowSalvedRecipes } />
-      <Route path="/favorite-recipes" component={ ShowSalvedRecipes } />
+      <Route path="/done-recipes" component={ DoneAndFavoriteRecipes } />
+      <Route path="/favorite-recipes" component={ DoneAndFavoriteRecipes } />
       <Route component={ NotFound } />
     </Switch>
   );

@@ -7,7 +7,7 @@ import Header from '../components/Header';
 import FilterBarStorage from '../components/FilterBarStorage';
 import CardRevenuesStorage from '../components/CardRevenuesStorage';
 
-function ShowSalvedRecipes() {
+function DoneAndFavoriteRecipes() {
   const { setExibitionRevenues } = useContext(RevenuesContext);
   const location = useLocation().pathname.split('/')[1];
 
@@ -37,4 +37,4 @@ function ShowSalvedRecipes() {
   );
 }
 
-export default ShowSalvedRecipes;
+export default DoneAndFavoriteRecipes;
