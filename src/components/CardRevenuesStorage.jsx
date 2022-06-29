@@ -1,21 +1,33 @@
-import React, { useContext /* useEffect  */ } from 'react';
-import { /* useHistory,  */useLocation } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 import RevenuesContext from '../context/RevenuesContext';
+import { removeFavoriteRecipes } from '../helpers/storageFavorited';
 import shareIcon from '../images/shareIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import '../styles/CardRevenues.css';
-/* import { getFavoriteRecipes } from '../helpers/storageFavorited'; */
 
 function CardRevenuesStorage() {
   const {
     exibitionRevenues,
+    setExibitionRevenues,
     handleShare,
     alertShare,
-    handleFavorite,
   } = useContext(RevenuesContext);
   const location = useLocation().pathname.split('/')[1];
-  /* const history = useHistory(); */
+  const history = useHistory();
+
+  const removeFavorite = (revenue) => {
+    removeFavoriteRecipes(revenue);
+    const exibitionNotFavorite = exibitionRevenues
+      .filter((recipe) => recipe.id !== revenue.id);
+    setExibitionRevenues([...exibitionNotFavorite]);
+  };
+
+  const routeFromDetail = ({ target: { name } }, revenue) => {
+    if (name !== 'share' && name !== 'favorite') {
+      history.push(`/${revenue.type}s/${revenue.id}`);
+    }
+  };
 
   if (!exibitionRevenues) return null;
 
@@ -30,7 +42,7 @@ function CardRevenuesStorage() {
           role="button"
           tabIndex={ revenue.id }
           onKeyPress={ () => {} }
-          /* onClick={ () => history.push(`/${revenue.type}s/${revenue.id}`) } */
+          onClick={ (event) => routeFromDetail(event, revenue) }
           data-testid={ `${index}-recipe-card` }
         >
           {/* utilizar css para mudar o tamanho das imagens */}
@@ -51,25 +63,27 @@ function CardRevenuesStorage() {
                   : revenue.alcoholicOrNot }
               </h4>
               <button
+                name="share"
                 type="button"
                 onClick={ () => handleShare(`http://localhost:3000/${revenue.type}s/${revenue.id}`) }
               >
                 <img
+                  name="share"
                   src={ shareIcon }
                   alt="share-Icon"
                   data-testid={ `${index}-horizontal-share-btn` }
                 />
               </button>
               <button
+                name="favorite"
                 type="button"
-                onClick={ () => handleFavorite(revenue) }
+                onClick={ () => removeFavorite(revenue) }
               >
                 <img
-                  data-testid={ `${index}-horizontal-favorite-btn` }
-                  src={ exibitionRevenues
-                    .find((recipe) => recipe.id === revenue.id)
-                    ? blackHeartIcon : whiteHeartIcon }
+                  name="favorite"
+                  src={ blackHeartIcon }
                   alt="heart-Icon"
+                  data-testid={ `${index}-horizontal-favorite-btn` }
                 />
               </button>
             </div>

@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import RevenuesContext from '../context/RevenuesContext';
+import { getFavoriteRecipes } from '../helpers/storageFavorited';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
-import { getFavoriteRecipes } from '../helpers/storageFavorited';
 
 function HeaderRevenue() {
   const {

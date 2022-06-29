@@ -7,7 +7,7 @@ import Header from '../components/Header';
 import FilterBarStorage from '../components/FilterBarStorage';
 import CardRevenuesStorage from '../components/CardRevenuesStorage';
 
-function DoneRecipes() {
+function ShowSalvedRecipes() {
   const { setExibitionRevenues } = useContext(RevenuesContext);
   const location = useLocation().pathname.split('/')[1];
 
@@ -37,4 +37,4 @@ function DoneRecipes() {
   );
 }
 
-export default DoneRecipes;
+export default ShowSalvedRecipes;
