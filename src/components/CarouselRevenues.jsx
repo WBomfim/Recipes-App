@@ -20,7 +20,7 @@ function CarouselRevenues() {
     <section className="carousel">
       {exibitionRevenues.slice(0, MAX_CARDS).map((revenue, index) => (
         <button
-          key={ revenue.idMeal || revenue.idDrink }
+          key={ `${index}-carousel-revenues` }
           onClick={ () => handleClick(revenue.idMeal || revenue.idDrink) }
           type="button"
           data-testid={ `${index}-recomendation-card` }

@@ -9,13 +9,11 @@ import FoodsAndDrinks from '../pages/FoodsAndDrinks';
 import FoodAndDrinkDetail from '../pages/FoodAndDrinkDetail';
 import FoodAndDrinkInProgress from '../pages/FoodAndDrinkInProgress';
 import Explore from '../pages/Explore';
-import ExploreFoods from '../pages/ExploreFoods';
-import ExploreDrinks from '../pages/ExploreDrinks';
+import ExploreFoodsAndDrinks from '../pages/ExploreFoodsAndDrinks';
 import ExploreFoodDrinkIngredients from '../pages/ExploreFoodDrinkIngredients';
 import ExploreFoodNationalities from '../pages/ExploreFoodNationalities';
 import Profile from '../pages/Profile';
-import DoneRecipes from '../pages/DoneRecipes';
-import FavoriteRecipes from '../pages/FavoriteRecipes';
+import DoneAndFavoriteRecipes from '../pages/DoneAndFavoriteRecipes';
 
 describe('19- Implemente os elementos do menu inferior', () => {
   it('O menu inferior deve possuir data-testid="footer"', () => {
@@ -88,13 +86,13 @@ describe('21-verifica se o footer renderiza corretamente', () => {
   });
 
   it('Tem footer na tela de explorar comidas', () => {
-    renderWithRouter(<ExploreFoods />);
+    renderWithRouter(<ExploreFoodsAndDrinks />);
     const footerExploreFoods = screen.getByTestId('footer');
     expect(footerExploreFoods).toBeInTheDocument();
   });
 
   it('Tem footer na tela de explorar bebidas', () => {
-    renderWithRouter(<ExploreDrinks />);
+    renderWithRouter(<ExploreFoodsAndDrinks />);
     const footerExploreDrinks = screen.getByTestId('footer');
     expect(footerExploreDrinks).toBeInTheDocument();
   });
@@ -124,12 +122,12 @@ describe('21-verifica se o footer renderiza corretamente', () => {
   });
 
   it('Não tem footer na tela de receitas feitas', () => {
-    renderWithRouter(<DoneRecipes />);
+    renderWithRouter(<DoneAndFavoriteRecipes />);
     notFooter();
   });
 
   it('Não tem footer na tela de receitas favorita', () => {
-    renderWithRouter(<FavoriteRecipes />);
+    renderWithRouter(<DoneAndFavoriteRecipes />);
     notFooter();
   });
 });

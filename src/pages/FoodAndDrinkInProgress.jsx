@@ -14,11 +14,13 @@ function FoodInProgress() {
     setIngredientsSelected,
     alertShare,
     verifyRecipiesStorage,
+    finishAndSaveRecipe,
   } = useContext(RevenuesContext);
 
   const { id } = useParams();
   const history = useHistory();
   const location = useLocation().pathname.split('/')[1];
+  const locationName = location.split('s')[0];
   const savedKey = location === 'foods' ? 'meals' : 'cocktails';
 
   useEffect(() => {
@@ -32,12 +34,15 @@ function FoodInProgress() {
         setIngredientsSelected(storage.meals[id]);
       }
     };
-
     getDataById(location, id);
     getStorageInProgress();
     verifyRecipiesStorage(id, savedKey);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const finishRecipe = () => {
+    finishAndSaveRecipe(locationName);
+    history.push('/done-recipes');
+  };
 
   if (ingredientsList.length === 0) return null;
 
@@ -49,7 +54,7 @@ function FoodInProgress() {
       <Button
         name="Finish Recipe"
         disabled={ ingredientsList.length !== ingredientsSelected.length }
-        onClick={ () => history.push('/done-recipes') }
+        onClick={ () => finishRecipe() }
         dataTestId="finish-recipe-btn"
       />
     </>

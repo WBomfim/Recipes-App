@@ -6,14 +6,12 @@ import Profile from '../pages/Profile';
 import Login from '../pages/Login';
 import FoodAndDrinkInProgress from '../pages/FoodAndDrinkInProgress';
 import FoodAndDrinkDetail from '../pages/FoodAndDrinkDetail';
-import FavoriteRecipes from '../pages/FavoriteRecipes';
-import ExploreFoods from '../pages/ExploreFoods';
+import DoneAndFavoriteRecipes from '../pages/DoneAndFavoriteRecipes';
+import ExploreFoodsAndDrinks from '../pages/ExploreFoodsAndDrinks';
 import ExploreFoodDrinkIngredients from '../pages/ExploreFoodDrinkIngredients';
 import ExploreFoodNationalities from '../pages/ExploreFoodNationalities';
 // import ExploreFoodIngredients from '../pages/ExploreFoodIngredients';
-import ExploreDrinks from '../pages/ExploreDrinks';
 import Explore from '../pages/Explore';
-import DoneRecipes from '../pages/DoneRecipes';
 import FoodsAndDrinks from '../pages/FoodsAndDrinks';
 
 const PAGE_TITLE = 'page-title';
@@ -104,12 +102,12 @@ describe('Verifica a renderização do componente Header', () => {
   });
 
   it('O header tem os ícones corretos na tela de explorar comidas', () => {
-    renderWithRouter(<ExploreFoods />);
+    renderWithRouter(<ExploreFoodsAndDrinks />);
     withHeader('Explore Foods', false);
   });
 
   it('O header tem os ícones corretos na tela de explorar bebidas', () => {
-    renderWithRouter(<ExploreDrinks />);
+    renderWithRouter(<ExploreFoodsAndDrinks />);
     withHeader('Explore Drinks', false);
   });
 
@@ -137,12 +135,12 @@ describe('Verifica a renderização do componente Header', () => {
   });
 
   it('O header tem os ícones corretos na tela de receitas feitas', () => {
-    renderWithRouter(<DoneRecipes />);
+    renderWithRouter(<DoneAndFavoriteRecipes />);
     withHeader('Done Recipes', false);
   });
 
   it('O header tem os ícones corretos na tela de receitas favoritas', () => {
-    renderWithRouter(<FavoriteRecipes />);
+    renderWithRouter(<DoneAndFavoriteRecipes />);
     withHeader('Favorite Recipes', false);
   });
 });

@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import RevenuesContext from '../context/RevenuesContext';
+import { getFavoriteRecipes } from '../helpers/storageFavorited';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
@@ -11,13 +12,15 @@ function HeaderRevenue() {
     exibitionDetails,
     handleFavorite,
     handleShare,
-    isFavorited,
   } = useContext(RevenuesContext);
 
   const location = useLocation().pathname;
   const locationClipboard = location.split('/');
   const locationName = location.split('s')[0].split('/')[1];
   const [revenueDetails] = exibitionDetails;
+  const favoritesRecipes = getFavoriteRecipes();
+  const isFavorite = favoritesRecipes
+    .find((recipe) => recipe.id === locationClipboard[2]);
 
   const revenueSaveStorage = {
     id: revenueDetails.idMeal || revenueDetails.idDrink,
@@ -40,13 +43,11 @@ function HeaderRevenue() {
         data-testid="recipe-title"
       >
         { revenueDetails.strMeal || revenueDetails.strDrink }
-
       </h1>
       <p
         data-testid="recipe-category"
       >
         { revenueDetails.strAlcoholic || revenueDetails.strCategory }
-
       </p>
       <div>
         <button
@@ -62,7 +63,7 @@ function HeaderRevenue() {
         >
           <img
             data-testid="favorite-btn"
-            src={ isFavorited ? blackHeartIcon : whiteHeartIcon }
+            src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
             alt="heart-Icon"
           />
         </button>

@@ -4,8 +4,8 @@ import RevenuesContext from './RevenuesContext';
 import * as fetchFoods from '../services/fetchFoods';
 import * as fetchDrinks from '../services/fetchDrinks';
 import { getInProgressRecipes } from '../helpers/storageInProgress';
-import { getFavoriteRecipes, saveFavoriteRecipes } from '../helpers/storageFavorited';
-import getDoneRecipes from '../helpers/storageDoneRecipes';
+import * as storageFavorited from '../helpers/storageFavorited';
+import { getDoneRecipes, addDoneRecipe } from '../helpers/storageDoneRecipes';
 
 const copy = require('clipboard-copy');
 
@@ -24,7 +24,6 @@ function RevenuesProvider({ children }) {
   const [alertShare, setAlertShare] = useState(false);
   const [click, setClick] = useState(false);
   const [isFavorited, setIsFavorited] = useState();
-  const [saveFavorite, setSaveFavorite] = useState([]);
   const [exibitionIngredient, setExibitionIngredient] = useState();
   const [allNacionalities, setAllNacionalities] = useState();
 
@@ -67,90 +66,84 @@ function RevenuesProvider({ children }) {
   }, [exibitionDetails]);
 
   const getDataByIngredients = async (route) => {
+    let data = [];
     if (route === 'foods') {
-      const data = await fetchFoods.getFoodsIngredients(searchValue);
-      setDataRevenues(data);
-      setExibitionRevenues(data);
+      data = await fetchFoods.getFoodsIngredients(searchValue);
     } else if (route === 'drinks') {
-      const data = await fetchDrinks.getDrinksIngredients(searchValue);
-      setDataRevenues(data);
-      setExibitionRevenues(data);
+      data = await fetchDrinks.getDrinksIngredients(searchValue);
     }
+    setDataRevenues(data);
+    setExibitionRevenues(data);
   };
 
   const getDataByIngredientsExplore = async (route, fetchIngredients) => {
+    let data = [];
     if (route === 'foods') {
-      const data = await fetchFoods.getFoodsIngredients(fetchIngredients);
-      setDataRevenues(data);
-      setExibitionRevenues(data);
+      data = await fetchFoods.getFoodsIngredients(fetchIngredients);
     } else if (route === 'drinks') {
-      const data = await fetchDrinks.getDrinksIngredients(fetchIngredients);
-      setDataRevenues(data);
-      setExibitionRevenues(data);
+      data = await fetchDrinks.getDrinksIngredients(fetchIngredients);
     }
+    setDataRevenues(data);
+    setExibitionRevenues(data);
   };
 
   const getDataAllByIngredients = async (fetchIngredients) => {
+    let data = [];
     if (fetchIngredients === 'foods') {
-      const data = await fetchFoods.getAllFoodsIngredients();
-      setDataRevenues(data);
-      setExibitionRevenues(data);
+      data = await fetchFoods.getAllFoodsIngredients();
     } else if (fetchIngredients === 'drinks') {
-      const data = await fetchDrinks.getAllDrinksIngredients();
-      setDataRevenues(data);
-      setExibitionRevenues(data);
+      data = await fetchDrinks.getAllDrinksIngredients();
     }
+    setDataRevenues(data);
+    setExibitionRevenues(data);
   };
 
   const getDataByName = async (route) => {
+    let data = [];
     if (route === 'foods') {
-      const data = await fetchFoods.getFoodsName(searchValue);
-      setDataRevenues(data);
-      setExibitionRevenues(data);
+      data = await fetchFoods.getFoodsName(searchValue);
     } else if (route === 'drinks') {
-      const data = await fetchDrinks.getDrinksName(searchValue);
-      setDataRevenues(data);
-      setExibitionRevenues(data);
+      data = await fetchDrinks.getDrinksName(searchValue);
     }
+    setDataRevenues(data);
+    setExibitionRevenues(data);
   };
 
   const getDataByFirstLetter = async (route) => {
+    let data = [];
     if (route === 'foods') {
-      const data = await fetchFoods.getFoodsFirstLetter(searchValue);
-      setDataRevenues(data);
-      setExibitionRevenues(data);
+      data = await fetchFoods.getFoodsFirstLetter(searchValue);
     } else if (route === 'drinks') {
-      const data = await fetchDrinks.getDrinksFirstLetter(searchValue);
-      setDataRevenues(data);
-      setExibitionRevenues(data);
+      data = await fetchDrinks.getDrinksFirstLetter(searchValue);
     }
+    setDataRevenues(data);
+    setExibitionRevenues(data);
   };
 
   const getDataById = async (route, id) => {
+    let data = [];
     if (route === 'foods') {
-      const data = await fetchFoods.getFoodsId(id);
-      setExibitionDetails(data);
+      data = await fetchFoods.getFoodsId(id);
     } else if (route === 'drinks') {
-      const data = await fetchDrinks.getDrinksId(id);
-      setExibitionDetails(data);
+      data = await fetchDrinks.getDrinksId(id);
     }
+    setExibitionDetails(data);
   };
 
   const getData = async (route) => {
+    let data = [];
     if (route === 'foods') {
-      const data = await fetchFoods.getFoods();
-      setDataRevenues(data);
-      setExibitionRevenues(data);
+      data = await fetchFoods.getFoods();
     } else if (route === 'drinks') {
-      const data = await fetchDrinks.getDrinks();
-      setDataRevenues(data);
-      setExibitionRevenues(data);
+      data = await fetchDrinks.getDrinks();
     }
+    setDataRevenues(data);
+    setExibitionRevenues(data);
   };
 
   const verifyRecipiesStorage = (id, option) => {
     const recipiesDone = getDoneRecipes();
-    const favoriteRecipies = getFavoriteRecipes();
+    const favoriteRecipies = storageFavorited.getFavoriteRecipes();
     const recipiesInProgress = getInProgressRecipes();
 
     const recipiesInProgressVerified = Object.keys(recipiesInProgress[option])
@@ -168,16 +161,27 @@ function RevenuesProvider({ children }) {
 
   const handleFavorite = (revenue) => {
     if (!isFavorited) {
-      saveFavoriteRecipes([...saveFavorite, revenue]);
-      setSaveFavorite([...saveFavorite, revenue]);
+      storageFavorited.saveFavoriteRecipes(revenue);
     } else {
-      const recipesFavoriteds = getFavoriteRecipes();
-      const deleteRecipesFavoriteds = recipesFavoriteds
-        .filter((recipe) => recipe.id !== revenue.id);
-      saveFavoriteRecipes(deleteRecipesFavoriteds);
-      setSaveFavorite(deleteRecipesFavoriteds);
+      storageFavorited.removeFavoriteRecipes(revenue);
     }
     setIsFavorited(!isFavorited);
+  };
+
+  const finishAndSaveRecipe = (locationName) => {
+    const [revenueDetails] = exibitionDetails;
+    const revenueSaveDone = {
+      id: revenueDetails.idMeal || revenueDetails.idDrink,
+      type: locationName,
+      nationality: revenueDetails.strArea || '',
+      category: revenueDetails.strCategory,
+      alcoholicOrNot: revenueDetails.strAlcoholic || '',
+      name: revenueDetails.strMeal || revenueDetails.strDrink,
+      image: revenueDetails.strMealThumb || revenueDetails.strDrinkThumb,
+      doneDate: new Date().toLocaleDateString(),
+      tags: revenueDetails.strTags === null ? [] : revenueDetails.strTags.split(','),
+    };
+    addDoneRecipe(revenueSaveDone);
   };
 
   const handleShare = (url) => {
@@ -185,8 +189,7 @@ function RevenuesProvider({ children }) {
     setAlertShare(true);
   };
 
-  const context = {
-    dataRevenues,
+  const context = { dataRevenues,
     setDataRevenues,
     exibitionRevenues,
     setExibitionRevenues,
@@ -221,6 +224,7 @@ function RevenuesProvider({ children }) {
     getData,
     getDataAllByIngredients,
     getDataById,
+    finishAndSaveRecipe,
     handleFavorite,
     handleShare,
     verifyRecipiesStorage,
