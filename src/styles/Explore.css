@@ -10,7 +10,7 @@
   background-color: white;
   border: none;
   border-radius: 3px;
-  box-shadow: 2px 2px 2px rgb(173, 171, 171);
+  box-shadow: 2px 2px 2px black;
   color: white;
   display: flex;
   flex-direction: column;
@@ -58,10 +58,10 @@
 
 .ingredient, .nationality, .surprise {
   align-items: center;
-  background-color: rgb(149, 90, 238);
+  background-color: rgb(216, 24, 72);
   border: none;
   border-radius: 5px;
-  box-shadow: 2px 2px 2px rgb(80, 80, 80);
+  box-shadow: 2px 2px 2px black;
   color: white;
   display: flex;
   flex-direction: column;

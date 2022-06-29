@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import RevenuesContext from '../context/RevenuesContext';
+import '../styles/CardRevenues.css';
 
 function CardExploreRevenues() {
   const {
@@ -22,7 +23,7 @@ function CardExploreRevenues() {
   if (!exibitionRevenues) return null;
 
   return (
-    <section>
+    <section className="cards">
       {exibitionRevenues.slice(0, MAX_CARDS).map((revenue, index) => (
         <button
           key={ index }

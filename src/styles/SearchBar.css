@@ -1,7 +1,8 @@
 .search-inputs {
-  background-color: white;
+  background-color: black;
   border-radius: 5px;
-  box-shadow: 2px 2px 2px rgb(173, 171, 171);
+  box-shadow: 2px 2px 2px black;
+  color: white;
   display: flex;
   justify-content: space-around;
   margin: auto;
@@ -18,7 +19,7 @@
 }
 
 .search-inputs button {
-  background-color: rgb(149, 90, 238);
+  background-color: rgb(216, 24, 72);
   border: none;
   border-radius: 5px;
   color: white;
