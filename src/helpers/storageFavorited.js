@@ -3,5 +3,13 @@ export const getFavoriteRecipes = () => (
 );
 
 export const saveFavoriteRecipes = (revenue) => {
-  localStorage.setItem('favoriteRecipes', JSON.stringify(revenue));
+  const recipes = getFavoriteRecipes();
+  localStorage.setItem('favoriteRecipes', JSON.stringify([...recipes, revenue]));
+};
+
+export const removeFavoriteRecipes = (revenue) => {
+  const recipes = getFavoriteRecipes();
+  const recipesFavorite = recipes
+    .filter((recipe) => recipe.id !== revenue.id);
+  localStorage.setItem('favoriteRecipes', JSON.stringify(recipesFavorite));
 };

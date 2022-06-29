@@ -4,7 +4,7 @@ import RevenuesContext from './RevenuesContext';
 import * as fetchFoods from '../services/fetchFoods';
 import * as fetchDrinks from '../services/fetchDrinks';
 import { getInProgressRecipes } from '../helpers/storageInProgress';
-import { getFavoriteRecipes, saveFavoriteRecipes } from '../helpers/storageFavorited';
+import * as storageFavorited from '../helpers/storageFavorited';
 import { getDoneRecipes, addDoneRecipe } from '../helpers/storageDoneRecipes';
 
 const copy = require('clipboard-copy');
@@ -24,7 +24,6 @@ function RevenuesProvider({ children }) {
   const [alertShare, setAlertShare] = useState(false);
   const [click, setClick] = useState(false);
   const [isFavorited, setIsFavorited] = useState();
-  const [saveFavorite, setSaveFavorite] = useState([]);
   const [exibitionIngredient, setExibitionIngredient] = useState();
 
   useEffect(() => {
@@ -143,7 +142,7 @@ function RevenuesProvider({ children }) {
 
   const verifyRecipiesStorage = (id, option) => {
     const recipiesDone = getDoneRecipes();
-    const favoriteRecipies = getFavoriteRecipes();
+    const favoriteRecipies = storageFavorited.getFavoriteRecipes();
     const recipiesInProgress = getInProgressRecipes();
 
     const recipiesInProgressVerified = Object.keys(recipiesInProgress[option])
@@ -161,14 +160,9 @@ function RevenuesProvider({ children }) {
 
   const handleFavorite = (revenue) => {
     if (!isFavorited) {
-      saveFavoriteRecipes([...saveFavorite, revenue]);
-      setSaveFavorite([...saveFavorite, revenue]);
+      storageFavorited.saveFavoriteRecipes(revenue);
     } else {
-      const recipesFavoriteds = getFavoriteRecipes();
-      const deleteRecipesFavoriteds = recipesFavoriteds
-        .filter((recipe) => recipe.id !== revenue.id);
-      saveFavoriteRecipes(deleteRecipesFavoriteds);
-      setSaveFavorite(deleteRecipesFavoriteds);
+      storageFavorited.removeFavoriteRecipes(revenue);
     }
     setIsFavorited(!isFavorited);
   };

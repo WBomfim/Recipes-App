@@ -1,12 +1,21 @@
-import React, { useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useContext /* useEffect  */ } from 'react';
+import { /* useHistory,  */useLocation } from 'react-router-dom';
 import RevenuesContext from '../context/RevenuesContext';
 import shareIcon from '../images/shareIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 import '../styles/CardRevenues.css';
+/* import { getFavoriteRecipes } from '../helpers/storageFavorited'; */
 
 function CardRevenuesStorage() {
-  const { exibitionRevenues, handleShare, alertShare } = useContext(RevenuesContext);
-  const history = useHistory();
+  const {
+    exibitionRevenues,
+    handleShare,
+    alertShare,
+    handleFavorite,
+  } = useContext(RevenuesContext);
+  const location = useLocation().pathname.split('/')[1];
+  /* const history = useHistory(); */
 
   if (!exibitionRevenues) return null;
 
@@ -21,7 +30,7 @@ function CardRevenuesStorage() {
           role="button"
           tabIndex={ revenue.id }
           onKeyPress={ () => {} }
-          onClick={ () => history.push(`/${revenue.type}s/${revenue.id}`) }
+          /* onClick={ () => history.push(`/${revenue.type}s/${revenue.id}`) } */
           data-testid={ `${index}-recipe-card` }
         >
           {/* utilizar css para mudar o tamanho das imagens */}
@@ -51,6 +60,18 @@ function CardRevenuesStorage() {
                   data-testid={ `${index}-horizontal-share-btn` }
                 />
               </button>
+              <button
+                type="button"
+                onClick={ () => handleFavorite(revenue) }
+              >
+                <img
+                  data-testid={ `${index}-horizontal-favorite-btn` }
+                  src={ exibitionRevenues
+                    .find((recipe) => recipe.id === revenue.id)
+                    ? blackHeartIcon : whiteHeartIcon }
+                  alt="heart-Icon"
+                />
+              </button>
             </div>
             <h3
               data-testid={ `${index}-horizontal-name` }
@@ -60,18 +81,19 @@ function CardRevenuesStorage() {
             <p
               data-testid={ `${index}-horizontal-done-date` }
             >
-              {`Done in: ${revenue.doneDate}`}
+              {location === 'done-recipes' && `Done in: ${revenue.doneDate}`}
             </p>
           </div>
-          {revenue.type === 'food' && revenue.tags.slice(0, 2).map((tag) => (
-            <div key={ tag }>
-              <p
-                data-testid={ `${index}-${tag}-horizontal-tag` }
-              >
-                {tag}
-              </p>
-            </div>
-          ))}
+          {location === 'done-recipes' && (
+            revenue.type === 'food' && revenue.tags.slice(0, 2).map((tag) => (
+              <div key={ tag }>
+                <p
+                  data-testid={ `${index}-${tag}-horizontal-tag` }
+                >
+                  {tag}
+                </p>
+              </div>
+            )))}
         </div>
       ))}
     </section>

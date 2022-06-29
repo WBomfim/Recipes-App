@@ -11,7 +11,6 @@ import ExploreFoodDrinkIngredients from './pages/ExploreFoodDrinkIngredients';
 import ExploreFoodNationalities from './pages/ExploreFoodNationalities';
 import Profile from './pages/Profile';
 import DoneRecipes from './pages/DoneRecipes';
-import FavoriteRecipes from './pages/FavoriteRecipes';
 import './App.css';
 
 function App() {
@@ -44,7 +43,7 @@ function App() {
       />
       <Route path="/profile" component={ Profile } />
       <Route path="/done-recipes" component={ DoneRecipes } />
-      <Route path="/favorite-recipes" component={ FavoriteRecipes } />
+      <Route path="/favorite-recipes" component={ DoneRecipes } />
     </Switch>
   );
 }
