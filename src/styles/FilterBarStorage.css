@@ -1,7 +1,23 @@
 .filter-buttons-storage {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
   margin-top: 70px;
   width: 100%;
+}
+
+.filter-buttons-storage button {
+  align-items: center;
+  background-color: rgb(216, 24, 72);
+  border: none;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px black;
+  color: white;
+  font-weight: 700;
+  height: 50%;
+  justify-content: space-evenly;
+  margin: auto;
+  margin-top: 3%;
+  padding: 3%;
+  width: 25%;
 }

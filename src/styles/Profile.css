@@ -1,14 +1,33 @@
 .profile-page {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  margin-top: 200px;
+  height: 200px;
+  margin-top: 5%;
   width: 100%;
 }
 
 .profile-header {
-  border: solid black 2px;
   display: flex;
   flex-direction: column;
-  margin-top: 20%;
+  margin-top: 50%;
   width: 90%;
+}
+
+.profile-page button {
+  align-items: center;
+  background-color: rgb(216, 24, 72);
+  border: none;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px black;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  font-weight: 700;
+  height: 50%;
+  justify-content: space-evenly;
+  margin: auto;
+  margin-top: 3%;
+  padding: 3%;
+  width: 25%;
 }
