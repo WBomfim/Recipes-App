@@ -27,7 +27,6 @@ function ExploreFoodNationalities() {
       setAllNacionalities(getAllNacionalities);
     };
     getNacionalities();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleChange = ({ target }) => {
