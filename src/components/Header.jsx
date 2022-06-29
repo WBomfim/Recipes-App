@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import RevenuesContext from '../context/RevenuesContext';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
+import '../styles/Header.css';
 
 function Header({ title, buttonSearch = false }) {
   const { searchValue, setSearchValue } = useContext(RevenuesContext);
@@ -16,7 +17,7 @@ function Header({ title, buttonSearch = false }) {
 
   return (
     <header>
-      <div>
+      <div className="header-items">
         <button
           data-testid="profile-top-btn"
           type="button"
@@ -41,6 +42,7 @@ function Header({ title, buttonSearch = false }) {
 
       {search && (
         <input
+          className="input-search"
           type="text"
           placeholder="Search"
           value={ searchValue }

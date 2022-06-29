@@ -5,6 +5,7 @@ import { getFavoriteRecipes } from '../helpers/storageFavorited';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import '../styles/HeaderRevenue.css';
 
 function HeaderRevenue() {
   const {
@@ -32,7 +33,7 @@ function HeaderRevenue() {
   };
 
   return (
-    <section>
+    <section className="revenue-items">
       <img
         data-testid="recipe-photo"
         src={ revenueDetails.strMealThumb || revenueDetails.strDrinkThumb }
@@ -48,23 +49,25 @@ function HeaderRevenue() {
       >
         { revenueDetails.strAlcoholic || revenueDetails.strCategory }
       </p>
-      <button
-        type="button"
-        data-testid="share-btn"
-        onClick={ () => handleShare(`http://localhost:3000/${locationClipboard[1]}/${locationClipboard[2]}`) }
-      >
-        <img src={ shareIcon } alt="share-Icon" />
-      </button>
-      <button
-        type="button"
-        onClick={ () => handleFavorite(revenueSaveStorage) }
-      >
-        <img
-          data-testid="favorite-btn"
-          src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
-          alt="heart-Icon"
-        />
-      </button>
+      <div>
+        <button
+          type="button"
+          data-testid="share-btn"
+          onClick={ () => handleShare(`http://localhost:3000/${locationClipboard[1]}/${locationClipboard[2]}`) }
+        >
+          <img src={ shareIcon } alt="share-Icon" />
+        </button>
+        <button
+          type="button"
+          onClick={ () => handleFavorite(revenueSaveStorage) }
+        >
+          <img
+            data-testid="favorite-btn"
+            src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
+            alt="heart-Icon"
+          />
+        </button>
+      </div>
     </section>
   );
 }

@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import RevenuesContext from '../context/RevenuesContext';
 import { getDoneRecipes } from '../helpers/storageDoneRecipes';
 import { getFavoriteRecipes } from '../helpers/storageFavorited';
+import '../styles/filterBarStorage.css';
 
 function FilterBarStorage() {
   const { setExibitionRevenues } = useContext(RevenuesContext);
@@ -51,7 +52,7 @@ function FilterBarStorage() {
   };
 
   return (
-    <div>
+    <section className="filter-buttons-storage">
       <button
         type="button"
         data-testid="filter-by-all-btn"
@@ -73,7 +74,7 @@ function FilterBarStorage() {
       >
         Drink
       </button>
-    </div>
+    </section>
   );
 }
 

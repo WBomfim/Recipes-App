@@ -1,6 +1,7 @@
 import React, { useContext, useCallback, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import RevenuesContext from '../context/RevenuesContext';
+import '../styles/SearchBar.css';
 
 function SearchBar() {
   const {
@@ -73,8 +74,8 @@ function SearchBar() {
   };
 
   return (
-    <section>
-      <div>
+    <section className="search-inputs">
+      <div className="search-radios">
         <label htmlFor="ingredients">
           <input
             id="ingredients"

@@ -1,0 +1,10 @@
+.revenue-items {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.revenue-items img {
+  width: 60%;
+}

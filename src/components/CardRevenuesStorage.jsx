@@ -32,7 +32,7 @@ function CardRevenuesStorage() {
   if (!exibitionRevenues) return null;
 
   return (
-    <section className="cards">
+    <section>
       <div>
         {alertShare && <span>Link copied!</span>}
       </div>

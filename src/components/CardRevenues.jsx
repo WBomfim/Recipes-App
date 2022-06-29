@@ -6,12 +6,16 @@ import '../styles/CardRevenues.css';
 function CardRevenues() {
   const { exibitionRevenues } = useContext(RevenuesContext);
 
-  const location = useLocation().pathname.split('/')[1];
+  const location = useLocation().pathname.split('/');
   const history = useHistory();
   const MAX_CARDS = 12;
 
   const handleClick = (id) => {
-    history.push(`/${location}/${id}`);
+    if (location[3] === 'nationalities') {
+      history.push(`/${location[2]}/${id}`);
+    } else {
+      history.push(`/${location[1]}/${id}`);
+    }
   };
 
   if (!exibitionRevenues) return null;
@@ -25,10 +29,7 @@ function CardRevenues() {
           type="button"
           data-testid={ `${index}-recipe-card` }
         >
-          {/* utilizar css para mudar o tamanho das imagens */}
           <img
-            width="153px"
-            height="150px"
             src={ revenue.strDrinkThumb || revenue.strMealThumb }
             alt={ `imagem-${revenue.strDrink || revenue.strMeal}` }
             data-testid={ `${index}-card-img` }
