@@ -1,28 +1,18 @@
-.profile-page {
-  align-items: center;
+.filter-buttons-storage {
   display: flex;
   flex-direction: column;
-  height: 200px;
-  margin-top: 5%;
+  justify-content: center;
+  margin-top: 70px;
   width: 100%;
 }
 
-.profile-header {
-  display: flex;
-  flex-direction: column;
-  margin-top: 50%;
-  width: 90%;
-}
-
-.profile-page button {
+.filter-buttons-storage button {
   align-items: center;
   background-color: rgb(216, 24, 72);
   border: none;
   border-radius: 5px;
   box-shadow: 2px 2px 2px black;
   color: white;
-  display: flex;
-  flex-direction: column;
   font-weight: 700;
   height: 50%;
   justify-content: space-evenly;

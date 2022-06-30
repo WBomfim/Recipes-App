@@ -1,6 +1,6 @@
 .header-items {
   align-items: center;
-  background-color: rgb(149, 90, 238);
+  background-color: rgb(216, 24, 72);
   border-bottom: solid black 1px;
   color: white;
   display: flex;
@@ -31,7 +31,7 @@
 }
 
 .input-search:focus {
-  border: solid rgb(149, 90, 238);
+  border: solid rgb(216, 24, 72);
 }
 
 .filter-buttons {
@@ -42,7 +42,7 @@
 }
 
 .filter-buttons button {
-  background-color: rgb(149, 90, 238);
+  background-color: rgb(216, 24, 72);
   border: none;
   border-radius: 5px;
   color: white;

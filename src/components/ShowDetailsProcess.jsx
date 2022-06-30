@@ -33,7 +33,7 @@ function ShowDetailsProcess() {
   };
 
   return (
-    <section>
+    <section className="page-detail">
       <h2>Ingredients</h2>
       <ul>
         {ingredientsList.map((ingredient, index) => (

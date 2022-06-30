@@ -79,6 +79,7 @@ describe('Verifica a renderização do componente Header', () => {
 
   it('O header tem os ícones corretos na tela de explorar comidas', () => {
     renderWithRouter(<App />, '/explore/foods');
+
     withHeader('Explore Foods', false);
   });
 
