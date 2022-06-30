@@ -59,6 +59,7 @@ function HeaderRevenue() {
         </button>
         <button
           type="button"
+          name="favorite-btn"
           onClick={ () => handleFavorite(revenueSaveStorage) }
         >
           <img
