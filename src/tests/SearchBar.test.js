@@ -2,12 +2,12 @@ import React from 'react';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import renderWithRouter from './renderWithRouter';
+import App from '../App';
 import SearchBar from '../components/SearchBar';
-import FoodsAndDrinks from '../pages/FoodsAndDrinks';
 
 describe('13- Verifica a barra de busca', () => {
   it('A barra de busca deve possuir o data-testid="search-input"', () => {
-    renderWithRouter(<FoodsAndDrinks />, '/foods');
+    renderWithRouter(<App />, '/foods');
     const searchInput = screen.queryByTestId('search-top-btn');
     userEvent.click(searchInput);
     expect(searchInput).toBeInTheDocument();

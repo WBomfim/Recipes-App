@@ -3,41 +3,30 @@ import '@testing-library/jest-dom/extend-expect';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Footer from '../components/Footer';
+import App from '../App';
 import renderWithRouter from './renderWithRouter';
-import Login from '../pages/Login';
-import FoodsAndDrinks from '../pages/FoodsAndDrinks';
-import FoodAndDrinkDetail from '../pages/FoodAndDrinkDetail';
-import FoodAndDrinkInProgress from '../pages/FoodAndDrinkInProgress';
-import Explore from '../pages/Explore';
-import ExploreFoods from '../pages/ExploreFoods';
-import ExploreDrinks from '../pages/ExploreDrinks';
-import ExploreFoodDrinkIngredients from '../pages/ExploreFoodDrinkIngredients';
-import ExploreFoodNationalities from '../pages/ExploreFoodNationalities';
-import Profile from '../pages/Profile';
-import DoneRecipes from '../pages/DoneRecipes';
-import FavoriteRecipes from '../pages/FavoriteRecipes';
 
 describe('19- Implemente os elementos do menu inferior', () => {
   it('O menu inferior deve possuir data-testid="footer"', () => {
-    renderWithRouter(<Footer />);
+    renderWithRouter(<App />, '/foods');
     const footerContainer = screen.getByTestId('footer');
     expect(footerContainer).toBeInTheDocument();
   });
 
   it('O elemento página de bebidas possui data-testid="drinks-bottom-btn"', () => {
-    renderWithRouter(<Footer />);
+    renderWithRouter(<App />, '/drinks');
     const iconDrinks = screen.getByTestId('drinks-bottom-btn');
     expect(iconDrinks).toBeInTheDocument();
   });
 
   it('O elemento página de explorar possui data-testid="explore-bottom-btn""', () => {
-    renderWithRouter(<Footer />);
+    renderWithRouter(<App />, '/explore');
     const iconExplore = screen.getByTestId('explore-bottom-btn');
     expect(iconExplore).toBeInTheDocument();
   });
 
   it('O elemento página de comidas possui data-testid="food-bottom-btn"', () => {
-    renderWithRouter(<Footer />);
+    renderWithRouter(<App />, '/foods');
     const iconFoods = screen.getByTestId('food-bottom-btn');
     expect(iconFoods).toBeInTheDocument();
   });
@@ -51,85 +40,85 @@ describe('21-verifica se o footer renderiza corretamente', () => {
   };
 
   it('Não tem footer na tela de login', () => {
-    renderWithRouter(<Login />);
+    renderWithRouter(<App />, '/');
     notFooter();
   });
 
   it('Tem footer na tela de principal de receitas de bebidas e comidas', () => {
-    renderWithRouter(<FoodsAndDrinks />, '/drinks');
+    renderWithRouter(<App />, '/drinks');
     const footerDrinksPage = screen.getByTestId('footer');
     expect(footerDrinksPage).toBeInTheDocument();
   });
 
   it('Não tem footer na tela de detalhes de uma receita de comida', () => {
-    renderWithRouter(<FoodAndDrinkDetail />);
+    renderWithRouter(<App />, '/foods/0');
     notFooter();
   });
 
   it('Não tem footer na tela de detalhes de uma receita de bebida', () => {
-    renderWithRouter(<FoodAndDrinkDetail />);
+    renderWithRouter(<App />, '/drinks/1');
     notFooter();
   });
 
-  it('Não tem footer na tela de receita em progresso de comida', () => {
-    renderWithRouter(<FoodAndDrinkInProgress />);
+  it('Não tem footer na tela de receita de comida em progresso', () => {
+    renderWithRouter(<App />, '/foods/in-progress');
     notFooter();
   });
 
-  it('Não tem footer na tela de receita em progresso de bebida', () => {
-    renderWithRouter(<FoodAndDrinkInProgress />);
+  it('Não tem footer na tela de receita de bebida em progresso', () => {
+    renderWithRouter(<App />, '/drinks/in-progress');
     notFooter();
   });
 
   it('Tem footer na tela de explorar', () => {
-    renderWithRouter(<Explore />);
+    renderWithRouter(<App />, '/explore');
     const footerExplorePage = screen.getByTestId('footer');
     expect(footerExplorePage).toBeInTheDocument();
   });
 
   it('Tem footer na tela de explorar comidas', () => {
-    renderWithRouter(<ExploreFoods />);
+    renderWithRouter(<App />, '/explore/foods');
     const footerExploreFoods = screen.getByTestId('footer');
     expect(footerExploreFoods).toBeInTheDocument();
   });
 
   it('Tem footer na tela de explorar bebidas', () => {
-    renderWithRouter(<ExploreDrinks />);
+    renderWithRouter(<App />, '/explore/drinks');
     const footerExploreDrinks = screen.getByTestId('footer');
     expect(footerExploreDrinks).toBeInTheDocument();
   });
 
   it('Tem footer na tela de explorar comidas por ingrediente', () => {
-    renderWithRouter(<ExploreFoodDrinkIngredients />);
+    renderWithRouter(<App />, '/explore/foods/ingredients');
     const footerExploreFoods = screen.getByTestId('footer');
     expect(footerExploreFoods).toBeInTheDocument();
   });
 
   it('Tem footer na tela de explorar bebidas por ingrediente', () => {
-    renderWithRouter(<ExploreFoodDrinkIngredients />);
+    renderWithRouter(<App />, '/explore/drinks/ingredients');
     const footerExploreDrinks = screen.getByTestId('footer');
     expect(footerExploreDrinks).toBeInTheDocument();
   });
 
   it('Tem footer na tela de explorar comidas por nacionalidade', () => {
-    renderWithRouter(<ExploreFoodNationalities />);
+    renderWithRouter(<App />, '/explore/foods/nationalities');
     const footerFoods = screen.getByTestId('footer');
     expect(footerFoods).toBeInTheDocument();
   });
 
   it('Tem footer na tela de perfil', () => {
-    renderWithRouter(<Profile />);
+    renderWithRouter(<App />, '/profile');
     const footerProfilePage = screen.getByTestId('footer');
     expect(footerProfilePage).toBeInTheDocument();
   });
 
   it('Não tem footer na tela de receitas feitas', () => {
-    renderWithRouter(<DoneRecipes />);
+    renderWithRouter(<App />, '/done-recipes');
     notFooter();
   });
 
   it('Não tem footer na tela de receitas favorita', () => {
-    renderWithRouter(<FavoriteRecipes />);
+    renderWithRouter(<App />, '/favorite-recipes');
     notFooter();
   });
 });
