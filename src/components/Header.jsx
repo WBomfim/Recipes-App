@@ -31,6 +31,7 @@ function Header({ title, buttonSearch = false }) {
         {buttonSearch && (
           <button
             data-testid="search-top-btn"
+            name="search-top-btn"
             type="button"
             onClick={ () => setSearch(!search) }
             src={ searchIcon }
