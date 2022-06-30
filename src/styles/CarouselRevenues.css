@@ -6,6 +6,26 @@
   scroll-behavior: smooth;
 }
 
+.carousel-cards {
+  align-items: center;
+  background-color: rgb(216, 24, 72);
+  border: none;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px black;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin-top: 3%;
+  min-width: 50%;
+  padding: 2%;
+}
+
+.picture-carousel {
+  border-radius: 5px;
+  width: 85%;
+}
+
 .carousel::-webkit-scrollbar {
   display: none;
 }

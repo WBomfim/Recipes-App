@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import RevenuesContext from '../context/RevenuesContext';
@@ -7,8 +7,7 @@ import searchIcon from '../images/searchIcon.svg';
 import '../styles/Header.css';
 
 function Header({ title, buttonSearch = false }) {
-  const { searchValue, setSearchValue } = useContext(RevenuesContext);
-  const [search, setSearch] = useState(false);
+  const { searchValue, setSearchValue, search, setSearch } = useContext(RevenuesContext);
   const history = useHistory();
 
   const hendleChange = ({ target }) => {

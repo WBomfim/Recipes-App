@@ -26,6 +26,7 @@ function RevenuesProvider({ children }) {
   const [isFavorited, setIsFavorited] = useState();
   const [exibitionIngredient, setExibitionIngredient] = useState();
   const [allNacionalities, setAllNacionalities] = useState();
+  const [search, setSearch] = useState(false);
 
   useEffect(() => {
     if (categorySelect.category !== '') {
@@ -228,6 +229,8 @@ function RevenuesProvider({ children }) {
     handleFavorite,
     handleShare,
     verifyRecipiesStorage,
+    search,
+    setSearch,
   };
 
   return (

@@ -1,10 +1,19 @@
 .revenue-items {
   align-items: center;
+  color: white;
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
-.revenue-items img {
-  width: 60%;
+.revenue-picture {
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px black;
+  width: 100%;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  margin-left: 5px;
 }

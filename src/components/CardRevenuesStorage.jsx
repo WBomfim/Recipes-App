@@ -4,7 +4,7 @@ import RevenuesContext from '../context/RevenuesContext';
 import { removeFavoriteRecipes } from '../helpers/storageFavorited';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
-import '../styles/CardRevenues.css';
+import '../styles/FilterBarStorage.css';
 
 function CardRevenuesStorage() {
   const {
@@ -32,12 +32,13 @@ function CardRevenuesStorage() {
   if (!exibitionRevenues) return null;
 
   return (
-    <section>
+    <section className="recipe">
       <div>
         {alertShare && <span>Link copied!</span>}
       </div>
       {exibitionRevenues.map((revenue, index) => (
         <div
+          className="recipe-cards"
           key={ `${index}-card-storage` }
           role="button"
           tabIndex={ revenue.id }
@@ -45,23 +46,33 @@ function CardRevenuesStorage() {
           onClick={ (event) => routeFromDetail(event, revenue) }
           data-testid={ `${index}-recipe-card` }
         >
-          {/* utilizar css para mudar o tamanho das imagens */}
-          <img
-            width="153px"
-            height="150px"
-            src={ revenue.image }
-            alt={ `imagem-${revenue.name}` }
-            data-testid={ `${index}-horizontal-image` }
-          />
           <div>
-            <div>
-              <h4
-                data-testid={ `${index}-horizontal-top-text` }
-              >
-                { revenue.type === 'food'
-                  ? ` ${revenue.nationality} - ${revenue.category}`
-                  : revenue.alcoholicOrNot }
-              </h4>
+            <img
+              className="picture-recipe"
+              src={ revenue.image }
+              alt={ `imagem-${revenue.name}` }
+              data-testid={ `${index}-horizontal-image` }
+            />
+            {location === 'done-recipes' && (
+              revenue.type === 'food' && revenue.tags.slice(0, 2).map((tag) => (
+                <div className="tag-info" key={ tag }>
+                  <p
+                    data-testid={ `${index}-${tag}-horizontal-tag` }
+                  >
+                    {tag}
+                  </p>
+                </div>
+              )))}
+          </div>
+          <div className="recipe-infos">
+            <h4
+              data-testid={ `${index}-horizontal-top-text` }
+            >
+              { revenue.type === 'food'
+                ? ` ${revenue.nationality} - ${revenue.category}`
+                : revenue.alcoholicOrNot }
+            </h4>
+            <div className="button-recipe">
               <button
                 name="share"
                 type="button"
@@ -98,16 +109,6 @@ function CardRevenuesStorage() {
               {location === 'done-recipes' && `Done in: ${revenue.doneDate}`}
             </p>
           </div>
-          {location === 'done-recipes' && (
-            revenue.type === 'food' && revenue.tags.slice(0, 2).map((tag) => (
-              <div key={ tag }>
-                <p
-                  data-testid={ `${index}-${tag}-horizontal-tag` }
-                >
-                  {tag}
-                </p>
-              </div>
-            )))}
         </div>
       ))}
     </section>

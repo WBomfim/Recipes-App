@@ -12,6 +12,7 @@
   width: 100%;
 }
 
+
 .header-items button {
   background-color: transparent;
   border: none;
@@ -27,7 +28,7 @@
   outline: none;
   padding: 12px 20px;
   transition: 0.5s;
-  width: 90%;
+  width: 100%;
 }
 
 .input-search:focus {
@@ -38,6 +39,8 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  overflow-x: auto;
+  scroll-behavior: smooth;
   width: 100%;
 }
 
@@ -45,15 +48,17 @@
   background-color: rgb(216, 24, 72);
   border: none;
   border-radius: 5px;
+  box-shadow: 2px 2px 2px black;
   color: white;
   cursor: pointer;
   font-size: 12px;
+  font-weight: 700;
   margin: 4px 2px;
   padding: 4%;
   text-align: center;
   text-decoration: none;
   transition-duration: 0.4s;
-  width: 25%;
+  width: 30%;
 }
 
 .filter-buttons button:active {

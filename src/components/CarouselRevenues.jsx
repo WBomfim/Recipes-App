@@ -20,6 +20,7 @@ function CarouselRevenues() {
     <section className="carousel">
       {exibitionRevenues.slice(0, MAX_CARDS).map((revenue, index) => (
         <button
+          className="carousel-cards"
           key={ `${index}-carousel-revenues` }
           onClick={ () => handleClick(revenue.idMeal || revenue.idDrink) }
           type="button"
@@ -27,8 +28,9 @@ function CarouselRevenues() {
         >
           {/* utilizar css para mudar o tamanho das imagens */}
           <img
-            width="153px"
-            height="150px"
+            // width="153px"
+            // height="150px"
+            className="picture-carousel"
             src={ revenue.strDrinkThumb || revenue.strMealThumb }
             alt={ `imagem-${revenue.strDrink || revenue.strMeal}` }
             data-testid={ `${index}-card-img` }

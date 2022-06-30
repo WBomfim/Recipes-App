@@ -35,6 +35,7 @@ function HeaderRevenue() {
   return (
     <section className="revenue-items">
       <img
+        className="revenue-picture"
         data-testid="recipe-photo"
         src={ revenueDetails.strMealThumb || revenueDetails.strDrinkThumb }
         alt={ `imagem-${revenueDetails.strMeal || revenueDetails.strDrink}` }
