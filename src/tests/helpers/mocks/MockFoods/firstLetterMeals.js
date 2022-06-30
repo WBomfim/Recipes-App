@@ -24,4 +24,4 @@ const firstLetterMeals = {
   ],
 };
 
-export default firstLetterMeals;
+module.exports = firstLetterMeals;

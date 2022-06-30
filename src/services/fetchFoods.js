@@ -30,6 +30,7 @@ export const getFoodsName = async (search) => {
       `https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`,
     );
     const data = await response.json();
+    console.log(data);
     return data.meals;
   } catch (error) {
     console.log(error);

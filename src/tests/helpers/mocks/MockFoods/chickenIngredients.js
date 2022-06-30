@@ -58,4 +58,4 @@ const chickenMeals = {
   ],
 };
 
-export default chickenMeals;
+module.exports = chickenMeals;

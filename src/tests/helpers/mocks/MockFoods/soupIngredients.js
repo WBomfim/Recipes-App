@@ -1,4 +1,4 @@
-const soupMeals = {
+const soupIngredients = {
   meals: [
     {
       idMeal: '52973',
@@ -64,4 +64,4 @@ const soupMeals = {
   ],
 };
 
-export default soupMeals;
+module.exports = soupIngredients;

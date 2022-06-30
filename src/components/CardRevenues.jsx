@@ -22,7 +22,6 @@ function CardRevenues() {
 
   return (
     <section className="cards">
-      {console.log(exibitionRevenues)}
       {exibitionRevenues.slice(0, MAX_CARDS).map((revenue, index) => (
         <button
           key={ revenue.idMeal || revenue.idDrink }
