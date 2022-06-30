@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import RevenuesContext from '../context/RevenuesContext';
+import '../styles/ShowDetailsProcess.css';
 
 function VideoRevenues() {
   const { exibitionDetails } = useContext(RevenuesContext);

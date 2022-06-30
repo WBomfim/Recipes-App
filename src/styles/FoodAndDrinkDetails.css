@@ -7,13 +7,20 @@
 .button-details {
   align-items: center;
   background-color: rgb(216, 24, 72);
+  border: none;
   bottom: 0;
+  color: white;
   display: flex;
+  font-size: larger;
   height: 58px;
   justify-content: space-around;
   left: 0;
   position: fixed;
-  width: 640px;
+  width: 100%;
+}
+
+.button-details:disabled {
+  background-color: rgb(219, 95, 126);
 }
 
 .container-recomendation {

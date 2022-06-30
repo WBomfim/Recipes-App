@@ -1,7 +1,7 @@
 body {
   background-color: rgb(71, 71, 71);
   background-size: auto;
-  font-family: 'Courier New ' , Courier , monospace;
+  font-family: Roboto , sans-serif;
 }
 
 .form-login {
@@ -19,7 +19,7 @@ body {
 }
 
 .form-login h1 {
-  text-shadow: 1px 1px rgb(216, 24, 72);
+  text-shadow: 1px 1px rgb(3, 3, 3);
 }
 
 .inputs-login {
@@ -30,6 +30,7 @@ body {
 
 .inputs-login input {
   border: 3px solid #ccc;
+  border-radius: 3px;
   box-sizing: border-box;
   margin: 8px 0;
   outline: none;
@@ -46,6 +47,7 @@ body {
   background-color: rgb(216, 24, 72);
   border: none;
   border-radius: 5px;
+  box-shadow: 2px 2px 2px rgb(32, 32, 32);
   color: white;
   cursor: pointer;
   display: inline-block;
@@ -56,6 +58,10 @@ body {
   text-align: center;
   text-decoration: none;
   transition-duration: 0.4s;
+}
+
+.inputs-login button:disabled {
+  opacity: 0.5;
 }
 
 .inputs-login button:active {

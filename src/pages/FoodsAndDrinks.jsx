@@ -16,6 +16,7 @@ function FoodsAndDrinks() {
     setExibitionRevenues,
     setCategories,
     exibitionIngredient,
+    search,
   } = useContext(RevenuesContext);
 
   const location = useLocation().pathname.split('/')[1];
@@ -49,7 +50,7 @@ function FoodsAndDrinks() {
   return (
     <div className="main-page">
       <Header title={ title } buttonSearch />
-      <SearchBar />
+      {search && <SearchBar />}
       <Categories />
       <CardRevenues />
       <Footer />
