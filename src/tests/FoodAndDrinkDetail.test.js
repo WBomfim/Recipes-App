@@ -1,62 +1,59 @@
-// import React from 'react';
-// import { screen } from '@testing-library/react';
+import React from 'react';
+import { screen } from '@testing-library/react';
 // import userEvent from '@testing-library/user-event';
-// import renderWithRouter from './renderWithRouter';
-// import FoodAndDrinkDetail from '../pages/FoodAndDrinkDetail';
+import renderWithRouter from './renderWithRouter';
+import App from '../App';
+import fetchMocks from './helpers/mocks/MockFoods/fetchMocksMeals';
 
-// const oneMealsDetail = require('./helpers/mocks/oneMealsDetail');
+const ROTA_FOODS = '/foods/52977';
+// const ROTA_DRINKS = '/drinks/17256';
 
-// const ROTA_FOODS = '/foods/52882';
-// // const ROTA_DRINKS = '/drinks/17256';
+describe('Verifica funcionalidades da página FoodAndDrink na rota foods', () => {
+  beforeEach(() => {
+    jest.spyOn(global, 'fetch').mockImplementation(fetchMocks);
+  });
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
 
-// describe('Verifica funcionalidades da página FoodAndDrink na rota foods', () => {
-//   let fetchMock;
-//   beforeEach(() => {
-//     fetchMock = jest.spyOn(global, 'fetch').mockResolvedValue({
-//       json: jest.fn().mockResolvedValue({ oneMealsDetail }),
-//     });
-//   });
-//   afterEach(() => {
-//     jest.clearAllMocks();
-//   });
+  it('Verifica a existencia da imagem, nome e categoria da comida e botões', async () => {
+    renderWithRouter(<App />, ROTA_FOODS);
 
-//   it('Verifica á chamada a API', async () => {
-//     renderWithRouter(<FoodAndDrinkDetail />, ROTA_FOODS);
+    const img = await screen.findByTestId('recipe-photo');
+    const nameFood = await screen.findByRole('heading', { level: 1, name: /corba/i });
+    const category = await screen.findByTestId('recipe-category');
+    const buttonShare = await screen.findByTestId('share-btn');
+    const buttonFavorite = await screen.findByTestId('favorite-btn');
 
-//     expect(fetchMock).toHaveBeenCalled();
-//     expect(fetchMock).toHaveBeenCalledTimes(2);
-//   });
+    expect(img).toBeInTheDocument();
+    expect(nameFood).toBeInTheDocument();
+    expect(category).toBeInTheDocument();
+    expect(buttonShare).toBeInTheDocument();
+    expect(buttonFavorite).toBeInTheDocument();
+  });
 
-//   it('Verifica a existencia dos elementos', async () => {
-//     renderWithRouter(<FoodAndDrinkDetail />, ROTA_FOODS);
+  it('Verifica a existencia dos titulos de ingredients e instruções', async () => {
+    renderWithRouter(<App />, ROTA_FOODS);
+    const ingredientsTitle = await screen
+      .findByRole('heading', { level: 2, name: /ingredients/i });
+    const instructionsTitle = await screen
+      .findByRole('heading', { level: 2, name: /ingredients/i });
 
-//     const img = await screen.findByRole('img', { alt: 'imagem-Three Fish Pie' });
-//     const nameFood = await screen.findByRole('heading', { level: 1, name: /three fis/i });
-//     const category = await screen.findByText(/seafood/i);
-//     const buttonShare = await screen.findByTestId('share-btn');
-//     const buttonFavorite = await screen.findByRole('button', {name: //i});
+    expect(ingredientsTitle).toBeInTheDocument();
+    expect(instructionsTitle).toBeInTheDocument();
+  });
 
-//     expect(button).toBeInTheDocument();
-//     expect(category).toBeInTheDocument();
-//     expect(nameFood).toBeInTheDocument();
-//     expect(img).toBeInTheDocument();
-//     expect(buttonShare).toBeInTheDocument();
-//     expect(img).toBeInTheDocument();
-//   });
+  it('Verifica a existencia do video, cards de recomendação e botão para inicar receita',
+    async () => {
+      renderWithRouter(<App />, ROTA_FOODS);
 
-//   it('Verifica a existencia dos elementos', async () => {
-//     renderWithRouter(<FoodAndDrinkDetail />, ROTA_FOODS);
+      const video = await screen.findByTestId('video');
+      const recomendationCard = await screen.findByTestId('0-recomendation-card');
+      const buttonDetails = await screen
+        .findByTestId('start-recipe-btn');
 
-//     const img = await screen.findByRole('img', { alt: 'imagem-Three Fish Pie' });
-//     const nameFood = await screen.findByRole('heading', { level: 1, name: /three fis/i });
-//     const category = await screen.findByText(/seafood/i);
-//     const button = await screen.findAllByRole('button');
-
-//     expect(button).toBeInTheDocument();
-//     expect(category).toBeInTheDocument();
-//     expect(nameFood).toBeInTheDocument();
-//     expect(img).toBeInTheDocument();
-//     expect(fetchMock).toHaveBeenCalled();
-//     expect(fetchMock).toHaveBeenCalledTimes(2);
-//   });
-// });
+      expect(video).toBeInTheDocument();
+      expect(recomendationCard).toBeInTheDocument();
+      expect(buttonDetails).toBeInTheDocument();
+    });
+});
