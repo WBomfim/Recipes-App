@@ -37,7 +37,6 @@ function FoodAndDrinkDetail() {
 
   return (
     <>
-      {console.log(exibitionDetails)}
       <HeaderRevenue />
       {alertShare && <span>Link copied!</span>}
       <ShowDetailsRevenues />

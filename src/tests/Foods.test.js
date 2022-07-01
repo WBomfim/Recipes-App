@@ -1,5 +1,5 @@
 import React from 'react';
-import { screen, wait } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import renderWithRouter from './renderWithRouter';
 import App from '../App';
@@ -7,7 +7,7 @@ import fetchMocks from './helpers/mocks/MockFoods/fetchMocksMeals';
 
 const mealsAll = require('./helpers/mocks/MockFoods/mealsAll');
 const chickenIngredients = require('./helpers/mocks/MockFoods/chickenIngredients');
-const soupIngredients = require('./helpers/mocks/MockFoods/soupIngredients');
+const soupName = require('./helpers/mocks/MockFoods/soupName');
 const firstLetterMeals = require('./helpers/mocks/MockFoods/firstLetterMeals');
 const beef = require('./helpers/mocks/MockFoods/beefMeals');
 const breakfast = require('./helpers/mocks/MockFoods/breakfastMeals');
@@ -83,7 +83,7 @@ describe('Testa as funcionalidades da página "/Foods"',
       renderWithRouter(<App />, ROTA);
 
       verifyFilters('Name', 'soup');
-      verifyCards(soupIngredients);
+      verifyCards(soupName);
     });
 
     it('Verifica se ao clicar no radio "First Letter" é filtrado corretamente',
@@ -93,15 +93,6 @@ describe('Testa as funcionalidades da página "/Foods"',
         verifyFilters('First letter', 'a');
         verifyCards(firstLetterMeals);
       });
-
-    // it.only('Caso apenas uma comida seja encontrada, deve-se ir para sua rota correta',
-    //   async () => {
-    //     const { history } = renderWithRouter(<App />, ROTA);
-
-    //     verifyFilters('Name', 'Arrabiata');
-
-    //     await wait(() => expect(history.location.pathname).toBe('/foods/52771'));
-    //   });
 
     it('Verifica se existe 6 botões de filtro', async () => {
       renderWithRouter(<App />, ROTA);

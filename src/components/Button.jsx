@@ -5,6 +5,7 @@ function Button({ name, onClick, disabled, dataTestId }) {
   return (
     <button
       className="button-details"
+      name="button-details"
       type="button"
       onClick={ onClick }
       disabled={ disabled }

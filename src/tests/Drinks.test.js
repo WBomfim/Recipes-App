@@ -3,7 +3,17 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import renderWithRouter from './renderWithRouter';
 import App from '../App';
-import fetchMocksDrinks from './helpers/mocks/MockFoods/fetchMocksMeals';
+import fetchMocksDrinks from './helpers/mocks/MockDrinks/fetchMockDrinks';
+
+const drinksAll = require('./helpers/mocks/MockDrinks/drinksAll');
+const lemonIngredients = require('./helpers/mocks/MockDrinks/lemonIngredients');
+const ginName = require('./helpers/mocks/MockDrinks/ginName');
+const firstLetterDrinks = require('./helpers/mocks/MockDrinks/firstLetterDrinks');
+const ordinaryDrinks = require('./helpers/mocks/MockDrinks/ordinaryDrinks');
+const cocktailDrinks = require('./helpers/mocks/MockDrinks/cocktailDrinks');
+const shakeDrinks = require('./helpers/mocks/MockDrinks/shakeDrinks');
+const otherDrinks = require('./helpers/mocks/MockDrinks/otherDrinks');
+const cocoaDrinks = require('./helpers/mocks/MockDrinks/cocoaDrinks');
 
 const ROTA = '/drinks';
 
@@ -40,7 +50,7 @@ const verifyCards = (fetch) => {
   });
 };
 
-describe('Testa as funcionalidades da da página "/Drinks"',
+describe.only('Testa as funcionalidades da da página "/Drinks"',
   () => {
     beforeEach(() => {
       jest.spyOn(global, 'fetch').mockImplementation(fetchMocksDrinks);
@@ -66,14 +76,14 @@ describe('Testa as funcionalidades da da página "/Drinks"',
         renderWithRouter(<App />, ROTA);
 
         verifyFilters('Ingredients', 'lemon');
-        verifyCards(chickenIngredients);
+        verifyCards(lemonIngredients);
       });
 
     it('Verifica se ao clicar no radio "Name" é filtrado corretamente', async () => {
       renderWithRouter(<App />, ROTA);
 
       verifyFilters('Name', 'gin');
-      verifyCards(soupIngredients);
+      verifyCards(ginName);
     });
 
     it('Verifica se ao clicar no radio "First Letter" é filtrado corretamente',
@@ -81,28 +91,28 @@ describe('Testa as funcionalidades da da página "/Drinks"',
         renderWithRouter(<App />, ROTA);
 
         verifyFilters('First letter', 'a');
-        verifyCards(firstLetterMeals);
+        verifyCards(firstLetterDrinks);
       });
 
     it('Verifica se existe 6 botões de filtro', async () => {
-      renderWithRouter(<App />, ROTA);
+      const { debug } = renderWithRouter(<App />, ROTA);
 
       const allBtn = await screen.findByText(/all/i);
-      const beefBtn = screen.findByText(/beef/i);
-      const breakfastBtn = screen.findByText(/breakfast/i);
-      const chickenBtn = screen.findByText(/chicken/i);
-      const dessertBtn = screen.findByText(/dessert/i);
-      const goatBtn = screen.findByText(/goat/i);
-
+      const ordinaryBtn = await screen.findByText(/ordinary drink/i);
+      const cocktailBtn = await screen.findByText(/cocktail/i);
+      const shakeBtn = await screen.findByText(/shake/i);
+      const otherBtn = await screen.findByText(/other/i);
+      const cocoaBtn = await screen.findByText(/cocoa/i);
+      debug();
       expect(allBtn).toBeInTheDocument();
-      expect(beefBtn).toBeInTheDocument();
-      expect(breakfastBtn).toBeInTheDocument();
-      expect(chickenBtn).toBeInTheDocument();
-      expect(dessertBtn).toBeInTheDocument();
-      expect(goatBtn).toBeInTheDocument();
+      expect(ordinaryBtn).toBeInTheDocument();
+      expect(cocktailBtn).toBeInTheDocument();
+      expect(shakeBtn).toBeInTheDocument();
+      expect(otherBtn).toBeInTheDocument();
+      expect(cocoaBtn).toBeInTheDocument();
     });
 
-    it.only('Verifica se existem os 12 cards na primeira renderização',
+    it('Verifica se existem os 12 cards na primeira renderização',
       async () => {
         renderWithRouter(<App />, ROTA);
 
@@ -113,60 +123,60 @@ describe('Testa as funcionalidades da da página "/Drinks"',
       async () => {
         renderWithRouter(<App />, ROTA);
 
-        const ordinaryBtn = await screen.findByTestId('ordinary-category-filter');
+        const ordinaryBtn = await screen.findByTestId('Ordinary Drink-category-filter');
         expect(ordinaryBtn).toBeInTheDocument();
 
         userEvent.click(ordinaryBtn);
 
-        verifyCards(ordinaryDrink);
+        verifyCards(ordinaryDrinks);
       });
 
-    it('Verifica se ao clicar no botão "Breakfast" é renderizado os cards correspondetes',
+    it('Verifica se ao clicar no botão "Cocktail" é renderizado os cards correspondetes',
       async () => {
         renderWithRouter(<App />, ROTA);
 
-        const breakfastBtn = await screen.findByTestId('Breakfast-category-filter');
-        expect(breakfastBtn).toBeInTheDocument();
+        const cocktailBtn = await screen.findByTestId('Cocktail-category-filter');
+        expect(cocktailBtn).toBeInTheDocument();
 
-        userEvent.click(breakfastBtn);
+        userEvent.click(cocktailBtn);
 
-        verifyCards(breakfast);
+        verifyCards(cocktailDrinks);
       });
 
-    it('Verifica se ao clicar no botão "Chicken" é renderizado os cards dessa categoria',
+    it('Verifica se ao clicar no botão "Shake" é renderizado os cards dessa categoria',
       async () => {
         renderWithRouter(<App />, ROTA);
 
-        const chickenBtn = await screen.findByTestId('Chicken-category-filter');
+        const chickenBtn = await screen.findByTestId('Shake-category-filter');
         expect(chickenBtn).toBeInTheDocument();
 
         userEvent.click(chickenBtn);
 
-        verifyCards(chickenMeals);
+        verifyCards(shakeDrinks);
       });
 
-    it('Verifica se ao clicar no botão "Dessert" é renderizado os cards dessa categoria',
+    it('Verifica se ao clicar no botão "Other" é renderizado os cards dessa categoria',
       async () => {
         renderWithRouter(<App />, ROTA);
 
-        const dessertBtn = await screen.findByTestId('Dessert-category-filter');
-        expect(dessertBtn).toBeInTheDocument();
+        const otherBtn = await screen.findByTestId('Other-category-filter');
+        expect(otherBtn).toBeInTheDocument();
 
-        userEvent.click(dessertBtn);
+        userEvent.click(otherBtn);
 
-        verifyCards(dessert);
+        verifyCards(otherDrinks);
       });
 
-    it('Verifica se ao clicar no botão "Goat" é renderizado os cards dessa categoria',
+    it('Verifica se ao clicar no botão "Cocoa" é renderizado os cards dessa categoria',
       async () => {
         renderWithRouter(<App />, ROTA);
 
-        const goatBtn = await screen.findByTestId('Goat-category-filter');
-        expect(goatBtn).toBeInTheDocument();
+        const cocoaBtn = await screen.findByTestId('Cocoa-category-filter');
+        expect(cocoaBtn).toBeInTheDocument();
 
-        userEvent.click(goatBtn);
+        userEvent.click(cocoaBtn);
 
-        verifyCards(goat);
+        verifyCards(cocoaDrinks);
       });
 
     it('Verifica se ao clicar no botão "All" é renderizado sem filtros',
@@ -178,6 +188,6 @@ describe('Testa as funcionalidades da da página "/Drinks"',
 
         userEvent.click(allBtn);
 
-        verifyCards(mealsAll);
+        verifyCards(drinksAll);
       });
   });
